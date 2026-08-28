@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ဆန်းကျမ်း Pro - မဟာဘုတ်ဗေဒင် (မှန်ကန်သောစနစ်)</title>
+  <title>ဆန်းကျမ်း Pro - မဟာဘုတ်ဗေဒင် (အစဉ်လိုက်မှန်ကန်သောစနစ်)</title>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -62,7 +62,7 @@
   <!-- PAGE 1: Input Form -->
   <div class="container" id="form-page">
     <div class="header-title">
-      <span>ဆန်းကျမ်း Pro ( V.1.0.8 )</span>
+      <span>ဆန်းကျမ်း Pro ( V.1.0.9 )</span>
       <span>🔮</span>
     </div>
 
@@ -177,12 +177,12 @@
   <script>
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
-    // ပုံပါ အမှန်အတိုင်း အိမ်နေရာအသေအချာပါသော ဂဏန်းဇယားများ (Remainders 1 to 7)
-    // Order inside object: adhipati, thun, thaik, raja, marana, banga, puti
+    // TikTok ပုံပါ အမှန်အတိုင်း အစဉ်လိုက် (အကြွင်း ၁ မှ ၇ ထိ ဇယားများ)
+    // Grid mapping order: adhipati, thun, thaik, raja, marana, banga, puti
     const chartsMap = {
-      1: { adhipati: 5, thun: 0, thaik: 2, raja: 6, marana: 4, banga: 1, puti: 2 },
-      2: { adhipati: 6, thun: 1, thaik: 5, raja: 0, marana: 5, banga: 2, puti: 3 },
-      3: { adhipati: 0, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 3, puti: 4 },
+      1: { adhipati: 5, thun: 0, thaik: 2, raja: 6, marana: 4, banga: 1, puti: 3 },
+      2: { adhipati: 6, thun: 1, thaik: 4, raja: 0, marana: 5, banga: 3, puti: 2 },
+      3: { adhipati: 0, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 2, puti: 4 },
       4: { adhipati: 1, thun: 3, thaik: 6, raja: 2, marana: 0, banga: 4, puti: 5 },
       5: { adhipati: 2, thun: 4, thaik: 0, raja: 3, marana: 1, banga: 5, puti: 6 },
       6: { adhipati: 3, thun: 5, thaik: 1, raja: 4, marana: 2, banga: 6, puti: 0 },
@@ -218,7 +218,7 @@
       let remainder = meBirthYear % 7;
       if (remainder === 0) remainder = 7;
 
-      let chart = chartsMap[remainder] || chartsMap[2];
+      let chart = chartsMap[remainder] || chartsMap[1];
 
       // Fill Mula Grid
       document.getElementById('p-m-adhipati').innerText = chart.adhipati;
@@ -231,7 +231,7 @@
 
       // Fill Gola Grid
       let golaRemainder = ((remainder + 1) % 7) || 7;
-      let golaChart = chartsMap[golaRemainder] || chartsMap[3];
+      let golaChart = chartsMap[golaRemainder] || chartsMap[2];
       document.getElementById('p-g-adhipati').innerText = golaChart.adhipati;
       document.getElementById('p-g-thun').innerText = golaChart.thun;
       document.getElementById('p-g-thaik').innerText = golaChart.thaik;
@@ -242,7 +242,7 @@
 
       // Fill Asat Grid
       let asatRemainder = (age % 7) || 7;
-      let asatChart = chartsMap[asatRemainder] || chartsMap[5];
+      let asatChart = chartsMap[asatRemainder] || chartsMap[3];
       document.getElementById('p-a-adhipati').innerText = asatChart.adhipati;
       document.getElementById('p-a-thun').innerText = asatChart.thun;
       document.getElementById('p-a-thaik').innerText = asatChart.thaik;
@@ -257,7 +257,7 @@
         `<b>မွေးရက်:</b> ${day}/${month}/${year} (${birthDayText})<br>` +
         `<b>အသက်:</b> ${age} နှစ် | <b>မြန်မာမွေးနှစ်:</b> ${meBirthYear} ခု (အကြွင်း - ${remainder})`;
 
-      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>ဇယားကွက်များ အားလုံး ပုံပါအတိုင်း တိကျမှန်ကန်စွာ တွက်ချက်ပြီးပါပြီ။`;
+      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>ပုံပါ ဇယားကွက်အစဉ်လိုက် အတိုင်း အားလုံး မှန်ကန်စွာ တွက်ချက်ပြီးပါပြီ။`;
 
       document.getElementById('form-page').style.display = 'none';
       document.getElementById('result-page').style.display = 'block';
