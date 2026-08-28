@@ -53,7 +53,6 @@
     .m-cell { border: 1px solid #8b0000; border-radius: 3px; padding: 6px 2px; background: #fff; font-size: 11px; }
     .m-cell .h-name { color: #666; font-size: 10px; font-weight: bold; }
     .m-cell .p-num { font-size: 15px; font-weight: bold; color: #0044aa; margin-top: 2px; }
-    .m-cell.highlight { background: #ffe6e6; border: 2px solid #8b0000; }
 
     .back-btn { width: 100%; background-color: #333; color: white; border: none; padding: 8px; font-size: 14px; border-radius: 4px; cursor: pointer; margin-top: 15px; font-family: inherit; }
   </style>
@@ -63,7 +62,7 @@
   <!-- PAGE 1: Input Form -->
   <div class="container" id="form-page">
     <div class="header-title">
-      <span>ဆန်းကျမ်း Pro ( V.1.0.6 )</span>
+      <span>ဆန်းကျမ်း Pro ( V.1.0.8 )</span>
       <span>🔮</span>
     </div>
 
@@ -178,16 +177,16 @@
   <script>
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
-    // Exact mapping for Remainder 1 to 7 based on the reference images provided
-    // Grid mapping: adhipati, thun, thaik, raja, marana, banga, puti
+    // ပုံပါ အမှန်အတိုင်း အိမ်နေရာအသေအချာပါသော ဂဏန်းဇယားများ (Remainders 1 to 7)
+    // Order inside object: adhipati, thun, thaik, raja, marana, banga, puti
     const chartsMap = {
-      1: { adhipati: 5, thun: 4, thaik: 0, raja: 6, marana: 1, banga: 3, puti: 2 },
-      2: { adhipati: 6, thun: 5, thaik: 1, raja: 0, marana: 2, banga: 4, puti: 3 },
+      1: { adhipati: 5, thun: 0, thaik: 2, raja: 6, marana: 4, banga: 1, puti: 2 },
+      2: { adhipati: 6, thun: 1, thaik: 5, raja: 0, marana: 5, banga: 2, puti: 3 },
       3: { adhipati: 0, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 3, puti: 4 },
-      4: { adhipati: 1, thun: 3, thaik: 6, raja: 2, marana: 0, banga: 5, puti: 4 },
-      5: { adhipati: 2, thun: 4, thaik: 0, raja: 3, marana: 1, banga: 6, puti: 5 },
-      6: { adhipati: 3, thun: 5, thaik: 1, raja: 4, marana: 2, banga: 0, puti: 6 },
-      7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 1, puti: 0 }
+      4: { adhipati: 1, thun: 3, thaik: 6, raja: 2, marana: 0, banga: 4, puti: 5 },
+      5: { adhipati: 2, thun: 4, thaik: 0, raja: 3, marana: 1, banga: 5, puti: 6 },
+      6: { adhipati: 3, thun: 5, thaik: 1, raja: 4, marana: 2, banga: 6, puti: 0 },
+      7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 0, puti: 1 }
     };
 
     function calculateMahabote() {
@@ -212,7 +211,6 @@
         birthDayNum = 8; 
       }
 
-      // Calculations
       let meBirthYear = month < 4 || (month === 4 && day < 17) ? year - 639 : year - 638;
       let meCurrentYear = 1388; 
       let age = meCurrentYear - meBirthYear;
@@ -259,7 +257,7 @@
         `<b>မွေးရက်:</b> ${day}/${month}/${year} (${birthDayText})<br>` +
         `<b>အသက်:</b> ${age} နှစ် | <b>မြန်မာမွေးနှစ်:</b> ${meBirthYear} ခု (အကြွင်း - ${remainder})`;
 
-      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>အကြွင်းအလိုက် မူလ၊ ဂေါလ၊ အသက် ဇယားကွက်များ အားလုံး ပုံစံတူ အမှန်အတိုင်း တွက်ချက်ပြီးပါပြီ။`;
+      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>ဇယားကွက်များ အားလုံး ပုံပါအတိုင်း တိကျမှန်ကန်စွာ တွက်ချက်ပြီးပါပြီ။`;
 
       document.getElementById('form-page').style.display = 'none';
       document.getElementById('result-page').style.display = 'block';
