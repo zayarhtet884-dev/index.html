@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ဆန်းကျမ်း Pro ( V.1.0.2 BETA )</title>
+  <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #fcf9ee;
+      --card-bg: #ffffff;
+      --border-color: #bcd0e5;
+      --input-bg: #eaf2fb;
+      --btn-color: #8b0000;
+      --text-main: #333333;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Padauk', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 15px; min-height: 100vh; }
+    .container { width: 100%; max-width: 420px; background: var(--card-bg); border: 1px solid #dcd6c5; border-radius: 6px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .header-title { font-size: 15px; font-weight: bold; color: #555; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+    
+    .row { display: flex; align-items: center; margin-bottom: 12px; gap: 8px; }
+    label { font-size: 14px; font-weight: bold; width: 105px; color: #333; }
+    
+    .name-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 8px 12px; font-size: 14px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
+    
+    .date-inputs { display: flex; gap: 5px; flex: 1; }
+    .date-inputs input { width: 32%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 8px 4px; font-size: 14px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
+
+    .note { font-size: 11px; color: #cc0000; text-align: center; margin: 10px 0; font-style: italic; }
+    
+    .rahubox { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 12px 0; font-size: 14px; }
+    .rahubox input { width: 16px; height: 16px; }
+    .rahubox span { color: #cc0000; font-weight: bold; }
+
+    .btn-calc { width: 120px; background-color: var(--btn-color); color: white; border: none; padding: 8px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; display: block; margin: 0 auto 15px auto; font-family: inherit; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .btn-calc:active { transform: scale(0.98); }
+
+    .time-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 14px; font-weight: bold; color: #444; }
+    .time-boxes { display: flex; gap: 5px; }
+    .time-boxes input { width: 45px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; font-size: 14px; color: #0044aa; text-align: center; font-weight: bold; }
+
+    .btn-pred { width: 100%; background-color: var(--btn-color); color: white; border: none; padding: 10px; font-size: 15px; font-weight: bold; border-radius: 4px; cursor: pointer; font-family: inherit; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    
+    .result-box { margin-top: 15px; padding: 12px; background: #fffbe8; border: 1px dashed var(--btn-color); border-radius: 4px; display: none; font-size: 13px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-title">
+      <span>ဆန်းကျမ်း Pro ( V.1.0.2 BETA )</span>
+      <span>🔮</span>
+    </div>
+
+    <div class="row">
+      <label>အမည် (Name):</label>
+      <input type="text" id="username" class="name-input" value="သင့်နာမည်">
+    </div>
+
+    <div class="row">
+      <label>လက်ရှိနှစ် :</label>
+      <div class="date-inputs">
+        <input type="text" id="ny-day" value="07">
+        <input type="text" id="ny-month" value="09">
+        <input type="text" id="ny-year" value="2026">
+      </div>
+    </div>
+
+    <div class="row">
+      <label>မွေးသက္ကရာဇ် :</label>
+      <div class="date-inputs">
+        <input type="text" id="b-day" value="04">
+        <input type="text" id="b-month" value="01">
+        <input type="text" id="b-year" value="1994">
+      </div>
+    </div>
+
+    <div class="note">* ဗုဒ္ဓဟူးနေ့ နေ့လယ် ၁၂ နာရီနောက်ပိုင်း မွေးပါက Rahu ကို ခြစ်ပါရန်။</div>
+
+    <div class="rahubox">
+      <input type="checkbox" id="rahuCheck">
+      <span>Rahu (ရာဟု)</span>
+    </div>
+
+    <button class="btn-calc" onclick="calculateData()">Calculate</button>
+
+    <div class="time-row">
+      <span>Now Time:</span>
+      <div class="time-boxes">
+        <input type="text" id="cur-hour" value="11">
+        <input type="text" id="cur-min" value="17">
+      </div>
+    </div>
+
+    <button class="btn-pred" onclick="makePrediction()">Prediction</button>
+
+    <div class="result-box" id="resultBox">
+      <b>ဟောကိန်းရလဒ်:</b> <span id="resultText"></span>
+    </div>
+  </div>
+
+  <script>
+    function calculateData() {
+      alert('အချက်အလက်များ တွက်ချက်ပြီးပါပြီ!');
+    }
+
+    function makePrediction() {
+      const name = document.getElementById('username').value;
+      const bYear = document.getElementById('b-year').value;
+      const isRahu = document.getElementById('rahuCheck').checked;
+      const resultBox = document.getElementById('resultBox');
+      const resultText = document.getElementById('resultText');
+
+      let rahuMsg = isRahu ? " (ဗုဒ္ဓဟူးရာဟု)" : "";
+      
+      resultBox.style.display = 'block';
+      resultText.innerHTML = `<br>အမည်: <b>${name}</b><br>မွေးသက္ကရာဇ်: ${bYear}${rahuMsg}<br>ဟောကိန်း: ဆန်းကျမ်းဟောကိန်းအရ ယခုကာလတွင် ကံဇာတာတက်လှမ်းမည့် အခါကောင်းဖြစ်ပါသည်။`;
+    }
+  </script>
+
+</body>
+</html>
