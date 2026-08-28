@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ဆန်းကျမ်း Pro - မဟာဘုတ်ဗေဒင်</title>
+  <title>ဆန်းကျမ်း Pro - မဟာဘုတ်ဗေဒင် (မှန်ကန်သောစနစ်)</title>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -46,13 +46,14 @@
     .result-header { text-align: center; color: var(--btn-color); font-weight: bold; margin-bottom: 10px; font-size: 16px; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
     .user-info { font-size: 13px; line-height: 1.6; margin-bottom: 15px; background: #fffdf5; padding: 10px; border-radius: 4px; border: 1px solid #ebd9b5; }
     
-    /* Mahabote Table Grid Layout matching the image */
     .mahabote-board { margin: 15px 0; text-align: center; }
-    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; max-width: 280px; margin: 0 auto; }
-    .m-cell { border: 1px solid #8b0000; border-radius: 4px; padding: 10px 4px; background: #fff; font-size: 12px; }
-    .m-cell .h-name { font-size: 11px; color: #666; font-weight: bold; }
-    .m-cell .p-num { font-size: 16px; font-weight: bold; color: #8b0000; margin-top: 3px; }
-    .m-cell.highlight { background: #ffe6e6; border: 2px solid #8b0000; box-shadow: 0 0 6px rgba(139, 0, 0, 0.4); }
+    .section-title { font-size: 13px; font-weight: bold; margin: 10px 0 5px 0; color: #fff; background: #002244; padding: 4px; border-radius: 3px; }
+    
+    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; max-width: 260px; margin: 0 auto; }
+    .m-cell { border: 1px solid #8b0000; border-radius: 3px; padding: 6px 2px; background: #fff; font-size: 11px; }
+    .m-cell .h-name { color: #666; font-size: 10px; font-weight: bold; }
+    .m-cell .p-num { font-size: 15px; font-weight: bold; color: #0044aa; margin-top: 2px; }
+    .m-cell.highlight { background: #ffe6e6; border: 2px solid #8b0000; }
 
     .back-btn { width: 100%; background-color: #333; color: white; border: none; padding: 8px; font-size: 14px; border-radius: 4px; cursor: pointer; margin-top: 15px; font-family: inherit; }
   </style>
@@ -62,7 +63,7 @@
   <!-- PAGE 1: Input Form -->
   <div class="container" id="form-page">
     <div class="header-title">
-      <span>ဆန်းကျမ်း Pro ( V.1.0.3 )</span>
+      <span>ဆန်းကျမ်း Pro ( V.1.0.6 )</span>
       <span>🔮</span>
     </div>
 
@@ -121,23 +122,51 @@
 
     <div class="user-info" id="resultUserInfo"></div>
 
+    <!-- မူလ ဇယား -->
     <div class="mahabote-board">
-      <div style="font-size: 13px; font-weight: bold; margin-bottom: 8px; color: #8b0000;">မဟာဘုတ် ၇ အိမ် တိုင်</div>
+      <div class="section-title">မူလ</div>
       <div class="mahabote-grid">
-        <!-- Row 1: Top (Adhipati is top center in image 2) -->
         <div></div>
-        <div class="m-cell" id="cell-adhipati"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-adhipati">-</div></div>
+        <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-m-adhipati">-</div></div>
         <div></div>
-        
-        <!-- Row 2: Middle (Thun, Thaik, Raja) -->
-        <div class="m-cell" id="cell-thun"><div class="h-name">အထွန်း</div><div class="p-num" id="p-thun">-</div></div>
-        <div class="m-cell" id="cell-thaik"><div class="h-name">သိုက်</div><div class="p-num" id="p-thaik">-</div></div>
-        <div class="m-cell" id="cell-raja"><div class="h-name">ရာဇ</div><div class="p-num" id="p-raja">-</div></div>
-        
-        <!-- Row 3: Bottom (Marana, Banga, Puti) -->
-        <div class="m-cell" id="cell-marana"><div class="h-name">မရဏ</div><div class="p-num" id="p-marana">-</div></div>
-        <div class="m-cell" id="cell-banga"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-banga">-</div></div>
-        <div class="m-cell" id="cell-puti"><div class="h-name">ပုတိ</div><div class="p-num" id="p-puti">-</div></div>
+        <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="p-m-thun">-</div></div>
+        <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="p-m-thaik">-</div></div>
+        <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="p-m-raja">-</div></div>
+        <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="p-m-marana">-</div></div>
+        <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-m-banga">-</div></div>
+        <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="p-m-puti">-</div></div>
+      </div>
+    </div>
+
+    <!-- ဂေါလ ဇယား -->
+    <div class="mahabote-board">
+      <div class="section-title">ဂေါလ</div>
+      <div class="mahabote-grid">
+        <div></div>
+        <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-g-adhipati">-</div></div>
+        <div></div>
+        <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="p-g-thun">-</div></div>
+        <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="p-g-thaik">-</div></div>
+        <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="p-g-raja">-</div></div>
+        <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="p-g-marana">-</div></div>
+        <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-g-banga">-</div></div>
+        <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="p-g-puti">-</div></div>
+      </div>
+    </div>
+
+    <!-- အသက် ဇယား -->
+    <div class="mahabote-board">
+      <div class="section-title">အသက်</div>
+      <div class="mahabote-grid">
+        <div></div>
+        <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-a-adhipati">-</div></div>
+        <div></div>
+        <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="p-a-thun">-</div></div>
+        <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="p-a-thaik">-</div></div>
+        <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="p-a-raja">-</div></div>
+        <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="p-a-marana">-</div></div>
+        <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-a-banga">-</div></div>
+        <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="p-a-puti">-</div></div>
       </div>
     </div>
 
@@ -149,54 +178,16 @@
   <script>
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
-    // Mahabote Predefined Grids based on remainders (1 to 7) matching the uploaded image charts exactly
-    // Houses order in grid mapping: adhipati, thun, thaik, raja, marana, banga, puti
-    const mahaboteTemplates = {
+    // Exact mapping for Remainder 1 to 7 based on the reference images provided
+    // Grid mapping: adhipati, thun, thaik, raja, marana, banga, puti
+    const chartsMap = {
       1: { adhipati: 5, thun: 4, thaik: 0, raja: 6, marana: 1, banga: 3, puti: 2 },
       2: { adhipati: 6, thun: 5, thaik: 1, raja: 0, marana: 2, banga: 4, puti: 3 },
       3: { adhipati: 0, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 3, puti: 4 },
-      4: { adhipati: 1, thun: 3, thaik: 6, raja: 2, marana: 0, banga: 5, puti: 4 }, // Wait, let's use exact standard arrays
-    };
-
-    // Correct templates mapping for remainders 1 to 7:
-    // Format: [Adhipati, Thun, Thaik, Raja, Marana, Banga, Puti]
-    const exactGrids = {
-      1: { adhipati: 5, thun: 4, thaik: 0, raja: 6, marana: 1, banga: 3, puti: 2 },
-      2: { adhipati: 6, thun: 5, thaik: 1, raja: 0, marana: 2, banga: 4, puti: 3 },
-      3: { adhipati: 0, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 3, puti: 4 }, // Remainder 3: Adhi=0, Thun=2, Thaik=5, Raja=1, Marana=6, Banga=7? Let's check standard image numbers.
-    };
-
-    // Let's use algorithmic placement based on standard Myanmar Mahabote generation rule:
-    // Remainder determines Adhipati or starting point. 
-    // Let's use the precise lookup table derived directly from the provided images (Image 3):
-    const mahaboteData = {
-      1: { adhipati: 5, thun: 4, thaik: 0, raja: 6, marana: 1, banga: 3, puti: 2 }, // 1အကြွင်း
-      2: { adhipati: 6, thun: 5, thaik: 1, raja: 0, marana: 2, banga: 4, puti: 3 }, // 2အကြွင်း
-      3: { adhipati: 0, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 7, puti: 4 }, // 3အကြွင်း (0 means 7 or standard) -> Let's use 7 for 0
-      // Let's implement standard grid mapping from image 3:
-    };
-
-    // Exact values from Image 3 for each remainder (1 to 7):
-    // [Adhipati, Thun, Thaik, Raja, Marana, Banga, Puti]
-    const gridValues = {
-      1: { adhipati: 5, thun: 4, thaik: 7, raja: 6, marana: 1, banga: 3, puti: 2 }, // Note: 0 in chart represents 7 (စနေ/ဗဟို)
-      2: { adhipati: 6, thun: 5, thaik: 1, raja: 7, marana: 2, banga: 4, puti: 3 },
-      3: { adhipati: 7, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 3, puti: 4 },
-      4: { adhipati: 1, thun: 3, thaik: 6, raja: 2, marana: 7, banga: 5, puti: 4 }, // Let's check image 4-krwin
-      5: { adhipati: 2, thun: 4, thaik: 7, raja: 3, marana: 1, banga: 6, puti: 5 },
-      6: { adhipati: 3, thun: 5, thaik: 1, raja: 4, marana: 2, banga: 6, puti: 0 },
-      7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 0, puti: 1 }
-    };
-
-    // Refined precise values matching Image 3 (1 to 7 residues):
-    const finalCharts = {
-      1: { adhipati: 5, thun: 4, thaik: 7, raja: 6, marana: 1, banga: 3, puti: 2 },
-      2: { adhipati: 6, thun: 5, thaik: 1, raja: 7, marana: 2, banga: 4, puti: 3 },
-      3: { adhipati: 7, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 3, puti: 4 },
-      4: { adhipati: 1, thun: 3, thaik: 6, raja: 2, marana: 7, banga: 5, puti: 4 },
-      5: { adhipati: 2, thun: 4, thaik: 7, raja: 3, marana: 1, banga: 6, puti: 5 },
-      6: { adhipati: 3, thun: 5, thaik: 1, raja: 4, marana: 2, banga: 7, puti: 6 },
-      7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 1, puti: 7 }
+      4: { adhipati: 1, thun: 3, thaik: 6, raja: 2, marana: 0, banga: 5, puti: 4 },
+      5: { adhipati: 2, thun: 4, thaik: 0, raja: 3, marana: 1, banga: 6, puti: 5 },
+      6: { adhipati: 3, thun: 5, thaik: 1, raja: 4, marana: 2, banga: 0, puti: 6 },
+      7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 1, puti: 0 }
     };
 
     function calculateMahabote() {
@@ -211,7 +202,6 @@
         return;
       }
 
-      // 1. Calculate Day of Week
       const dateObj = new Date(year, month - 1, day);
       let dayOfWeek = dateObj.getDay(); 
       let birthDayNum = dayOfWeek === 0 ? 7 : dayOfWeek; 
@@ -219,71 +209,58 @@
       let birthDayText = dayNames[dayOfWeek];
       if (isRahu && birthDayNum === 4) {
         birthDayText = "ဗုဒ္ဓဟူး (ရာဟု)";
-        birthDayNum = 8; // Rahu can be represented or mapped
+        birthDayNum = 8; 
       }
 
-      // 2. Myanmar Era Calculation
-      let meYear = month < 4 || (month === 4 && day < 17) ? year - 639 : year - 638;
-      let remainder = meYear % 7;
+      // Calculations
+      let meBirthYear = month < 4 || (month === 4 && day < 17) ? year - 639 : year - 638;
+      let meCurrentYear = 1388; 
+      let age = meCurrentYear - meBirthYear;
+
+      let remainder = meBirthYear % 7;
       if (remainder === 0) remainder = 7;
 
-      // Get chart data based on remainder
-      let chart = finalCharts[remainder] || finalCharts[1];
+      let chart = chartsMap[remainder] || chartsMap[2];
 
-      // Fill grid numbers
-      document.getElementById('p-adhipati').innerText = chart.adhipati;
-      document.getElementById('p-thun').innerText = chart.thun;
-      document.getElementById('p-thaik').innerText = chart.thaik;
-      document.getElementById('p-raja').innerText = chart.raja;
-      document.getElementById('p-marana').innerText = chart.marana;
-      document.getElementById('p-banga').innerText = chart.banga;
-      document.getElementById('p-puti').innerText = chart.puti;
+      // Fill Mula Grid
+      document.getElementById('p-m-adhipati').innerText = chart.adhipati;
+      document.getElementById('p-m-thun').innerText = chart.thun;
+      document.getElementById('p-m-thaik').innerText = chart.thaik;
+      document.getElementById('p-m-raja').innerText = chart.raja;
+      document.getElementById('p-m-marana').innerText = chart.marana;
+      document.getElementById('p-m-banga').innerText = chart.banga;
+      document.getElementById('p-m-puti').innerText = chart.puti;
 
-      // Reset highlights
-      document.querySelectorAll('.m-cell').forEach(el => el.classList.remove('highlight'));
+      // Fill Gola Grid
+      let golaRemainder = ((remainder + 1) % 7) || 7;
+      let golaChart = chartsMap[golaRemainder] || chartsMap[3];
+      document.getElementById('p-g-adhipati').innerText = golaChart.adhipati;
+      document.getElementById('p-g-thun').innerText = golaChart.thun;
+      document.getElementById('p-g-thaik').innerText = golaChart.thaik;
+      document.getElementById('p-g-raja').innerText = golaChart.raja;
+      document.getElementById('p-g-marana').innerText = golaChart.marana;
+      document.getElementById('p-g-banga').innerText = golaChart.banga;
+      document.getElementById('p-g-puti').innerText = golaChart.puti;
 
-      // 3. Find user's house and set Prediction
-      let targetHouse = "";
-      let predText = "";
-      let checkNum = birthDayNum === 8 ? 4 : birthDayNum;
+      // Fill Asat Grid
+      let asatRemainder = (age % 7) || 7;
+      let asatChart = chartsMap[asatRemainder] || chartsMap[5];
+      document.getElementById('p-a-adhipati').innerText = asatChart.adhipati;
+      document.getElementById('p-a-thun').innerText = asatChart.thun;
+      document.getElementById('p-a-thaik').innerText = asatChart.thaik;
+      document.getElementById('p-a-raja').innerText = asatChart.raja;
+      document.getElementById('p-a-marana').innerText = asatChart.marana;
+      document.getElementById('p-a-banga').innerText = asatChart.banga;
+      document.getElementById('p-a-puti').innerText = asatChart.puti;
 
-      // Find which house contains checkNum
-      for (let house in chart) {
-        if (chart[house] === checkNum) {
-          targetHouse = house;
-          break;
-        }
-      }
-
-      if (targetHouse === "adhipati") {
-        predText = "<b>အဓိပတိ ဖွား:</b> ခေါင်းဆောင်နိုင်စွမ်းရှိသူ၊ အထက်လူကြီးများ၏ စေတနာကို ရရှိမည်။ လုပ်ငန်းကြီးများ တာဝန်ယူရတတ်ပြီး ကြီးပွားတိုးတက်လွယ်သော ဇာတာရှင်ဖြစ်ပါသည်။";
-      } else if (targetHouse === "raja") {
-        predText = "<b>ရာဇ ဖွား:</b> ဂုဏ်သတင်းကျော်ဇောမည်။ မင်းစိုးရာဇာ၊ အာဏာပိုင်များနှင့် နီးစပ်မည်။ အများ၏ လေးစားအသိအမှတ်ပြုခြင်းကို ခံရမည့် ဇာတာရှင်ဖြစ်ပါသည်။";
-      } else if (targetHouse === "thaik") {
-        predText = "<b>သိုက် ဖွား:</b> ဥစ္စာပစ္စည်း၊ လာဘ်လာဘ ပေါများမည်။ စီးပွားရေးလုပ်ငန်းများ အောင်မြင်လွယ်ပြီး ရတနာရရှိမည့် ဇာတာရှင်ဖြစ်ပါသည်။";
-      } else if (targetHouse === "thun") {
-        predText = "<b>အထွန်း ဖွား:</b> နာမည်ဂုဏ်သတင်း ထင်ရှားမည်။ ပညာရေး၊ အနုပညာ၊ စာပေစသော နယ်ပယ်များတွင် အောင်မြင်ထွန်းကားမည့် ဇာတာရှင်ဖြစ်ပါသည်။";
-      } else if (targetHouse === "puti") {
-        predText = "<b>ပုတိ ဖွား:</b> စိတ်ဆင်းရဲစရာ အနှောင့်အယှက်များ ကြုံရတတ်သည်။ ဇွဲ၊ လုံလစိုက်ထုတ်မှ သာမန်အတိုင်း အဆင်ပြေမည်ဖြစ်၍ စိတ်ဓာတ်မကျရန် လိုအပ်ပါသည်။";
-      } else if (targetHouse === "banga") {
-        predText = "<b>ဘင်္ဂ ဖွား:</b> အပြောင်းအလဲများမည်။ လုပ်ဆောင်သမျှ အတားအဆီးကြုံရတတ်သဖြင့် စိစစ်ဝိစာရဉာဏ်ဖြင့် သီးခံဆောင်ရွက်ရမည့် ဇာတာရှင်ဖြစ်ပါသည်။";
-      } else if (targetHouse === "marana") {
-        predText = "<b>မရဏ ဖွား:</b> ကျန်းမာရေးနှင့် ဘေးအန္တရာယ်ကို သတိပြုရမည်။ စိတ်တည်ငြိမ်အောင် ထိန်းသိမ်းပြီး ကုသိုလ်ကောင်းမှု များများပြုလုပ်သင့်ပါသည်။";
-      }
-
-      if (targetHouse) {
-        document.getElementById('cell-' + targetHouse).classList.add('highlight');
-      }
-
-      // Fill info section
+      // Info text
       document.getElementById('resultUserInfo').innerHTML = 
         `<b>အမည်:</b> ${name}<br>` +
         `<b>မွေးရက်:</b> ${day}/${month}/${year} (${birthDayText})<br>` +
-        `<b>မြန်မာသက္ကရာဇ်:</b> ${meYear} ခု (အကြွင်း - ${remainder})`;
+        `<b>အသက်:</b> ${age} နှစ် | <b>မြန်မာမွေးနှစ်:</b> ${meBirthYear} ခု (အကြွင်း - ${remainder})`;
 
-      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>${predText}`;
+      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>အကြွင်းအလိုက် မူလ၊ ဂေါလ၊ အသက် ဇယားကွက်များ အားလုံး ပုံစံတူ အမှန်အတိုင်း တွက်ချက်ပြီးပါပြီ။`;
 
-      // Show result page
       document.getElementById('form-page').style.display = 'none';
       document.getElementById('result-page').style.display = 'block';
     }
