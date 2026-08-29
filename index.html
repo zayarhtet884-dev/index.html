@@ -58,8 +58,9 @@
     /* Day Column (မွေးနံတိုင်) style */
     .day-column-wrapper { flex: 1; min-width: 110px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 4px; border-radius: 4px; }
     .column-table { width: 100%; max-width: 80px; margin: 0 auto; border-collapse: collapse; }
-    .column-table td { text-align: center; font-size: 15px; font-weight: bold; color: #0044aa; padding: 2px 0; border-bottom: 1px solid #0044aa; }
-    .column-table tr:last-child td { border-bottom: none; }
+    .column-table td { text-align: center; font-size: 15px; font-weight: bold; color: #0044aa; padding: 3px 0; }
+    /* အလယ်တည့်တည့်က ဂဏန်းကိုသာ အောက်ခံမျဉ်းသားရန် */
+    .column-table td.middle-cell { border-bottom: 2px solid #0044aa; }
 
     .footer-credit { text-align: center; font-size: 11px; color: #666; margin-top: 15px; border-top: 1px solid #e0dcd0; padding-top: 6px; }
     .back-btn { width: 100%; background-color: #444; color: white; border: none; padding: 7px; font-size: 13px; border-radius: 4px; cursor: pointer; margin-top: 10px; font-family: inherit; }
@@ -250,11 +251,12 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // မွေးနေ့ (bDayOfWeek) အလိုက် သက်ဆိုင်ရာ နေ့နံတိုင်ကို တိုက်ရိုက်ဖော်ပြခြင်း
+      // မွေးနေ့ (bDayOfWeek) အလိုက် သက်ဆိုင်ရာ နေ့နံတိုင် (အလယ်ဂဏန်းကိုသာ middle-class ဖြင့် မျဉ်းသားခြင်း)
       let colValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let columnTableHTML = "";
-      colValues.forEach(val => {
-        columnTableHTML += `<tr><td>${val}</td></tr>`;
+      colValues.forEach((val, idx) => {
+        let cellClass = (idx === 3) ? 'class="middle-cell"' : '';
+        columnTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('dayColumnTable').innerHTML = columnTableHTML;
 
