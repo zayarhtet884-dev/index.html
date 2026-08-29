@@ -156,7 +156,6 @@
   </div>
 
   <script>
-    // နေ့အမည်များနှင့် ပုံပါအတိုင်း အကျီ (နေ့သားနာမည်အတို) များကို ချိတ်ဆက်ထားသည်
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     const dayShortNames = ["အနင်္ဂ", "အလာ", "အကျီ", "အဗုဒ္ဓ", "အကြာ", "အသော", "အစနေ"];
     
@@ -187,16 +186,13 @@
         return;
       }
 
-      // မွေးရက်အပေါ်မူတည်၍ နေ့သား ရှာဖွေခြင်း
+      // လ (Month) ကို မှန်ကန်စေရန် bMonth - 1 သုံးပေးထားသည်
       const dateObj = new Date(bYear, bMonth - 1, bDay);
-      let dayOfWeek = dateObj.getDay(); // 0: Sun, 1: Mon, ... 6: Sat
+      let dayOfWeek = dateObj.getDay(); 
       let birthDayNum = dayOfWeek === 0 ? 7 : dayOfWeek; 
       
-      let dayText = dayNames[dayOfWeek];
       let shortDayText = dayShortNames[dayOfWeek];
-
       if (isRahu && birthDayNum === 4) {
-        dayText = "ဗုဒ္ဓဟူး (ရာဟု)";
         shortDayText = "ရာဟု";
       }
 
@@ -226,7 +222,7 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // ပုံပါအတိုင်း မွေးသက္ကရာဇ်နောက်တွင် နေ့သား (ဥပမာ - အကျီ) ပါဝင်အောင် ဖော်ပြပေးခြင်း
+      // ပုံပါအတိုင်း မွေးသက္ကရာဇ်နောက်တွင် နေ့သား (ဥပမာ - အကျီ) မှန်ကန်စွာ ပေါ်လာစေရန်
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
         `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} ${shortDayText}<br>` +
