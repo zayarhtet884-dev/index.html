@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ဆန်းကျမ်း Pro - မူလမဟာဘုတ် (၁ အကြွင်းစနစ်)</title>
+  <title>ဆန်းကျမ်း Pro - မူလ နှင့် ကောဇာ မဟာဘုတ်</title>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -59,13 +59,22 @@
   <!-- PAGE 1: Input Form -->
   <div class="container" id="form-page">
     <div class="header-title">
-      <span>ဆန်းကျမ်း Pro ( မူလမဟာဘုတ် )</span>
+      <span>ဆန်းကျမ်း Pro ( မူလ & ကောဇာ )</span>
       <span>🔮</span>
     </div>
 
     <div class="row">
       <label>အမည် (Name):</label>
       <input type="text" id="username" class="name-input" value="မောင်မောင်">
+    </div>
+
+    <div class="row">
+      <label>လက်ရှိနှစ် :</label>
+      <div class="date-inputs">
+        <input type="text" id="ny-day" value="29">
+        <input type="text" id="ny-month" value="08">
+        <input type="text" id="ny-year" value="2026">
+      </div>
     </div>
 
     <div class="row">
@@ -86,39 +95,50 @@
 
     <button class="btn-calc" onclick="alert('အချက်အလက်များ အဆင်ပြေပါသည်။')">Calculate</button>
 
-    <button class="btn-pred" onclick="calculateMahabote()">မူလမဟာဘုတ် ဇယားကြည့်မည်</button>
+    <button class="btn-pred" onclick="calculateMahabote()">မဟာဘုတ် ဇယားများကြည့်မည်</button>
   </div>
 
 
   <!-- PAGE 2: Result Page -->
   <div class="container" id="result-page">
     <div class="header-title">
-      <span>ဆန်းကျမ်း Pro ( မူလမဟာဘုတ်ဇာတာ )</span>
+      <span>ဆန်းကျမ်း Pro ( မဟာဘုတ်ဇာတာ )</span>
       <span>✨</span>
     </div>
 
-    <div class="result-header">မြန်မာ့ရိုးရာဗေဒင်ပညာ မူလမဟာဘုတ်</div>
+    <div class="result-header">မြန်မာ့ရိုးရာဗေဒင်ပညာ မဟာဘုတ်ဇာတာ</div>
 
     <div class="user-info" id="resultUserInfo"></div>
 
-    <!-- မူလမဟာဘုတ် ဇယား (၁ အကြွင်း ပုံသေစနစ်) -->
+    <!-- မူလမဟာဘုတ် ဇယား -->
     <div class="mahabote-board">
-      <div class="section-title" id="mulaTitle">မူလမဟာဘုတ် (၁ အကြွင်း)</div>
+      <div class="section-title" id="mulaTitle">မူလမဟာဘုတ်</div>
       <div class="mahabote-grid">
-        <!-- ပထမတန်း -->
         <div></div>
-        <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-m-adhipati">5</div></div>
+        <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-m-adhipati">-</div></div>
         <div></div>
-        
-        <!-- ဒုတိယတန်း -->
-        <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="p-m-thun">0</div></div>
-        <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="p-m-thaik">3</div></div>
-        <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="p-m-raja">6</div></div>
-        
-        <!-- တတိယတန်း -->
-        <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="p-m-marana">4</div></div>
-        <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-m-banga">1</div></div>
-        <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="p-m-puti">2</div></div>
+        <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="p-m-thun">-</div></div>
+        <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="p-m-thaik">-</div></div>
+        <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="p-m-raja">-</div></div>
+        <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="p-m-marana">-</div></div>
+        <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-m-banga">-</div></div>
+        <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="p-m-puti">-</div></div>
+      </div>
+    </div>
+
+    <!-- ကောဇာမဟာဘုတ် ဇယား (အသစ်ထပ်တိုး) -->
+    <div class="mahabote-board">
+      <div class="section-title" id="kozarTitle">ကောဇာမဟာဘုတ်</div>
+      <div class="mahabote-grid">
+        <div></div>
+        <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-k-adhipati">-</div></div>
+        <div></div>
+        <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="p-k-thun">-</div></div>
+        <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="p-k-thaik">-</div></div>
+        <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="p-k-raja">-</div></div>
+        <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="p-k-marana">-</div></div>
+        <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-k-banga">-</div></div>
+        <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="p-k-puti">-</div></div>
       </div>
     </div>
 
@@ -130,7 +150,7 @@
   <script>
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
-    // အကြွင်း ၁ မှ ၇ ထိ ပုံသေဇယားများ (ဓာတ်ပုံပါ အချက်အလက်များအတိုင်း အတိအကျ)
+    // အကြွင်း ၁ မှ ၇ ထိ ပုံသေဇယားများ
     const chartsMap = {
       1: { adhipati: 5, thun: 0, thaik: 3, raja: 6, marana: 4, banga: 1, puti: 2 },
       2: { adhipati: 6, thun: 1, thaik: 4, raja: 0, marana: 5, banga: 2, puti: 3 },
@@ -143,52 +163,74 @@
 
     function calculateMahabote() {
       const name = document.getElementById('username').value || "ဧည့်သည်";
-      const day = parseInt(document.getElementById('b-day').value);
-      const month = parseInt(document.getElementById('b-month').value);
-      const year = parseInt(document.getElementById('b-year').value);
+      const bDay = parseInt(document.getElementById('b-day').value);
+      const bMonth = parseInt(document.getElementById('b-month').value);
+      const bYear = parseInt(document.getElementById('b-year').value);
+      
+      const nyDay = parseInt(document.getElementById('ny-day').value);
+      const nyMonth = parseInt(document.getElementById('ny-month').value);
+      const nyYear = parseInt(document.getElementById('ny-year').value);
+
       const isRahu = document.getElementById('rahuCheck').checked;
 
-      if (!day || !month || !year) {
-        alert("မွေးသက္ကရာဇ် ရက်၊ လ၊ ခုနှစ် ဖြည့်ပါ!");
+      if (!bDay || !bMonth || !bYear || !nyDay || !nyMonth || !nyYear) {
+        alert("ရက်၊ လ၊ ခုနှစ် အချက်အလက်များ အပြည့်အစုံ ဖြည့်ပါ!");
         return;
       }
 
-      const dateObj = new Date(year, month - 1, day);
+      // မွေးသက္ကရာဇ် တွက်ချက်ခြင်း (မူလ)
+      const dateObj = new Date(bYear, bMonth - 1, bDay);
       let dayOfWeek = dateObj.getDay(); 
       let birthDayNum = dayOfWeek === 0 ? 7 : dayOfWeek; 
 
       let birthDayText = dayNames[dayOfWeek];
       if (isRahu && birthDayNum === 4) {
         birthDayText = "ဗုဒ္ဓဟူး (ရာဟု)";
-        birthDayNum = 8; 
       }
 
-      // မြန်မာမွေးနှစ် တွက်ချက်ခြင်း
-      let meBirthYear = month < 4 || (month === 4 && day < 17) ? year - 639 : year - 638;
-      let remainder = meBirthYear % 7;
-      if (remainder === 0) remainder = 7;
+      let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
+      let mulaRemainder = meBirthYear % 7;
+      if (mulaRemainder === 0) mulaRemainder = 7;
 
-      let chart = chartsMap[remainder] || chartsMap[1];
+      let mulaChart = chartsMap[mulaRemainder] || chartsMap[1];
 
-      // ဇယားခေါင်းစဉ်တွင် အကြွင်းကို ဖော်ပြရန်
-      document.getElementById('mulaTitle').innerText = `မူလမဟာဘုတ် (${remainder} အကြွင်း)`;
+      // မူလ ဇယားသို့ ဂဏန်းများ ထည့်သွင်းခြင်း
+      document.getElementById('mulaTitle').innerText = `မူလမဟာဘုတ် (${mulaRemainder} အကြွင်း)`;
+      document.getElementById('p-m-adhipati').innerText = mulaChart.adhipati;
+      document.getElementById('p-m-thun').innerText = mulaChart.thun;
+      document.getElementById('p-m-thaik').innerText = mulaChart.thaik;
+      document.getElementById('p-m-raja').innerText = mulaChart.raja;
+      document.getElementById('p-m-marana').innerText = mulaChart.marana;
+      document.getElementById('p-m-banga').innerText = mulaChart.banga;
+      document.getElementById('p-m-puti').innerText = mulaChart.puti;
 
-      // ဇယားကွက်များသို့ ဂဏန်းများ ထည့်သွင်းခြင်း
-      document.getElementById('p-m-adhipati').innerText = chart.adhipati;
-      document.getElementById('p-m-thun').innerText = chart.thun;
-      document.getElementById('p-m-thaik').innerText = chart.thaik;
-      document.getElementById('p-m-raja').innerText = chart.raja;
-      document.getElementById('p-m-marana').innerText = chart.marana;
-      document.getElementById('p-m-banga').innerText = chart.banga;
-      document.getElementById('p-m-puti').innerText = chart.puti;
+
+      // လက်ရှိနှစ် တွက်ချက်ခြင်း (ကောဇာ)
+      let meCurrentYear = nyMonth < 4 || (nyMonth === 4 && nyDay < 17) ? nyYear - 639 : nyYear - 638;
+      let kozarRemainder = meCurrentYear % 7;
+      if (kozarRemainder === 0) kozarRemainder = 7;
+
+      let kozarChart = chartsMap[kozarRemainder] || chartsMap[1];
+
+      // ကောဇာ ဇယားသို့ ဂဏန်းများ ထည့်သွင်းခြင်း
+      document.getElementById('kozarTitle').innerText = `ကောဇာမဟာဘုတ် (${kozarRemainder} အကြွင်း)`;
+      document.getElementById('p-k-adhipati').innerText = kozarChart.adhipati;
+      document.getElementById('p-k-thun').innerText = kozarChart.thun;
+      document.getElementById('p-k-thaik').innerText = kozarChart.thaik;
+      document.getElementById('p-k-raja').innerText = kozarChart.raja;
+      document.getElementById('p-k-marana').innerText = kozarChart.marana;
+      document.getElementById('p-k-banga').innerText = kozarChart.banga;
+      document.getElementById('p-k-puti').innerText = kozarChart.puti;
+
 
       // အချက်အလက် ဖော်ပြချက်
       document.getElementById('resultUserInfo').innerHTML = 
         `<b>အမည်:</b> ${name}<br>` +
-        `<b>မွေးရက်:</b> ${day}/${month}/${year} (${birthDayText})<br>` +
-        `<b>မြန်မာမွေးနှစ်:</b> ${meBirthYear} ခု (အကြွင်း - ${remainder})`;
+        `<b>မွေးရက်:</b> ${bDay}/${bMonth}/${bYear} (${birthDayText})<br>` +
+        `<b>မူလမြန်မာနှစ်:</b> ${meBirthYear} ခု (အကြွင်း - ${mulaRemainder})<br>` +
+        `<b>ကောဇာမြန်မာနှစ်:</b> ${meCurrentYear} ခု (အကြွင်း - ${kozarRemainder})`;
 
-      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>မွေးသက္ကရာဇ်အပေါ် မူတည်၍ ထွက်ပေါ်လာသော (${remainder} အကြွင်း) မူလမဟာဘုတ် ဇယားကွက်ပုံစံ အတိအကျ တွက်ချက်ပြီးပါပြီ။`;
+      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>မူလမဟာဘုတ် (${mulaRemainder} အကြွင်း) နှင့် ကောဇာမဟာဘုတ် (${kozarRemainder} အကြွင်း) တို့ကို ဇယားကွက်ပုံစံတူ အတိအကျ တွက်ချက်ပြီးပါပြီ။`;
 
       document.getElementById('form-page').style.display = 'none';
       document.getElementById('result-page').style.display = 'block';
