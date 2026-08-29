@@ -17,7 +17,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Padauk', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; min-height: 100vh; }
     
-    .container { width: 100%; max-width: 600px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .container { width: 100%; max-width: 620px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
     
     /* App Title Header */
     .app-header { text-align: center; border-bottom: 1px solid #e0dcd0; padding-bottom: 8px; margin-bottom: 10px; }
@@ -27,7 +27,7 @@
 
     /* Input Form Styles */
     .row { display: flex; align-items: center; margin-bottom: 8px; gap: 8px; }
-    label { font-size: 13px; font-weight: bold; width: 95px; color: #333; }
+    label { font-size: 13px; font-weight: bold; width: 105px; color: #333; }
     .name-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 10px; font-size: 13px; font-family: inherit; color: #0044aa; font-weight: bold; }
     .date-inputs { display: flex; gap: 4px; flex: 1; }
     .date-inputs input { width: 32%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 4px; font-size: 13px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
@@ -44,23 +44,23 @@
     
     .report-info { font-size: 12px; line-height: 1.6; margin-bottom: 10px; color: #222; }
     
-    /* Mahabote and Day Column Layout */
-    .boards-container { display: flex; justify-content: space-between; gap: 6px; margin: 10px 0; flex-wrap: wrap; }
-    .board-wrapper { flex: 1; min-width: 95px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
+    /* Boards Layout */
+    .boards-container { display: flex; justify-content: space-between; gap: 4px; margin: 10px 0; flex-wrap: wrap; }
+    .board-wrapper { flex: 1; min-width: 90px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
     
     .board-label { font-size: 13px; font-weight: bold; color: #8b0000; margin-bottom: 6px; }
     
-    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 120px; margin: 0 auto; }
+    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 110px; margin: 0 auto; }
     .m-cell { border: 1px solid #8b0000; border-radius: 2px; padding: 4px 1px; background: #fff; font-size: 10px; }
     .m-cell .h-name { color: #555; font-size: 9px; font-weight: bold; }
-    .m-cell .p-num { font-size: 13px; font-weight: bold; color: #0044aa; margin-top: 2px; }
+    .m-cell .p-num { font-size: 12px; font-weight: bold; color: #0044aa; margin-top: 2px; }
 
-    /* Day Column and Akhar Column style */
-    .day-column-wrapper { flex: 1; min-width: 75px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
-    .column-table { width: 100%; max-width: 70px; margin: 0 auto; border-collapse: collapse; }
+    /* Column Styles (မွေးနံတိုင်နှင့် အခါတိုင်) */
+    .day-column-wrapper { flex: 1; min-width: 65px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
+    .column-table { width: 100%; max-width: 60px; margin: 0 auto; border-collapse: collapse; }
     .column-table td { text-align: center; font-size: 14px; font-weight: bold; color: #0044aa; padding: 3px 0; }
     
-    /* ဂဏန်း၏ အပေါ်နှင့်အောက် နှစ်ဖက်စလုံး မျဉ်းသားခြင်း */
+    /* မျဉ်းသားခြင်း (အပေါ်နှင့်အောက် နှစ်ဖက်စလုံး) */
     .column-table td.middle-cell-top { border-top: 2px solid #0044aa; }
     .column-table td.middle-cell-bottom { border-bottom: 2px solid #0044aa; }
 
@@ -84,11 +84,19 @@
     </div>
 
     <div class="row">
-      <label>လက်ရှိနှစ် :</label>
+      <label>လက်ရှိရက်စွဲ :</label>
       <div class="date-inputs">
         <input type="text" id="ny-day" value="29">
         <input type="text" id="ny-month" value="08">
         <input type="text" id="ny-year" value="2026">
+      </div>
+    </div>
+
+    <div class="row">
+      <label>အချိန် (နာရီ:မိနစ်):</label>
+      <div class="date-inputs" style="flex:1;">
+        <input type="text" id="ny-hour" value="14" style="width: 48%;" placeholder="နာရီ (24H)">
+        <input type="text" id="ny-min" value="30" style="width: 48%;" placeholder="မိနစ်">
       </div>
     </div>
 
@@ -122,7 +130,7 @@
 
     <div class="report-info" id="reportDetails"></div>
 
-    <!-- မူလ၊ ကောဇာ၊ မွေးနံတိုင် နှင့် အခါတိုင် -->
+    <!-- မူလ၊ ကောဇာ၊ မွေးနံတိုင် နှင့် အခါတိုင် ဇယားများ -->
     <div class="boards-container">
       
       <!-- မူလမဟာဘုတ် -->
@@ -189,18 +197,18 @@
       7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 0, puti: 1 }
     };
 
-    // နေ့အလိုက် တိုင်များ (0:Sun, 1:Mon, 2:Tue, 3:Wed, 4:Thu, 5:Fri, 6:Sat)
+    // မွေးနံတိုင် နေ့အလိုက် တိုင်များ (0:Sun, 1:Mon, 2:Tue, 3:Wed, 4:Thu, 5:Fri, 6:Sat)
     const dayColumns = {
-      0: [5, 2, 6, 1, 4, 0, 3], // တနင်္ဂနွေ တိုင်
-      1: [6, 3, 0, 2, 5, 1, 4], // တနင်္လာ တိုင်
-      2: [0, 4, 1, 3, 6, 2, 5], // အင်္ဂါ တိုင်
-      3: [1, 5, 2, 4, 0, 3, 6], // ဗုဒ္ဓဟူး တိုင်
-      4: [2, 6, 3, 5, 1, 4, 0], // ကြာသပတေး တိုင်
-      5: [3, 0, 4, 6, 2, 5, 1], // သောကြာ တိုင်
-      6: [4, 1, 5, 0, 3, 6, 2]  // စနေ တိုင်
+      0: [5, 2, 6, 1, 4, 0, 3],
+      1: [6, 3, 0, 2, 5, 1, 4],
+      2: [0, 4, 1, 3, 6, 2, 5],
+      3: [1, 5, 2, 4, 0, 3, 6],
+      4: [2, 6, 3, 5, 1, 4, 0],
+      5: [3, 0, 4, 6, 2, 5, 1],
+      6: [4, 1, 5, 0, 3, 6, 2]
     };
 
-    // အခါတိုင် နေ့အလိုက် စတင်မည့် ၈ ပိုင်း စဉ်ဆက်များ (Sun=1, Mon=2, Tue=3, Wed=4, Thu=5, Fri=6, Sat=0)
+    // အခါတိုင် နေ့အလိုက် ၈ ပိုင်း စဉ်ဆက်များ
     const dayAkharSequences = {
       0: [1, 6, 4, 2, 0, 5, 3, 1], // တနင်္ဂနွေ
       1: [2, 0, 5, 3, 1, 6, 4, 2], // တနင်္လာ
@@ -210,6 +218,23 @@
       5: [6, 4, 2, 0, 5, 3, 1, 6], // သောကြာ
       6: [0, 5, 3, 1, 6, 4, 2, 0]  // စနေ
     };
+
+    // အချိန် (နာရီနှင့် မိနစ်) ကိုအခြေခံ၍ အခါ ၈ ပိုင်းအနက် ဘယ်အခါ (0 မှ 7 ထိ) ကျရောက်ကြောင်း တွက်ချက်သည့် ဖန်ရှင်
+    function getSlotIndex(hour, minute) {
+      let totalMinutes = hour * 60 + minute;
+      // မနက် ၆:၀၀ (နာရီ ၃၆၀) မှ စတင်ရေတွက်သည် (တစ်ပိုင်းလျှင် မိနစ် ၉၀ / ၁ နာရီခွဲ)
+      let startMinutes = 6 * 60; // 360 min
+      let diff = totalMinutes - startMinutes;
+      
+      if (diff < 0) {
+        // ည ၆:၀၀ မှ မနက် ၆:၀၀ အတွင်းဖြစ်ပါက ပထမအခါ သို့မဟုတ် နောက်ဆုံးအခါသို့ ညှိနိုင်သည်
+        return 0; 
+      }
+      
+      let slot = Math.floor(diff / 90);
+      if (slot > 7) slot = 7; // ၈ ပိုင်းထਧ မကျော်စေရန်
+      return slot;
+    }
 
     function calculateMahabote() {
       const name = document.getElementById('username').value || "Your Name";
@@ -221,6 +246,9 @@
       const nyMonth = parseInt(document.getElementById('ny-month').value);
       const nyYear = parseInt(document.getElementById('ny-year').value);
 
+      const hour = parseInt(document.getElementById('ny-hour').value) || 0;
+      const minute = parseInt(document.getElementById('ny-min').value) || 0;
+
       const isRahu = document.getElementById('rahuCheck').checked;
 
       if (!bDay || !bMonth || !bYear || !nyDay || !nyMonth || !nyYear) {
@@ -228,20 +256,20 @@
         return;
       }
 
-      // မွေးရက်အတွက် နေ့သားရှာဖွေခြင်း
+      // မွေးရက် နေ့သားရှာဖွေခြင်း
       const bDateObj = new Date(bYear, bMonth - 1, bDay);
-      let bDayOfWeek = bDateObj.getDay(); // 0 to 6 (Sun = 0)
-      
+      let bDayOfWeek = bDateObj.getDay(); 
       let bDayText = dayNames[bDayOfWeek];
       if (isRahu && bDayOfWeek === 3) {
         bDayText = "ရာဟု";
       }
 
-      // တွက်ချက်ရက်စွဲ (ကောဇာ) အတွက် နေ့သားရှာဖွေခြင်း
+      // တွက်ချက်ရက်စွဲ (ကောဇာ) နေ့သားရှာဖွေခြင်း
       const nyDateObj = new Date(nyYear, nyMonth - 1, nyDay);
       let nyDayOfWeek = nyDateObj.getDay();
       let nyDayText = dayNames[nyDayOfWeek];
 
+      // မူလဇယား တွက်ချက်မှု
       let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
       let mulaRemainder = meBirthYear % 7;
       if (mulaRemainder === 0) mulaRemainder = 7;
@@ -255,6 +283,7 @@
       document.getElementById('m-banga').innerText = mulaChart.banga;
       document.getElementById('m-puti').innerText = mulaChart.puti;
 
+      // ကောဇာဇယား တွက်ချက်မှု
       let meCurrentYear = nyMonth < 4 || (nyMonth === 4 && nyDay < 17) ? nyYear - 639 : nyYear - 638;
       let kozarRemainder = meCurrentYear % 7;
       if (kozarRemainder === 0) kozarRemainder = 7;
@@ -268,7 +297,7 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // မွေးနေ့ (bDayOfWeek) အလိုက် သက်ဆိုင်ရာ နေ့နံတိုင်
+      // မွေးနံတိုင် ထည့်သွင်းခြင်း
       let colValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let columnTableHTML = "";
       colValues.forEach((val, idx) => {
@@ -280,10 +309,11 @@
       });
       document.getElementById('dayColumnTable').innerHTML = columnTableHTML;
 
-      // အခါတိုင် တွက်ချက်ခြင်း (တွက်ချက်ရက်စွဲ nyDayOfWeek ကိုအခြေခံပြီး ၈ ပိုင်းအနက် သင့်တော်ရာ slot ကို ဥပမာအဖြစ် index 6 သို့မဟုတ် အချိန်အလိုက် ထည့်သွင်းနိုင်သည်၊ ဤနေရာတွင် မူလတောင်းဆိုချက်အရ နေ့အလိုက် အခါတိုင်ကို ဇယားအတိုင်းဖော်ပြပေးသည်)
+      // အခါတိုင် တွက်ချက်ခြင်း (ရက်စွဲ၏ နေ့သားနှင့် အချိန်အလိုက် အခါ ၈ ပိုင်း တွက်ထုတ်ခြင်း)
+      let targetSlotIndex = getSlotIndex(hour, minute);
       let akharSeq = dayAkharSequences[nyDayOfWeek] || dayAkharSequences[0];
-      let targetSlotIndex = 6; // လိုအပ်ပါက အချိန်အလိုက်ပြောင်းလဲနိုင်ရန် (ဥပမာ ၇ မြောက်အခါ)
       let akharTableHTML = "";
+      
       akharSeq.forEach((val, idx) => {
         let cellClass = "";
         if (idx === targetSlotIndex) {
@@ -295,8 +325,8 @@
 
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
-        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} ${bDayText}<br>` +
-        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} ${nyDayText}`;
+        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} (${bDayText})<br>` +
+        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} (${nyDayText}) | အချိန် - ${hour}:${minute < 10 ? '0' : ''}${minute} နာရီ`;
 
       document.getElementById('form-page').style.display = 'none';
       document.getElementById('result-page').style.display = 'block';
