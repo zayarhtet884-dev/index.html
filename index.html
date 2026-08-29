@@ -39,10 +39,10 @@
 
     .btn-calc { width: 100%; background-color: var(--btn-color); color: white; border: none; padding: 9px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; font-family: inherit; margin-top: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
 
-    /* Result Page Styles (Dashboard Layout) */
+    /* Result Page Styles */
     #result-page { display: none; }
     
-    .report-info { font-size: 12px; line-height: 1.5; margin-bottom: 10px; color: #222; }
+    .report-info { font-size: 12px; line-height: 1.6; margin-bottom: 10px; color: #222; }
     
     /* Side-by-Side Mahabote Boards */
     .boards-container { display: flex; justify-content: space-between; gap: 8px; margin: 10px 0; }
@@ -50,7 +50,6 @@
     
     .board-label { font-size: 13px; font-weight: bold; color: #8b0000; margin-bottom: 6px; }
     
-    /* ဇယားကွက် သေးငယ်ပုံစံ (ဘေးချင်းယှဉ်ဆံ့စေရန်) */
     .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 140px; margin: 0 auto; }
     .m-cell { border: 1px solid #8b0000; border-radius: 2px; padding: 4px 1px; background: #fff; font-size: 10px; }
     .m-cell .h-name { color: #555; font-size: 9px; font-weight: bold; }
@@ -157,7 +156,9 @@
   </div>
 
   <script>
+    // နေ့အမည်များနှင့် ပုံပါအတိုင်း အကျီ (နေ့သားနာမည်အတို) များကို ချိတ်ဆက်ထားသည်
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
+    const dayShortNames = ["အနင်္ဂ", "အလာ", "အကျီ", "အဗုဒ္ဓ", "အကြာ", "အသော", "အစနေ"];
     
     const chartsMap = {
       1: { adhipati: 5, thun: 0, thaik: 3, raja: 6, marana: 4, banga: 1, puti: 2 },
@@ -186,12 +187,17 @@
         return;
       }
 
+      // မွေးရက်အပေါ်မူတည်၍ နေ့သား ရှာဖွေခြင်း
       const dateObj = new Date(bYear, bMonth - 1, bDay);
-      let dayOfWeek = dateObj.getDay(); 
+      let dayOfWeek = dateObj.getDay(); // 0: Sun, 1: Mon, ... 6: Sat
       let birthDayNum = dayOfWeek === 0 ? 7 : dayOfWeek; 
-      let birthDayText = dayNames[dayOfWeek];
+      
+      let dayText = dayNames[dayOfWeek];
+      let shortDayText = dayShortNames[dayOfWeek];
+
       if (isRahu && birthDayNum === 4) {
-        birthDayText = "ဗုဒ္ဓဟူး (ရာဟု)";
+        dayText = "ဗုဒ္ဓဟူး (ရာဟု)";
+        shortDayText = "ရာဟု";
       }
 
       let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
@@ -220,9 +226,10 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
+      // ပုံပါအတိုင်း မွေးသက္ကရာဇ်နောက်တွင် နေ့သား (ဥပမာ - အကျီ) ပါဝင်အောင် ဖော်ပြပေးခြင်း
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
-        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear}<br>` +
+        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} ${shortDayText}<br>` +
         `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear}`;
 
       document.getElementById('form-page').style.display = 'none';
