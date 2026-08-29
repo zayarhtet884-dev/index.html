@@ -3,67 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ဆန်းကျမ်း Pro - မူလ နှင့် ကောဇာ မဟာဘုတ်</title>
+  <title>ဆန်းကျမ်း</title>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #fcf9ee;
+      --bg-color: #fcf6e8;
       --card-bg: #ffffff;
-      --border-color: #bcd0e5;
-      --input-bg: #eaf2fb;
+      --border-color: #dcd6c5;
+      --input-bg: #fdfbf7;
       --btn-color: #8b0000;
       --text-main: #333333;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Padauk', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 15px; min-height: 100vh; }
-    .container { width: 100%; max-width: 420px; background: var(--card-bg); border: 1px solid #dcd6c5; border-radius: 6px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .header-title { font-size: 15px; font-weight: bold; color: #555; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Padauk', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; min-height: 100vh; }
     
-    .row { display: flex; align-items: center; margin-bottom: 12px; gap: 8px; }
-    label { font-size: 14px; font-weight: bold; width: 105px; color: #333; }
+    .container { width: 100%; max-width: 480px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
     
-    .name-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 8px 12px; font-size: 14px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
-    
-    .date-inputs { display: flex; gap: 5px; flex: 1; }
-    .date-inputs input { width: 32%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 8px 4px; font-size: 14px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
+    /* App Title Header */
+    .app-header { text-align: center; border-bottom: 1px solid #e0dcd0; padding-bottom: 8px; margin-bottom: 10px; }
+    .app-title { font-size: 16px; font-weight: bold; color: #444; }
+    .teacher-title { font-size: 15px; font-weight: bold; color: #8b0000; margin-top: 4px; }
+    .teacher-sub { font-size: 13px; color: #555; }
 
-    .note { font-size: 11px; color: #cc0000; text-align: center; margin: 10px 0; font-style: italic; }
-    
-    .rahubox { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 12px 0; font-size: 14px; }
-    .rahubox input { width: 16px; height: 16px; }
+    /* Input Form Styles */
+    .row { display: flex; align-items: center; margin-bottom: 8px; gap: 8px; }
+    label { font-size: 13px; font-weight: bold; width: 95px; color: #333; }
+    .name-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 10px; font-size: 13px; font-family: inherit; color: #0044aa; font-weight: bold; }
+    .date-inputs { display: flex; gap: 4px; flex: 1; }
+    .date-inputs input { width: 32%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 4px; font-size: 13px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
+
+    .note { font-size: 11px; color: #cc0000; text-align: center; margin: 6px 0; font-style: italic; }
+    .rahubox { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 13px; }
+    .rahubox input { width: 15px; height: 15px; }
     .rahubox span { color: #cc0000; font-weight: bold; }
 
-    .btn-calc { width: 120px; background-color: var(--btn-color); color: white; border: none; padding: 8px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; display: block; margin: 0 auto 15px auto; font-family: inherit; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-    
-    .btn-pred { width: 100%; background-color: var(--btn-color); color: white; border: none; padding: 10px; font-size: 15px; font-weight: bold; border-radius: 4px; cursor: pointer; font-family: inherit; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .btn-calc { width: 100%; background-color: var(--btn-color); color: white; border: none; padding: 9px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; font-family: inherit; margin-top: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
 
-    /* Result Page Styles */
+    /* Result Page Styles (Dashboard Layout) */
     #result-page { display: none; }
-    .result-header { text-align: center; color: var(--btn-color); font-weight: bold; margin-bottom: 10px; font-size: 16px; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
-    .user-info { font-size: 13px; line-height: 1.6; margin-bottom: 15px; background: #fffdf5; padding: 10px; border-radius: 4px; border: 1px solid #ebd9b5; }
     
-    .mahabote-board { margin: 15px 0; text-align: center; }
-    .section-title { font-size: 14px; font-weight: bold; margin: 10px 0 8px 0; color: #fff; background: #002244; padding: 6px; border-radius: 3px; }
+    .report-info { font-size: 12px; line-height: 1.5; margin-bottom: 10px; color: #222; }
     
-    /* ဇယားကွက် ပုံစံ */
-    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; max-width: 280px; margin: 0 auto; }
-    .m-cell { border: 1px solid #8b0000; border-radius: 3px; padding: 8px 2px; background: #fff; font-size: 12px; }
-    .m-cell .h-name { color: #666; font-size: 11px; font-weight: bold; }
-    .m-cell .p-num { font-size: 18px; font-weight: bold; color: #0044aa; margin-top: 3px; }
+    /* Side-by-Side Mahabote Boards */
+    .boards-container { display: flex; justify-content: space-between; gap: 8px; margin: 10px 0; }
+    .board-wrapper { flex: 1; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px; border-radius: 4px; }
+    
+    .board-label { font-size: 13px; font-weight: bold; color: #8b0000; margin-bottom: 6px; }
+    
+    /* ဇယားကွက် သေးငယ်ပုံစံ (ဘေးချင်းယှဉ်ဆံ့စေရန်) */
+    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 140px; margin: 0 auto; }
+    .m-cell { border: 1px solid #8b0000; border-radius: 2px; padding: 4px 1px; background: #fff; font-size: 10px; }
+    .m-cell .h-name { color: #555; font-size: 9px; font-weight: bold; }
+    .m-cell .p-num { font-size: 14px; font-weight: bold; color: #0044aa; margin-top: 2px; }
 
-    .back-btn { width: 100%; background-color: #333; color: white; border: none; padding: 8px; font-size: 14px; border-radius: 4px; cursor: pointer; margin-top: 15px; font-family: inherit; }
+    .footer-credit { text-align: center; font-size: 11px; color: #666; margin-top: 15px; border-top: 1px solid #e0dcd0; padding-top: 6px; }
+    .back-btn { width: 100%; background-color: #444; color: white; border: none; padding: 7px; font-size: 13px; border-radius: 4px; cursor: pointer; margin-top: 10px; font-family: inherit; }
   </style>
 </head>
 <body>
 
   <!-- PAGE 1: Input Form -->
   <div class="container" id="form-page">
-    <div class="header-title">
-      <span>ဆန်းကျမ်း Pro ( မူလ & ကောဇာ )</span>
-      <span>🔮</span>
+    <div class="app-header">
+      <div class="app-title">ဆန်းကျမ်း</div>
+      <div class="teacher-title">ဆရာ ဇေယျာထက်</div>
+      <div class="teacher-sub">တဲရော့ - ဗေဒင် - လက္ခဏာ</div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 10px;">
       <label>အမည် (Name):</label>
       <input type="text" id="username" class="name-input" value="မောင်မောင်">
     </div>
@@ -80,9 +87,9 @@
     <div class="row">
       <label>မွေးသက္ကရာဇ် :</label>
       <div class="date-inputs">
-        <input type="text" id="b-day" placeholder="ရက်" value="12">
-        <input type="text" id="b-month" placeholder="လ" value="08">
-        <input type="text" id="b-year" placeholder="ခုနှစ်" value="2005">
+        <input type="text" id="b-day" placeholder="ရက်" value="4">
+        <input type="text" id="b-month" placeholder="လ" value="1">
+        <input type="text" id="b-year" placeholder="ခုနှစ်" value="1994">
       </div>
     </div>
 
@@ -93,56 +100,58 @@
       <span>Rahu (ရာဟု)</span>
     </div>
 
-    <button class="btn-calc" onclick="alert('အချက်အလက်များ အဆင်ပြေပါသည်။')">Calculate</button>
-
-    <button class="btn-pred" onclick="calculateMahabote()">မဟာဘုတ် ဇယားများကြည့်မည်</button>
+    <button class="btn-calc" onclick="calculateMahabote()">မဟာဘုတ် ဇယားများ ထုတ်မည်</button>
   </div>
 
 
   <!-- PAGE 2: Result Page -->
   <div class="container" id="result-page">
-    <div class="header-title">
-      <span>ဆန်းကျမ်း Pro ( မဟာဘုတ်ဇာတာ )</span>
-      <span>✨</span>
+    <div class="app-header">
+      <div class="app-title">ဆန်းကျမ်း</div>
+      <div class="teacher-title">ဆရာ ဇေယျာထက်</div>
+      <div class="teacher-sub">တဲရော့ - ဗေဒင် - လက္ခဏာ</div>
     </div>
 
-    <div class="result-header">မြန်မာ့ရိုးရာဗေဒင်ပညာ မဟာဘုတ်ဇာတာ</div>
+    <div class="report-info" id="reportDetails"></div>
 
-    <div class="user-info" id="resultUserInfo"></div>
-
-    <!-- မူလမဟာဘုတ် ဇယား -->
-    <div class="mahabote-board">
-      <div class="section-title" id="mulaTitle">မူလမဟာဘုတ်</div>
-      <div class="mahabote-grid">
-        <div></div>
-        <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-m-adhipati">-</div></div>
-        <div></div>
-        <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="p-m-thun">-</div></div>
-        <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="p-m-thaik">-</div></div>
-        <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="p-m-raja">-</div></div>
-        <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="p-m-marana">-</div></div>
-        <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-m-banga">-</div></div>
-        <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="p-m-puti">-</div></div>
+    <!-- မူလ နှင့် ကောဇာ မဟာဘုတ် ဘေးချင်းယှဉ်ဇယားများ -->
+    <div class="boards-container">
+      
+      <!-- မူလမဟာဘုတ် -->
+      <div class="board-wrapper">
+        <div class="board-label">မူလ</div>
+        <div class="mahabote-grid">
+          <div></div>
+          <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="m-adhipati">-</div></div>
+          <div></div>
+          <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="m-thun">-</div></div>
+          <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="m-thaik">-</div></div>
+          <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="m-raja">-</div></div>
+          <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="m-marana">-</div></div>
+          <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="m-banga">-</div></div>
+          <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="m-puti">-</div></div>
+        </div>
       </div>
-    </div>
 
-    <!-- ကောဇာမဟာဘုတ် ဇယား (အသစ်ထပ်တိုး) -->
-    <div class="mahabote-board">
-      <div class="section-title" id="kozarTitle">ကောဇာမဟာဘုတ်</div>
-      <div class="mahabote-grid">
-        <div></div>
-        <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="p-k-adhipati">-</div></div>
-        <div></div>
-        <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="p-k-thun">-</div></div>
-        <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="p-k-thaik">-</div></div>
-        <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="p-k-raja">-</div></div>
-        <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="p-k-marana">-</div></div>
-        <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="p-k-banga">-</div></div>
-        <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="p-k-puti">-</div></div>
+      <!-- ကောဇာမဟာဘုတ် -->
+      <div class="board-wrapper">
+        <div class="board-label">ကောဇာ</div>
+        <div class="mahabote-grid">
+          <div></div>
+          <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="k-adhipati">-</div></div>
+          <div></div>
+          <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="k-thun">-</div></div>
+          <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="k-thaik">-</div></div>
+          <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="k-raja">-</div></div>
+          <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="k-marana">-</div></div>
+          <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="k-banga">-</div></div>
+          <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="k-puti">-</div></div>
+        </div>
       </div>
+
     </div>
 
-    <div class="user-info" style="background: #fff5f5; border-color: #f5c6cb;" id="predictionResult"></div>
+    <div class="footer-credit">Developed By ဆရာ ဇေယျာထက်</div>
 
     <button class="back-btn" onclick="goBackToForm()">နောက်သို့ (Back)</button>
   </div>
@@ -150,7 +159,6 @@
   <script>
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
-    // အကြွင်း ၁ မှ ၇ ထိ ပုံသေဇယားများ
     const chartsMap = {
       1: { adhipati: 5, thun: 0, thaik: 3, raja: 6, marana: 4, banga: 1, puti: 2 },
       2: { adhipati: 6, thun: 1, thaik: 4, raja: 0, marana: 5, banga: 2, puti: 3 },
@@ -162,7 +170,7 @@
     };
 
     function calculateMahabote() {
-      const name = document.getElementById('username').value || "ဧည့်သည်";
+      const name = document.getElementById('username').value || "Your Name";
       const bDay = parseInt(document.getElementById('b-day').value);
       const bMonth = parseInt(document.getElementById('b-month').value);
       const bYear = parseInt(document.getElementById('b-year').value);
@@ -174,15 +182,13 @@
       const isRahu = document.getElementById('rahuCheck').checked;
 
       if (!bDay || !bMonth || !bYear || !nyDay || !nyMonth || !nyYear) {
-        alert("ရက်၊ လ၊ ခုနှစ် အချက်အလက်များ အပြည့်အစုံ ဖြည့်ပါ!");
+        alert("အချက်အလက်များ အပြည့်အစုံ ဖြည့်ပါ!");
         return;
       }
 
-      // မွေးသက္ကရာဇ် တွက်ချက်ခြင်း (မူလ)
       const dateObj = new Date(bYear, bMonth - 1, bDay);
       let dayOfWeek = dateObj.getDay(); 
       let birthDayNum = dayOfWeek === 0 ? 7 : dayOfWeek; 
-
       let birthDayText = dayNames[dayOfWeek];
       if (isRahu && birthDayNum === 4) {
         birthDayText = "ဗုဒ္ဓဟူး (ရာဟု)";
@@ -191,46 +197,33 @@
       let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
       let mulaRemainder = meBirthYear % 7;
       if (mulaRemainder === 0) mulaRemainder = 7;
-
       let mulaChart = chartsMap[mulaRemainder] || chartsMap[1];
 
-      // မူလ ဇယားသို့ ဂဏန်းများ ထည့်သွင်းခြင်း
-      document.getElementById('mulaTitle').innerText = `မူလမဟာဘုတ် (${mulaRemainder} အကြွင်း)`;
-      document.getElementById('p-m-adhipati').innerText = mulaChart.adhipati;
-      document.getElementById('p-m-thun').innerText = mulaChart.thun;
-      document.getElementById('p-m-thaik').innerText = mulaChart.thaik;
-      document.getElementById('p-m-raja').innerText = mulaChart.raja;
-      document.getElementById('p-m-marana').innerText = mulaChart.marana;
-      document.getElementById('p-m-banga').innerText = mulaChart.banga;
-      document.getElementById('p-m-puti').innerText = mulaChart.puti;
+      document.getElementById('m-adhipati').innerText = mulaChart.adhipati;
+      document.getElementById('m-thun').innerText = mulaChart.thun;
+      document.getElementById('m-thaik').innerText = mulaChart.thaik;
+      document.getElementById('m-raja').innerText = mulaChart.raja;
+      document.getElementById('m-marana').innerText = mulaChart.marana;
+      document.getElementById('m-banga').innerText = mulaChart.banga;
+      document.getElementById('m-puti').innerText = mulaChart.puti;
 
-
-      // လက်ရှိနှစ် တွက်ချက်ခြင်း (ကောဇာ)
       let meCurrentYear = nyMonth < 4 || (nyMonth === 4 && nyDay < 17) ? nyYear - 639 : nyYear - 638;
       let kozarRemainder = meCurrentYear % 7;
       if (kozarRemainder === 0) kozarRemainder = 7;
-
       let kozarChart = chartsMap[kozarRemainder] || chartsMap[1];
 
-      // ကောဇာ ဇယားသို့ ဂဏန်းများ ထည့်သွင်းခြင်း
-      document.getElementById('kozarTitle').innerText = `ကောဇာမဟာဘုတ် (${kozarRemainder} အကြွင်း)`;
-      document.getElementById('p-k-adhipati').innerText = kozarChart.adhipati;
-      document.getElementById('p-k-thun').innerText = kozarChart.thun;
-      document.getElementById('p-k-thaik').innerText = kozarChart.thaik;
-      document.getElementById('p-k-raja').innerText = kozarChart.raja;
-      document.getElementById('p-k-marana').innerText = kozarChart.marana;
-      document.getElementById('p-k-banga').innerText = kozarChart.banga;
-      document.getElementById('p-k-puti').innerText = kozarChart.puti;
+      document.getElementById('k-adhipati').innerText = kozarChart.adhipati;
+      document.getElementById('k-thun').innerText = kozarChart.thun;
+      document.getElementById('k-thaik').innerText = kozarChart.thaik;
+      document.getElementById('k-raja').innerText = kozarChart.raja;
+      document.getElementById('k-marana').innerText = kozarChart.marana;
+      document.getElementById('k-banga').innerText = kozarChart.banga;
+      document.getElementById('k-puti').innerText = kozarChart.puti;
 
-
-      // အချက်အလက် ဖော်ပြချက်
-      document.getElementById('resultUserInfo').innerHTML = 
-        `<b>အမည်:</b> ${name}<br>` +
-        `<b>မွေးရက်:</b> ${bDay}/${bMonth}/${bYear} (${birthDayText})<br>` +
-        `<b>မူလမြန်မာနှစ်:</b> ${meBirthYear} ခု (အကြွင်း - ${mulaRemainder})<br>` +
-        `<b>ကောဇာမြန်မာနှစ်:</b> ${meCurrentYear} ခု (အကြွင်း - ${kozarRemainder})`;
-
-      document.getElementById('predictionResult').innerHTML = `<b>မဟာဘုတ် ဟောကိန်း:</b><br>မူလမဟာဘုတ် (${mulaRemainder} အကြွင်း) နှင့် ကောဇာမဟာဘုတ် (${kozarRemainder} အကြွင်း) တို့ကို ဇယားကွက်ပုံစံတူ အတိအကျ တွက်ချက်ပြီးပါပြီ။`;
+      document.getElementById('reportDetails').innerHTML = 
+        `<b>${name}</b><br>` +
+        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear}<br>` +
+        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear}`;
 
       document.getElementById('form-page').style.display = 'none';
       document.getElementById('result-page').style.display = 'block';
