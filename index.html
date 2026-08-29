@@ -92,9 +92,9 @@
     <div class="row">
       <label>မွေးသက္ကရာဇ် :</label>
       <div class="date-inputs">
-        <input type="text" id="b-day" placeholder="ရက်" value="4">
-        <input type="text" id="b-month" placeholder="လ" value="1">
-        <input type="text" id="b-year" placeholder="ခုနှစ်" value="1994">
+        <input type="text" id="b-day" placeholder="ရက်" value="25">
+        <input type="text" id="b-month" placeholder="လ" value="8">
+        <input type="text" id="b-year" placeholder="ခုနှစ်" value="2005">
       </div>
     </div>
 
@@ -182,15 +182,15 @@
       7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 0, puti: 1 }
     };
 
-    // နေ့အလိုက် တိုင်များ (Remainder 1 to 7)
+    // နေ့အလိုက် တိုင်များ (0:Sun, 1:Mon, 2:Tue, 3:Wed, 4:Thu, 5:Fri, 6:Sat)
     const dayColumns = {
-      1: [5, 2, 6, 1, 4, 0, 3], // တနင်္ဂနွေတိုင်
-      2: [6, 3, 0, 2, 5, 1, 4], // တနင်္လာတိုင်
-      3: [0, 4, 1, 3, 6, 2, 5], // အင်္ဂါတိုင်
-      4: [1, 5, 2, 4, 0, 3, 6], // ဗုဒ္ဓဟူးတိုင်
-      5: [2, 6, 3, 5, 1, 4, 0], // ကြာသပတေးတိုင်
-      6: [3, 0, 4, 6, 2, 5, 1], // သောကြာတိုင်
-      7: [4, 1, 5, 0, 3, 6, 2]  // စနေတိုင်
+      0: [5, 2, 6, 1, 4, 0, 3], // တနင်္ဂနွေ တိုင်
+      1: [6, 3, 0, 2, 5, 1, 4], // တနင်္လာ တိုင်
+      2: [0, 4, 1, 3, 6, 2, 5], // အင်္ဂါ တိုင်
+      3: [1, 5, 2, 4, 0, 3, 6], // ဗုဒ္ဓဟူး တိုင်
+      4: [2, 6, 3, 5, 1, 4, 0], // ကြာသပတေး တိုင်
+      5: [3, 0, 4, 6, 2, 5, 1], // သောကြာ တိုင်
+      6: [4, 1, 5, 0, 3, 6, 2]  // စနေ တိုင်
     };
 
     function calculateMahabote() {
@@ -212,11 +212,10 @@
 
       // မွေးရက်အတွက် နေ့သားရှာဖွေခြင်း
       const bDateObj = new Date(bYear, bMonth - 1, bDay);
-      let bDayOfWeek = bDateObj.getDay(); 
-      let birthDayNum = bDayOfWeek === 0 ? 7 : bDayOfWeek; 
+      let bDayOfWeek = bDateObj.getDay(); // 0 to 6 (Sun = 0, Thu = 4)
       
       let bDayText = dayNames[bDayOfWeek];
-      if (isRahu && birthDayNum === 4) {
+      if (isRahu && bDayOfWeek === 3) {
         bDayText = "ရာဟု";
       }
 
@@ -251,15 +250,14 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // ခုနှစ်အရတွက်လို့ရလာတဲ့ အကြွင်း (Remainder) အရ သက်ဆိုင်ရာနေ့နံတိုင်ကို ပြသခြင်း
-      let colValues = dayColumns[mulaRemainder] || dayColumns[1];
+      // မွေးနေ့ (bDayOfWeek) အလိုက် သက်ဆိုင်ရာ နေ့နံတိုင်ကို တိုက်ရိုက်ဖော်ပြခြင်း
+      let colValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let columnTableHTML = "";
       colValues.forEach(val => {
         columnTableHTML += `<tr><td>${val}</td></tr>`;
       });
       document.getElementById('dayColumnTable').innerHTML = columnTableHTML;
 
-      // မွေးသက္ကရာဇ်နှင့် တွက်ချက်ရက်စွဲ နှစ်ခုစလုံးတွင် နေ့သားများ ပါဝင်စေရန်
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
         `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} ${bDayText}<br>` +
