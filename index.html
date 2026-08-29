@@ -152,12 +152,12 @@
 
     <div class="footer-credit">Developed By ဆရာ ဇေယျာထက်</div>
 
-    <button class="back-btn" onclick="goBackToForm()">နောက်သို့ (Back)</button>
+    <button class="back-btn" onclick="goBackToForm()">နောက်ို့ (Back)</button>
   </div>
 
   <script>
-    const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
-    const dayShortNames = ["အနင်္ဂ", "အလာ", "အကျီ", "အဗုဒ္ဓ", "အကြာ", "အသော", "အစနေ"];
+    // မှန်ကန်သော နေ့အမည်များနှင့် အတိုကောက် စာလုံးပေါင်းများ
+    const dayShortNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
     const chartsMap = {
       1: { adhipati: 5, thun: 0, thaik: 3, raja: 6, marana: 4, banga: 1, puti: 2 },
@@ -186,14 +186,14 @@
         return;
       }
 
-      // လ (Month) ကို မှန်ကန်စေရန် bMonth - 1 သုံးပေးထားသည်
+      // ရက်စွဲမှန်ကန်စွာ တွက်ချက်ရန် bMonth - 1 သုံးထားသည်
       const dateObj = new Date(bYear, bMonth - 1, bDay);
-      let dayOfWeek = dateObj.getDay(); 
+      let dayOfWeek = dateObj.getDay(); // 0: Sun, 1: Mon, ... 6: Sat
       let birthDayNum = dayOfWeek === 0 ? 7 : dayOfWeek; 
       
-      let shortDayText = dayShortNames[dayOfWeek];
+      let dayText = dayShortNames[dayOfWeek];
       if (isRahu && birthDayNum === 4) {
-        shortDayText = "ရာဟု";
+        dayText = "ရာဟု";
       }
 
       let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
@@ -222,10 +222,10 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // ပုံပါအတိုင်း မွေးသက္ကရာဇ်နောက်တွင် နေ့သား (ဥပမာ - အကျီ) မှန်ကန်စွာ ပေါ်လာစေရန်
+      // စာလုံးပေါင်းမှန်ကန်သော နေ့အမည်ဖြင့် ဖော်ပြပေးခြင်း
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
-        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} ${shortDayText}<br>` +
+        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} ${dayText}<br>` +
         `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear}`;
 
       document.getElementById('form-page').style.display = 'none';
