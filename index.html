@@ -19,13 +19,11 @@
     
     .container { width: 100%; max-width: 620px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
     
-    /* App Title Header */
     .app-header { text-align: center; border-bottom: 1px solid #e0dcd0; padding-bottom: 8px; margin-bottom: 10px; }
     .app-title { font-size: 16px; font-weight: bold; color: #444; }
     .teacher-title { font-size: 15px; font-weight: bold; color: #8b0000; margin-top: 4px; }
     .teacher-sub { font-size: 13px; color: #555; }
 
-    /* Input Form Styles */
     .row { display: flex; align-items: center; margin-bottom: 8px; gap: 8px; }
     label { font-size: 13px; font-weight: bold; width: 105px; color: #333; }
     .name-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 10px; font-size: 13px; font-family: inherit; color: #0044aa; font-weight: bold; }
@@ -39,12 +37,9 @@
 
     .btn-calc { width: 100%; background-color: var(--btn-color); color: white; border: none; padding: 9px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; font-family: inherit; margin-top: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
 
-    /* Result Page Styles */
     #result-page { display: none; }
-    
     .report-info { font-size: 12px; line-height: 1.6; margin-bottom: 10px; color: #222; }
     
-    /* Boards Layout */
     .boards-container { display: flex; justify-content: space-between; gap: 4px; margin: 10px 0; flex-wrap: wrap; }
     .board-wrapper { flex: 1; min-width: 90px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
     
@@ -55,14 +50,13 @@
     .m-cell .h-name { color: #555; font-size: 9px; font-weight: bold; }
     .m-cell .p-num { font-size: 12px; font-weight: bold; color: #0044aa; margin-top: 2px; }
 
-    /* Column Styles (မွေးနံတိုင်နှင့် အခါတိုင်) */
     .day-column-wrapper { flex: 1; min-width: 65px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
     .column-table { width: 100%; max-width: 60px; margin: 0 auto; border-collapse: collapse; }
     .column-table td { text-align: center; font-size: 14px; font-weight: bold; color: #0044aa; padding: 3px 0; }
     
-    /* မျဉ်းသားခြင်း (အပေါ်နှင့်အောက် နှစ်ဖက်စလုံး) */
-    .column-table td.middle-cell-top { border-top: 2px solid #0044aa; }
-    .column-table td.middle-cell-bottom { border-bottom: 2px solid #0044aa; }
+    /* မျဉ်းသားခြင်း စနစ်များ */
+    .column-table td.line-top { border-top: 2px solid #0044aa; }
+    .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
     .footer-credit { text-align: center; font-size: 11px; color: #666; margin-top: 15px; border-top: 1px solid #e0dcd0; padding-top: 6px; }
     .back-btn { width: 100%; background-color: #444; color: white; border: none; padding: 7px; font-size: 13px; border-radius: 4px; cursor: pointer; margin-top: 10px; font-family: inherit; }
@@ -119,7 +113,6 @@
     <button class="btn-calc" onclick="calculateMahabote()">မဟာဘုတ် ဇယားများ ထုတ်မည်</button>
   </div>
 
-
   <!-- PAGE 2: Result Page -->
   <div class="container" id="result-page">
     <div class="app-header">
@@ -130,7 +123,6 @@
 
     <div class="report-info" id="reportDetails"></div>
 
-    <!-- မူလ၊ ကောဇာ၊ မွေးနံတိုင် နှင့် အခါတိုင် ဇယားများ -->
     <div class="boards-container">
       
       <!-- မူလမဟာဘုတ် -->
@@ -165,13 +157,13 @@
         </div>
       </div>
 
-      <!-- မွေးနံတိုင် (Day Column) -->
+      <!-- မွေးနံတိုင် -->
       <div class="day-column-wrapper">
         <div class="board-label">မွေးနံတိုင်</div>
         <table class="column-table" id="dayColumnTable"></table>
       </div>
 
-      <!-- အခါတိုင် (Akhar Taing) -->
+      <!-- အခါတိုင် (အချိန်ဇယားအလိုက် မျဉ်းသားချက်များပါဝင်သည်) -->
       <div class="day-column-wrapper">
         <div class="board-label">အခါတိုင်</div>
         <table class="column-table" id="akharColumnTable"></table>
@@ -197,7 +189,6 @@
       7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 0, puti: 1 }
     };
 
-    // မွေးနံတိုင် နေ့အလိုက် တိုင်များ (0:Sun, 1:Mon, 2:Tue, 3:Wed, 4:Thu, 5:Fri, 6:Sat)
     const dayColumns = {
       0: [5, 2, 6, 1, 4, 0, 3],
       1: [6, 3, 0, 2, 5, 1, 4],
@@ -208,31 +199,95 @@
       6: [4, 1, 5, 0, 3, 6, 2]
     };
 
-    // အခါတိုင် နေ့အလိုက် ၈ ပိုင်း စဉ်ဆက်များ
-    const dayAkharSequences = {
-      0: [1, 6, 4, 2, 0, 5, 3, 1], // တနင်္ဂနွေ
-      1: [2, 0, 5, 3, 1, 6, 4, 2], // တနင်္လာ
-      2: [3, 1, 6, 4, 2, 0, 5, 3], // အင်္ဂါ
-      3: [4, 2, 0, 5, 3, 1, 6, 4], // ဗုဒ္ဓဟူး
-      4: [5, 3, 1, 6, 4, 2, 0, 5], // ကြာသပတေး
-      5: [6, 4, 2, 0, 5, 3, 1, 6], // သောကြာ
-      6: [0, 5, 3, 1, 6, 4, 2, 0]  // စနေ
+    // ပုံပါ အင်္ဂဝိဇ္ဇာ အခါတိုင်ဇယားအတိုင်း နေ့အလိုက် နှင့် အချိန်အခါ (၈) ပိုင်းစီ၏ ဂဏန်းများနှင့် မျဉ်းသားမည့်နေရာများ
+    // ကြီးစဉ် (numbers) နှင့် မျဉ်းသားမည့်အညွှန်း (lineAfter: အဲဒီ row အောက်မှာ မျဉ်းသားရန်)
+    const akharTableData = {
+      // တနင်္ဂနွေ (0)
+      0: [
+        { nums: [5,4,3,2,1,0,6,5], line: 3 }, // 6:00 - 7:30
+        { nums: [3,2,1,0,6,5,4,3], line: 1 }, // 7:30 - 9:00
+        { nums: [1,0,6,5,4,3,2,1], line: 6 }, // 9:00 - 10:30
+        { nums: [6,5,4,3,2,1,0,6], line: 4 }, // 10:30 - 12:00
+        { nums: [4,3,2,1,0,6,5,4], line: 2 }, // 12:00 - 13:30
+        { nums: [2,1,0,6,5,4,3,2], line: 7 }, // 13:30 - 15:00
+        { nums: [0,6,5,4,3,2,1,0], line: 5 }, // 15:00 - 16:30
+        { nums: [5,4,3,2,1,0,6,5], line: 3 }  // 16:30 - 18:00
+      ],
+      // တနင်္လာ (1)
+      1: [
+        { nums: [6,5,4,3,2,1,0,6], line: 4 },
+        { nums: [4,3,2,1,0,6,5,4], line: 2 },
+        { nums: [2,1,0,6,5,4,3,2], line: 7 },
+        { nums: [0,6,5,4,3,2,1,0], line: 5 },
+        { nums: [5,4,3,2,1,0,6,5], line: 3 },
+        { nums: [3,2,1,0,6,5,4,3], line: 1 },
+        { nums: [1,0,6,5,4,3,2,1], line: 6 },
+        { nums: [6,5,4,3,2,1,0,6], line: 4 }
+      ],
+      // အင်္ဂါ (2)
+      2: [
+        { nums: [0,6,5,4,3,2,1,0], line: 5 },
+        { nums: [5,4,3,2,1,0,6,5], line: 3 },
+        { nums: [3,2,1,0,6,5,4,3], line: 1 },
+        { nums: [1,0,6,5,4,3,2,1], line: 6 },
+        { nums: [6,5,4,3,2,1,0,6], line: 4 },
+        { nums: [4,3,2,1,0,6,5,4], line: 2 },
+        { nums: [2,1,0,6,5,4,3,2], line: 7 },
+        { nums: [0,6,5,4,3,2,1,0], line: 5 }
+      ],
+      // ဗုဒ္ဓဟူး (3)
+      3: [
+        { nums: [1,0,6,5,4,3,2,1], line: 6 },
+        { nums: [6,5,4,3,2,1,0,6], line: 4 },
+        { nums: [4,3,2,1,0,6,5,4], line: 2 },
+        { nums: [2,1,0,6,5,4,3,2], line: 7 },
+        { nums: [0,6,5,4,3,2,1,0], line: 5 },
+        { nums: [5,4,3,2,1,0,6,5], line: 3 },
+        { nums: [3,2,1,0,6,5,4,3], line: 1 },
+        { nums: [1,0,6,5,4,3,2,1], line: 6 }
+      ],
+      // ကြာသပတေး (4)
+      4: [
+        { nums: [2,1,0,6,5,4,3,2], line: 7 },
+        { nums: [0,6,5,4,3,2,1,0], line: 5 },
+        { nums: [5,4,3,2,1,0,6,5], line: 3 },
+        { nums: [3,2,1,0,6,5,4,3], line: 1 },
+        { nums: [1,0,6,5,4,3,2,1], line: 6 },
+        { nums: [6,5,4,3,2,1,0,6], line: 4 },
+        { nums: [4,3,2,1,0,6,5,4], line: 2 },
+        { nums: [2,1,0,6,5,4,3,2], line: 7 }
+      ],
+      // သောကြာ (5)
+      5: [
+        { nums: [3,2,1,0,6,5,4,3], line: 1 },
+        { nums: [1,0,6,5,4,3,2,1], line: 6 },
+        { nums: [6,5,4,3,2,1,0,6], line: 4 },
+        { nums: [4,3,2,1,0,6,5,4], line: 2 },
+        { nums: [2,1,0,6,5,4,3,2], line: 7 },
+        { nums: [0,6,5,4,3,2,1,0], line: 5 },
+        { nums: [5,4,3,2,1,0,6,5], line: 3 },
+        { nums: [3,2,1,0,6,5,4,3], line: 1 }
+      ],
+      // စနေ (6) - ဆရာပြထားသော ပုံပါအတိုင်း တိကျသော အခါတိုင် ဇယား
+      6: [
+        { nums: [4,3,2,1,0,6,5,4], line: 2 }, // 6:00 - 7:30 (ပထမအခါ - ဥပမာ ပုံတွင် ၂ အောက်မျဉ်း)
+        { nums: [2,1,0,6,5,4,3,2], line: 7 }, // 7:30 - 9:00
+        { nums: [0,6,5,4,3,2,1,0], line: 5 }, // 9:00 - 10:30
+        { nums: [5,4,3,2,1,0,6,5], line: 3 }, // 10:30 - 12:00
+        { nums: [3,2,1,0,6,5,4,3], line: 1 }, // 12:00 - 13:30
+        { nums: [1,0,6,5,4,3,2,1], line: 6 }, // 13:30 - 15:00
+        { nums: [6,5,4,3,2,1,0,6], line: 4 }, // 15:00 - 16:30 (စနေနေ့ 14:30 / 15:00 ဝန်းကျင်အတွက် ၄ အောက်မျဉ်း)
+        { nums: [4,3,2,1,0,6,5,4], line: 2 }  // 16:30 - 18:00
+      ]
     };
 
-    // အချိန် (နာရီနှင့် မိနစ်) ကိုအခြေခံ၍ အခါ ၈ ပိုင်းအနက် ဘယ်အခါ (0 မှ 7 ထိ) ကျရောက်ကြောင်း တွက်ချက်သည့် ဖန်ရှင်
     function getSlotIndex(hour, minute) {
       let totalMinutes = hour * 60 + minute;
-      // မနက် ၆:၀၀ (နာရီ ၃၆၀) မှ စတင်ရေတွက်သည် (တစ်ပိုင်းလျှင် မိနစ် ၉၀ / ၁ နာရီခွဲ)
-      let startMinutes = 6 * 60; // 360 min
+      let startMinutes = 6 * 60; // 6:00 AM
       let diff = totalMinutes - startMinutes;
-      
-      if (diff < 0) {
-        // ည ၆:၀၀ မှ မနက် ၆:၀၀ အတွင်းဖြစ်ပါက ပထမအခါ သို့မဟုတ် နောက်ဆုံးအခါသို့ ညှိနိုင်သည်
-        return 0; 
-      }
-      
+      if (diff < 0) return 0;
       let slot = Math.floor(diff / 90);
-      if (slot > 7) slot = 7; // ၈ ပိုင်းထਧ မကျော်စေရန်
+      if (slot > 7) slot = 7;
       return slot;
     }
 
@@ -248,7 +303,6 @@
 
       const hour = parseInt(document.getElementById('ny-hour').value) || 0;
       const minute = parseInt(document.getElementById('ny-min').value) || 0;
-
       const isRahu = document.getElementById('rahuCheck').checked;
 
       if (!bDay || !bMonth || !bYear || !nyDay || !nyMonth || !nyYear) {
@@ -256,20 +310,16 @@
         return;
       }
 
-      // မွေးရက် နေ့သားရှာဖွေခြင်း
       const bDateObj = new Date(bYear, bMonth - 1, bDay);
       let bDayOfWeek = bDateObj.getDay(); 
       let bDayText = dayNames[bDayOfWeek];
-      if (isRahu && bDayOfWeek === 3) {
-        bDayText = "ရာဟု";
-      }
+      if (isRahu && bDayOfWeek === 3) bDayText = "ရာဟု";
 
-      // တွက်ချက်ရက်စွဲ (ကောဇာ) နေ့သားရှာဖွေခြင်း
       const nyDateObj = new Date(nyYear, nyMonth - 1, nyDay);
       let nyDayOfWeek = nyDateObj.getDay();
       let nyDayText = dayNames[nyDayOfWeek];
 
-      // မူလဇယား တွက်ချက်မှု
+      // မူလ
       let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
       let mulaRemainder = meBirthYear % 7;
       if (mulaRemainder === 0) mulaRemainder = 7;
@@ -283,7 +333,7 @@
       document.getElementById('m-banga').innerText = mulaChart.banga;
       document.getElementById('m-puti').innerText = mulaChart.puti;
 
-      // ကောဇာဇယား တွက်ချက်မှု
+      // ကောဇာ
       let meCurrentYear = nyMonth < 4 || (nyMonth === 4 && nyDay < 17) ? nyYear - 639 : nyYear - 638;
       let kozarRemainder = meCurrentYear % 7;
       if (kozarRemainder === 0) kozarRemainder = 7;
@@ -297,27 +347,29 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // မွေးနံတိုင် ထည့်သွင်းခြင်း
+      // မွေးနံတိုင်
       let colValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let columnTableHTML = "";
       colValues.forEach((val, idx) => {
         let cellClass = "";
-        if (idx === 3) {
-          cellClass = 'class="middle-cell-top middle-cell-bottom"';
-        }
+        if (idx === 3) cellClass = 'class="line-top line-bottom"';
         columnTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('dayColumnTable').innerHTML = columnTableHTML;
 
-      // အခါတိုင် တွက်ချက်ခြင်း (ရက်စွဲ၏ နေ့သားနှင့် အချိန်အလိုက် အခါ ၈ ပိုင်း တွက်ထုတ်ခြင်း)
-      let targetSlotIndex = getSlotIndex(hour, minute);
-      let akharSeq = dayAkharSequences[nyDayOfWeek] || dayAkharSequences[0];
-      let akharTableHTML = "";
+      // အခါတိုင် (အချိန်နှင့် နေ့အလိုက် ဇယားမှ တိုက်ရိုက်ထုတ်ယူခြင်း)
+      let slotIdx = getSlotIndex(hour, minute);
+      let dayAkharObj = akharTableData[nyDayOfWeek] || akharTableData[0];
+      let selectedSlot = dayAkharObj[slotIdx] || dayAkharObj[0];
       
-      akharSeq.forEach((val, idx) => {
+      let akharTableHTML = "";
+      selectedSlot.nums.forEach((val, idx) => {
         let cellClass = "";
-        if (idx === targetSlotIndex) {
-          cellClass = 'class="middle-cell-top middle-cell-bottom"';
+        if (idx === selectedSlot.line) {
+          cellClass = 'class="line-bottom"';
+        }
+        if (idx === selectedSlot.line + 1) {
+          cellClass = 'class="line-top"';
         }
         akharTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
