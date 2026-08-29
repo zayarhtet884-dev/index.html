@@ -54,7 +54,7 @@
     .column-table { width: 100%; max-width: 60px; margin: 0 auto; border-collapse: collapse; }
     .column-table td { text-align: center; font-size: 14px; font-weight: bold; color: #0044aa; padding: 3px 0; }
     
-    /* မျဉ်းသားခြင်း စနစ်များ (မွေးနံတိုင်နှင့် အခါတိုင်အတွက် တူညီသော နှစ်ဖက်မျဉ်းသားပုံစံ) */
+    /* မွေးနံတိုင်နှင့် အခါတိုင်အတွက် တူညီသော မျဉ်းသားပုံစံ */
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
@@ -163,7 +163,7 @@
         <table class="column-table" id="dayColumnTable"></table>
       </div>
 
-      <!-- အခါတိုင် (မွေးနံတိုင်ပုံစံအတိုင်း နေ့အလိုက်တိုင်ဖြစ်ပြီး အချိန်အလိုက် မျဉ်းသားချက်ပါသည်) -->
+      <!-- အခါတိုင် (အချိန်အလိုက် တိုင်အစီအစဉ်နှင့် မျဉ်းသားချက်များ ပြောင်းလဲသည်) -->
       <div class="day-column-wrapper">
         <div class="board-label">အခါတိုင်</div>
         <table class="column-table" id="akharColumnTable"></table>
@@ -189,7 +189,7 @@
       7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 0, puti: 1 }
     };
 
-    // မွေးနံတိုင်နှင့် အခါတိုင်တို့အတွက် နေ့အလိုက် အဓိကတိုင် ဂဏန်းအစီအစဉ်များ
+    // နေ့အလိုက် အဓိကတိုင် ဂဏန်းအစီအစဉ်များ
     const dayColumns = {
       0: [5, 2, 6, 1, 4, 0, 3], // တနင်္ဂနွေ
       1: [6, 3, 0, 2, 5, 1, 4], // တနင်္လာ
@@ -200,24 +200,19 @@
       6: [4, 1, 5, 0, 3, 6, 2]  // စနေ
     };
 
-    // နေ့အလိုက် နှင့် အချိန်အခါ (၈) ပိုင်းအလိုက် မျဉ်းသားမည့်နေရာ အညွှန်းများ (index 0 မှ 6 ထိ)
-    // ဥပမာ - 3 ဆိုပါက 3 မြောက်အကွက်အောက်နှင့် 4 မြောက်အကွက်အပေါ်တို့တွင် မျဉ်းသားမည်
-    const akharLineIndices = {
-      0: [3, 1, 6, 4, 2, 7, 5, 3], // တနင်္ဂနွေအတွက် အချိန်အခါ ၈ ပိုင်းအလိုက် မျဉ်းသားမည့်နေရာများ
-      1: [4, 2, 7, 5, 3, 1, 6, 4], // တနင်္လာ
-      2: [5, 3, 1, 6, 4, 2, 7, 5], // အင်္ဂါ
-      3: [6, 4, 2, 7, 5, 3, 1, 6], // ဗုဒ္ဓဟူး
-      4: [7, 5, 3, 1, 6, 4, 2, 7], // ကြာသပတေး
-      5: [1, 6, 4, 2, 7, 5, 3, 1], // သောကြာ
-      6: [2, 7, 5, 3, 1, 6, 4, 2]  // စနေ
-    };
+    // အချိန်အခါ (၈) ပိုင်းအလိုက် တိုင်အစီအစဉ်ကို လှည့်ပေးရန် (Array များကို rotation လုပ်ရန် helper)
+    function rotateArray(arr, times) {
+      let len = arr.length;
+      let t = times % len;
+      return arr.slice(t).concat(arr.slice(0, t));
+    }
 
     function getSlotIndex(hour, minute) {
       let totalMinutes = hour * 60 + minute;
-      let startMinutes = 6 * 60; // 6:00 AM
+      let startMinutes = 6 * 60; // 6:00 AM ကစရေတွက်သည်
       let diff = totalMinutes - startMinutes;
-      if (diff < 0) return 0;
-      let slot = Math.floor(diff / 90);
+      if (diff < 0) diff = 0;
+      let slot = Math.floor(diff / 90); // 90 မိနစ် (၁ နာရီခွဲ) လျှင် တစ်ပိုင်း
       if (slot > 7) slot = 7;
       return slot;
     }
@@ -288,21 +283,19 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (လက်ရှိရက်စွဲ၏ နေ့အလိုက် ဂဏန်းအစဉ်နှင့် အချိန်အခါအလိုက် မျဉ်းသားသည့်နေရာ)
-      let akharColValues = dayColumns[nyDayOfWeek] || dayColumns[0];
+      // အခါတိုင် (လက်ရှိရက်စွဲ၏ နေ့အလိုက် ဂဏန်းအစဉ် ကို အချိန်အခါ (၈) ပိုင်းအလိုက် တိုင်ပုံစံ ပြောင်းလဲခြင်း)
+      let baseAkharCol = dayColumns[nyDayOfWeek] || dayColumns[0];
       let slotIdx = getSlotIndex(hour, minute);
-      let linesArray = akharLineIndices[nyDayOfWeek] || akharLineIndices[0];
-      let targetLineIndex = linesArray[slotIdx] !== undefined ? linesArray[slotIdx] : 3;
+      
+      // အချိန်အခါ အပိုင်းအခြားအလိုက် တိုင်ဂဏန်းများ အစဉ်ပြောင်းလဲပုံ (Rotation based on slotIdx)
+      let akharColValues = rotateArray(baseAkharCol, slotIdx);
 
       let akharTableHTML = "";
       akharColValues.forEach((val, idx) => {
         let cellClass = "";
-        // မျဉ်းသားမည့်နေရာ (သတ်မှတ်ထားသော အကွပ်၏ အောက်မျဉ်းနှင့် နောက်အကွက်၏ အပေါ်မျဉ်း)
-        if (idx === targetLineIndex) cellClass += " line-bottom";
-        if (idx === targetLineIndex + 1) cellClass += " line-top";
-        
-        let attr = cellClass ? `class="${cellClass.trim()}"` : "";
-        akharTableHTML += `<tr><td ${attr}>${val}</td></tr>`;
+        // မွေးနံတိုင်ကဲ့သို့ပင် အလယ်ပိုင်း (index 3 နှင့် 4 ကြား) တွင် မျဉ်းနှစ်ကြောင်း သارမည်
+        if (idx === 3) cellClass = 'class="line-top line-bottom"';
+        akharTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('akharColumnTable').innerHTML = akharTableHTML;
 
