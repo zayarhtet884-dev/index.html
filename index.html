@@ -54,7 +54,7 @@
     .column-table { width: 100%; max-width: 60px; margin: 0 auto; border-collapse: collapse; }
     .column-table td { text-align: center; font-size: 14px; font-weight: bold; color: #0044aa; padding: 3px 0; }
     
-    /* မျဉ်းသားခြင်း စနစ် (ပုံပါ အတိုင်း အထက်အောက် မျဉ်းသားချက်) */
+    /* မျဉ်းသားခြင်း စနစ် (ပုံပါအတိုင်း အထက်အောက် မျဉ်းသားချက်များ) */
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
@@ -89,7 +89,7 @@
     <div class="row">
       <label>အချိန် (နာရီ:မိနစ်):</label>
       <div class="date-inputs" style="flex:1;">
-        <input type="text" id="ny-hour" value="11" style="width: 48%;" placeholder="နာရီ (24H)">
+        <input type="text" id="ny-hour" value="12" style="width: 48%;" placeholder="နာရီ (24H)">
         <input type="text" id="ny-min" value="01" style="width: 48%;" placeholder="မိနစ်">
       </div>
     </div>
@@ -163,7 +163,7 @@
         <table class="column-table" id="dayColumnTable"></table>
       </div>
 
-      <!-- အခါတိုင် (တနင်္ဂနွေနေ့ ဇယားပုံပါ အတိုင်း အချိန် ၈ ပိုင်းတိတိ အစီအစဉ်နှင့် မျဉ်းသားချက်များ) -->
+      <!-- အခါတိုင် (တနင်္ဂနွေနေ့ ဇယားပါအတိုင်း အချိန် ၈ ပိုင်းတိတိ၏ မှန်ကန်သော ဂဏန်းအစဉ်နှင့် မျဉ်းသားချက်များ) -->
       <div class="day-column-wrapper">
         <div class="board-label">အခါတိုင်</div>
         <table class="column-table" id="akharColumnTable"></table>
@@ -200,17 +200,18 @@
       6: [4, 1, 5, 0, 3, 6, 2]  // စနေ
     };
 
-    // ပုံ (၂) ဇယားပါ တနင်္ဂနွေနေ့အတွက် အချိန်အခါ (၈) ပိုင်းတိတိ၏ ဂဏန်းအစဉ်နှင့် မျဉ်းသားမည့်နေရာများ
-    // lineIndex သည် အောက်ဘက်တွင် မျဉ်းသားမည့် နေရာကို ညွှန်ပြသည် (ဥပမာ 3 ဆိုလျှင် အတန်းအညွှန်း ၃ အောက်တွင် မျဉ်းသားမည်)
+    // တနင်္ဂနွေနေ့အတွက် အချိန်အခါ (၈) ပိုင်းတိတိ၏ ဇယားမှန် (ဂဏန်းအစဉ်နှင့် မျဉ်းသားမည့်နေရာ index)
+    // line: 3 ဆိုလျှင် အတန်းအညွှန်း ၃ အောက်တွင် မျဉ်းသားမည် (၄ လုံးအပေါ်၊ ၃ လုံးအောက်)
+    // line: 2 ဆိုလျှင် အတန်းအညွှန်း ၂ အောက်တွင် မျဉ်းသားမည် (၃ လုံးအပေါ်၊ ၄ လုံးအောက်)
     const sundayAkharData = [
-      { col: [5, 2, 6, 1, 4, 0, 3], line: 3 }, // ပထမပိုင်း (၆:၀၀ - ၇:၃၀)
-      { col: [3, 0, 4, 6, 2, 5, 1], line: 3 }, // ဒုတိယပိုင်း (၇:၃၀ - ၉:၀၀)
-      { col: [1, 5, 2, 4, 0, 3, 6], line: 3 }, // တတိယပိုင်း (၉:၀၀ - ၁၀:၃၀)
-      { col: [6, 3, 0, 2, 5, 1, 4], line: 2 }, // စတုတ္ထပိုင်း (၁၀:၃၀ - ၁၂:၀၀) -> 6, 3, 0 ပြီးမှမျဉ်းသားသည်
-      { col: [4, 1, 6, 3, 0, 2, 5], line: 3 }, // ပဉ္စမပိုင်း (၁၂:၀၀ - ၁:၃၀)
-      { col: [2, 6, 4, 1, 6, 3, 0], line: 3 }, // ဆဋ္ဌမပိုင်း (၁:၃၀ - ၃:၀၀)
-      { col: [0, 4, 2, 6, 4, 1, 5], line: 3 }, // သတ္တမပိုင်း (၃:၀၀ - ၄:၃၀)
-      { col: [5, 2, 6, 1, 4, 0, 3], line: 3 }  // အဋ္ဌမပိုင်း (၄:၃၀ - ၆:၀၀)
+      { col: [5, 2, 6, 1, 4, 0, 3], line: 3 }, // ၁။ ၆:၀၀ - ၇:၃၀
+      { col: [3, 0, 4, 6, 2, 5, 1], line: 3 }, // ၂။ ၇:၃၀ - ၉:၀၀
+      { col: [1, 5, 2, 4, 0, 3, 6], line: 3 }, // ၃။ ၉:၀၀ - ၁၀:၃၀
+      { col: [6, 3, 0, 2, 5, 1, 4], line: 2 }, // ၄။ ၁၀:၃၀ - ၁၂:၀၀ (၆, ၃, ၀ ပြီးလျှင် မျဉ်းသား)
+      { col: [4, 2, 5, 0, 3, 6, 1], line: 3 }, // ၅။ ၁၂:၀၀ - ၁:၃၀ (ပုံပါအတိုင်း အတိအကျပြင်ဆင်ထားသည်)
+      { col: [2, 6, 3, 5, 1, 4, 0], line: 3 }, // ၆။ ၁:၃၀ - ၃:၀၀
+      { col: [0, 4, 1, 3, 6, 2, 5], line: 3 }, // ၇။ ၃:၀၀ - ၄:၃၀
+      { col: [5, 1, 6, 2, 4, 0, 3], line: 3 }  // ၈။ ၄:၃၀ - ၆:၀၀
     ];
 
     function getSlotIndex(hour, minute) {
@@ -289,7 +290,7 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (တနင်္ဂနွေနေ့ ဇယားအတိုင်း အချိန်အလိုက် ဖော်ပြရန်)
+      // အခါတိုင် (တနင်္ဂနွေနေ့ ဇယားအတိုင်း အချိန်အလိုက် မှန်ကန်စွာဖော်ပြရန်)
       let slotIdx = getSlotIndex(hour, minute);
       let currentSlotData = sundayAkharData[slotIdx] || sundayAkharData[0];
       
