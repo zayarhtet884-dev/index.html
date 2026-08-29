@@ -156,8 +156,7 @@
   </div>
 
   <script>
-    // မှန်ကန်သော နေ့အမည်များနှင့် အတိုကောက် စာလုံးပေါင်းများ
-    const dayShortNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
+    const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
     const chartsMap = {
       1: { adhipati: 5, thun: 0, thaik: 3, raja: 6, marana: 4, banga: 1, puti: 2 },
@@ -186,15 +185,20 @@
         return;
       }
 
-      // ရက်စွဲမှန်ကန်စွာ တွက်ချက်ရန် bMonth - 1 သုံးထားသည်
-      const dateObj = new Date(bYear, bMonth - 1, bDay);
-      let dayOfWeek = dateObj.getDay(); // 0: Sun, 1: Mon, ... 6: Sat
-      let birthDayNum = dayOfWeek === 0 ? 7 : dayOfWeek; 
+      // မွေးရက်အတွက် နေ့သားရှာဖွေခြင်း
+      const bDateObj = new Date(bYear, bMonth - 1, bDay);
+      let bDayOfWeek = bDateObj.getDay(); 
+      let birthDayNum = bDayOfWeek === 0 ? 7 : bDayOfWeek; 
       
-      let dayText = dayShortNames[dayOfWeek];
+      let bDayText = dayNames[bDayOfWeek];
       if (isRahu && birthDayNum === 4) {
-        dayText = "ရာဟု";
+        bDayText = "ရာဟု";
       }
+
+      // တွက်ချက်ရက်စွဲ (ကောဇာ) အတွက် နေ့သားရှာဖွေခြင်း
+      const nyDateObj = new Date(nyYear, nyMonth - 1, nyDay);
+      let nyDayOfWeek = nyDateObj.getDay();
+      let nyDayText = dayNames[nyDayOfWeek];
 
       let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
       let mulaRemainder = meBirthYear % 7;
@@ -222,11 +226,11 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // စာလုံးပေါင်းမှန်ကန်သော နေ့အမည်ဖြင့် ဖော်ပြပေးခြင်း
+      // မွေးသက္ကရာဇ်နှင့် တွက်ချက်ရက်စွဲ နှစ်ခုစလုံးတွင် နေ့သားများ ပါဝင်စေရန်
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
-        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} ${dayText}<br>` +
-        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear}`;
+        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} ${bDayText}<br>` +
+        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} ${nyDayText}`;
 
       document.getElementById('form-page').style.display = 'none';
       document.getElementById('result-page').style.display = 'block';
