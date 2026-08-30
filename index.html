@@ -162,7 +162,7 @@
         <table class="column-table" id="dayColumnTable"></table>
       </div>
 
-      <!-- အခါတိုင် (မနက် ၆ နာရီကို အခြေခံ၍ ရက်စွဲနှင့် အချိန်အခါ မှန်ကန်စွာ တွက်ချက်ခြင်း) -->
+      <!-- အခါတိုင် (၇ ရက်သားသမီး အားလုံးအတွက် အချိန် ၈ ပိုင်းတိတိ အလိုက်သင့်ပြောင်းလဲမည့် ဇယား) -->
       <div class="day-column-wrapper">
         <div class="board-label">အခါတိုင်</div>
         <table class="column-table" id="akharColumnTable"></table>
@@ -198,7 +198,7 @@
       6: [4, 1, 5, 0, 3, 6, 2]
     };
 
-    // ၇ ရက်သားသမီး အားလုံးအတွက် အခါ (၈) ပိုင်း ဇယားများ (ပုံပါ တနင်္ဂနွေ/တနင်္လာ စသည်ဖြင့် အတိအကျ)
+    // ၇ ရက်သားသမီး အားလုံးအတွက် အခါ (၈) ပိုင်း ဇယားများနှင့် မျဉ်းသားမည့်နေရာများ (line index)
     const allDaysAkharData = {
       0: [ // တနင်္ဂနွေ
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
@@ -208,11 +208,11 @@
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 3, 1, 4, 0, 3], line: 3 }
+        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 }
       ],
       1: [ // တနင်္လာ
         { col: [6, 3, 0, 2, 5, 1, 4], line: 2 },
-        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
+        { col: [4, 1, 5, 0, 6, 3, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
@@ -225,50 +225,50 @@
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 2 },
-        { col: [6, 4, 0, 2, 5, 1, 3], line: 3 },
-        { col: [4, 2, 5, 0, 3, 6, 1], line: 3 },
-        { col: [2, 0, 3, 5, 1, 4, 6], line: 3 },
-        { col: [0, 3, 1, 4, 6, 2, 5], line: 3 }
+        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
+        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
+        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
+        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 }
       ],
       3: [ // ဗုဒ္ဓဟူး
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 2 },
-        { col: [0, 5, 1, 3, 6, 2, 4], line: 3 },
-        { col: [5, 3, 6, 1, 4, 0, 2], line: 3 },
-        { col: [3, 1, 4, 6, 2, 5, 0], line: 3 },
-        { col: [1, 4, 2, 0, 5, 3, 6], line: 3 }
+        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
+        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
+        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
+        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 }
       ],
       4: [ // ကြာသပတေး
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 2 },
-        { col: [1, 6, 2, 4, 0, 3, 5], line: 3 },
-        { col: [6, 4, 0, 2, 5, 1, 3], line: 3 },
-        { col: [4, 2, 5, 0, 3, 6, 1], line: 3 },
-        { col: [2, 5, 3, 1, 6, 4, 0], line: 3 }
+        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
+        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
+        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
+        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 }
       ],
       5: [ // သောကြာ
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
         { col: [4, 1, 5, 0, 3, 6, 2], line: 2 },
-        { col: [2, 0, 3, 5, 1, 4, 6], line: 3 },
-        { col: [0, 5, 1, 3, 6, 2, 4], line: 3 },
-        { col: [5, 3, 6, 1, 4, 0, 2], line: 3 },
-        { col: [3, 6, 4, 2, 0, 5, 1], line: 3 }
+        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
+        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
+        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
+        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 }
       ],
       6: [ // စနေ
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 2 },
-        { col: [3, 1, 4, 6, 2, 5, 0], line: 3 },
-        { col: [1, 6, 2, 4, 0, 3, 5], line: 3 },
-        { col: [6, 4, 0, 2, 5, 1, 3], line: 3 },
-        { col: [4, 0, 5, 3, 1, 6, 2], line: 3 }
+        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
+        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
+        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
+        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 }
       ]
     };
 
@@ -291,13 +291,12 @@
         return;
       }
 
-      // မွေးသက္ကရာဇ် နေ့ရက်ရှာဖွေခြင်း
       const bDateObj = new Date(bYear, bMonth - 1, bDay);
       let bDayOfWeek = bDateObj.getDay(); 
       let bDayText = dayNames[bDayOfWeek];
       if (isRahu && bDayOfWeek === 3) bDayText = "ရာဟု";
 
-      // တွက်ချက်ရက်စွဲ (မနက် ၆ နာရီ မတိုင်မီဆိုလျှင် မနေ့ကနေ့သို့ အလိုအလျောက် ပြန်ဆုတ်ပေးခြင်း)
+      // မနက် ၆ နာရီ မတိုင်မီဆိုလျှင် ရက်စွဲကို မနေ့ကနေ့သို့ ပြန်ဆုတ်ပေးခြင်း
       let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
       if (hour < 6) {
         targetDateObj.setDate(targetDateObj.getDate() - 1);
@@ -306,7 +305,6 @@
       let activeDayOfWeek = targetDateObj.getDay();
       let activeDayText = dayNames[activeDayOfWeek];
 
-      let displayDateStr = `${nyDay}/${nyMonth}/${nyYear}`;
       let inputDateObjForDay = new Date(nyYear, nyMonth - 1, nyDay);
       let originalDayText = dayNames[inputDateObjForDay.getDay()];
 
@@ -324,7 +322,7 @@
       document.getElementById('m-banga').innerText = mulaChart.banga;
       document.getElementById('m-puti').innerText = mulaChart.puti;
 
-      // ကောဇာမဟာဘုတ် (ရက်စွဲအလိုက်)
+      // ကောဇာမဟာဘုတ်
       let kYearVal = targetDateObj.getFullYear();
       let kMonthVal = targetDateObj.getMonth() + 1;
       let kDayVal = targetDateObj.getDate();
@@ -351,7 +349,7 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (မနက် ၆ နာရီမှစတင်သော ၂၄ နာရီပတ်လုံး ၈ ပိုင်းခွဲခြင်း)
+      // အခါတိုင် (မနက် ၆ နာရီမှစတင်သော ၂၄ နာရီပတ်လုံး ၈ ပိုင်းခွဲကာ သက်ဆိုင်ရာနေ့အလိုက် ဇယားထုတ်ပေးခြင်း)
       let totalMinutes = hour * 60 + minute;
       let diff = totalMinutes - (6 * 60);
       if (diff < 0) diff += 24 * 60;
