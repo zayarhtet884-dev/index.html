@@ -40,8 +40,8 @@
     #result-page { display: none; }
     .report-info { font-size: 12px; line-height: 1.5; margin-bottom: 8px; color: #222; text-align: center; }
     
-    /* ၄ ခုလုံးကို ဘေးချင်းယှဉ်ပြရန် */
-    .boards-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 6px 0; }
+    /* ၃ ခုကို ဘေးချင်းယှဉ်ပြရန် (မူလ၊ ကောဇာ၊ မွေးနံတိုင်) */
+    .boards-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 6px 0; }
     
     .board-wrapper { text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 4px 2px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; }
     
@@ -52,7 +52,7 @@
     .m-cell .h-name { color: #555; font-size: 8.5px; font-weight: bold; }
     .m-cell .p-num { font-size: 11px; font-weight: bold; color: #0044aa; margin-top: 1px; }
 
-    /* ကာရကဇယား (၉ ကွက်ဇယား) - အပြာရောင်ဘောင်၊ နာရီလက်တံအစဥ်လိုက် */
+    /* ကာရကဇယား (၉ ကွက်ဇယား) - မွေးနံတိုင်အောက်တွင်သာ ထားရှိသည် */
     .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 105px; margin: 4px auto 0 auto; }
     .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 9px; min-height: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
     .k-cell .k-text { font-size: 8px; font-weight: bold; color: #8b0000; line-height: 1.1; }
@@ -152,7 +152,7 @@
     <div class="row">
       <label>မွေးသက္ကရာဇ် :</label>
       <div class="date-inputs">
-        <input type="text" id="b-day" placeholder="ရက်" value="12">
+        <input type="text" id="b-day" placeholder="ရက်" value="18">
         <input type="text" id="b-month" placeholder="လ" value="8">
         <input type="text" id="b-year" placeholder="ခုနှစ်" value="2005">
       </div>
@@ -178,7 +178,7 @@
 
     <div class="report-info" id="reportDetails"></div>
 
-    <!-- ၄ ခုလုံးကို ဘေးချင်းယှဉ်တန်းထားခြင်း -->
+    <!-- ၃ ခုကို ဘေးချင်းယှဉ်တန်းထားခြင်း (မူလ၊ ကောဇာ၊ မွေးနံတိုင်+ကာရကဇယား) -->
     <div class="boards-container">
       
       <!-- ၁။ မူလမဟာဘုတ် -->
@@ -231,22 +231,13 @@
         </div>
       </div>
 
-      <!-- ၃။ မွေးနံတိုင် နှင့် အောက်တွင် ကာရကဇယား -->
+      <!-- ၃။ မွေးနံတိုင် နှင့် အောက်တွင် ကာရကဇယား (အခါတိုင်ဇယားကို ဖျက်ပြီးပါပြီ) -->
       <div class="day-column-wrapper">
         <div>
           <div class="board-label">မွေးနံတိုင်</div>
           <table class="column-table" id="dayColumnTable"></table>
         </div>
         <div class="karak-grid" id="dayKarakGrid"></div>
-      </div>
-
-      <!-- ၄။ အခါတိုင် နှင့် အောက်တွင် ကာရကဇယား -->
-      <div class="day-column-wrapper">
-        <div>
-          <div class="board-label">အခါတိုင်</div>
-          <table class="column-table" id="akharColumnTable"></table>
-        </div>
-        <div class="karak-grid" id="akharKarakGrid"></div>
       </div>
 
     </div>
@@ -289,125 +280,33 @@
     };
 
     const namaPatterns = {
-      1: { top: '၀', r1: ['၆', '၅'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
-      2: { top: '၁', r1: ['၀', '၆'], r2: ['၅', '၄'], r3: ['၃', '၂'] },
-      3: { top: '၂', r1: ['၁', '၀'], r2: ['၆', '၅'], r3: ['၄', '၃'] },
-      4: { top: '၃', r1: ['၂', '၁'], r2: ['၀', '၆'], r3: ['၅', '၄'] },
-      5: { top: '၄', r1: ['၃', '၂'], r2: ['၁', '၀'], r3: ['၆', '၅'] },
-      6: { top: '၅', r1: ['၄', '၃'], r2: ['၂', '၁'], r3: ['၀', '၆'] },
-      0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
+      1: { top: '၀', r1: ['၆', '۵'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
+      2: { top: '၁', r1: ['၀', '၆'], r2: ['۵', '၄'], r3: ['၃', '၂'] },
+      3: { top: '၂', r1: ['၁', '၀'], r2: ['၆', '۵'], r3: ['၄', '၃'] },
+      4: { top: '၃', r1: ['၂', '၁'], r2: ['၀', '၆'], r3: ['۵', '၄'] },
+      5: { top: '၄', r1: ['၃', '၂'], r2: ['၁', '၀'], r3: ['၆', '۵'] },
+      6: { top: '۵', r1: ['၄', '၃'], r2: ['၂', '၁'], r3: ['၀', '၆'] },
+      0: { top: '၆', r1: ['۵', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    const allDaysAkharData = {
-      0: [
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
-        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
-        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 }
-      ],
-      1: [
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
-        { col: [4, 1, 5, 0, 6, 3, 2], line: 3 },
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
-        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 }
-      ],
-      2: [
-        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
-        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
-        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 }
-      ],
-      3: [
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
-        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
-        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 }
-      ],
-      4: [
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
-        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
-        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 }
-      ],
-      5: [
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
-        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
-        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 }
-      ],
-      6: [
-        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
-        { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
-        { num: 4, col: [4, 1, 5, 0, 3, 6, 2], line: 3 }
-      ]
-    };
-
-    // ၉ ကွက်ဇယားတွင် နာရီလက်တံအစဉ်လိုက် (Clockwise order mapping)
-    // ဇယားဂရစ် ၉ ကွက်၏ grid index များ: [0, 1, 2, 5, 8, 7, 6, 3]
-    // 0: top-left (1), 1: top-middle (2), 2: top-right (3)
-    // 3: middle-right (4), 4: bottom-right (0 / 5) -> ဆရာ့ဇယားဂဏန်းများအလျောက် တိကျစွာ map လုပ်ခြင်း
-    // ဆရာပြထားသည့် ဇယားပုံစံ (ဂဏန်းများနေရာ):
-    // [1] [2] [3]
-    // [6] [ ] [4]
-    // [5] [9] [0]  (သို့မဟုတ် [5] [9] [6/0])
-    // ဤနေရာတွင် ဆရာ့မူလ လက်ရေးပုံပါ ဂဏန်းနေရာအတိုင်း ၉ ကွက်ဇယား၏ cell index များကို သတ်မှတ်သည် -
-    // ဂဏန်း ၁ = index 0
-    // ဂဏန်း ၂ = index 1
-    // ဂဏန်း ၃ = index 2
-    // ဂဏန်း ၄ = index 5
-    // ဂဏန်း 0 = index 8
-    // ဂဏန်း 9 = index 7
-    // ဂဏန်း 5 = index 6
-    // ဂဏန်း 6 = index 3
+    // ၉ ကွက်ဇယားတွင် နာရီလက်တံအစဉ်လိုက် ဂဏန်းများ နေရာချခြင်း
+    // ပုံပါလက်ရေးဇယားဂဏန်းများအတိုင်း grid index mapping:
+    // 1=0, 2=1, 3=2, 6=3, 4=5, 5=6, 9=7, 0=8
     const numberToGridIndex = {
       1: 0,
       2: 1,
       3: 2,
+      6: 3,
       4: 5,
-      0: 8,
-      9: 7,
       5: 6,
-      6: 3
+      9: 7,
+      0: 8
     };
 
-    // နာရီလက်တံအတိုင်း ဆက်သွားမည့် ဂဏန်းအစဉ် (၁ မှစ၍ လည်ပတ်ပုံ):
-    const clockWiseNumbers = [1, 2, 3, 4, 0, 9, 5, 6]; // ဥပမာ - ၁၊ ၂၊ ၃၊ ၄၊ 0၊ ၉၊ ၅၊ ၆ (သို့ တိကျသော ဂဏန်း ၈ လုံးအစဉ်)
-    // သို့မဟုတ် ဆရာပြထားသည့်အတိုင်း ဂဏန်းအစဉ်: 1, 2, 3, 4, 0, 9, 5, 6
-    const standardClockNumbers = [1, 2, 3, 4, 0, 6, 5, 9]; // ဆရာ့ပုံပါဂဏန်းများ: 1, 2, 3, 4, 0, 6, 5, 9 (သို့မဟုတ် ဆရာ့လက်ရေးပုံအတိုင်း)
-    
-    // ပုံပါလက်ရေးဇယားဂဏန်းများ (နာရီလက်တံအတိုင်း ညှိရန်):
-    // ထိပ်အတန်း: 1, 2, 3
-    // အလယ်တန်း: 6 (ဘယ်), 4 (ညာ)
-    // အောက်တန်း: 5 (ဘယ်), 9 (အလယ်), 0 (ညာ) -> ဤနေရာတွင် နာရီလက်တံအစဉ်မှာ 1 -> 2 -> 3 -> 4 -> 0 -> 9 -> 5 -> 6 ဖြစ်ပါသည်။
+    // ဆရာပြထားသည့် နာရီလက်တံအစဉ်အတိုင်း ၈ လုံးအစဉ်: 
+    // တနင်္ဂနွေ=1, တနင်္လာ=2, အင်္ဂါ=3, ဗုဒ္ဓဟူး=4, ကြာသပတေး=5, သောကြာ=6, စနေ=0 စသဖြင့်
+    // သို့သော် ဆရာပြထားသည့်အတိုင်း ကြာသပတေးဆိုရင် ၅ ကစရန် (5, 9, 0, 1, 2, 3, 4, 6 စသည် သို့မဟုတ် အစဉ်အတိုင်း)
+    // အောက်ပါ sequenceNumbers သည် ဇယားပေါ်ရှိ နာရီလက်တံအစဉ်အတိုင်း ဖြစ်သည်: [1, 2, 3, 4, 0, 9, 5, 6] (သို့မဟုတ် 5 မှစသော အစဉ်)
     const sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
 
     // ကာရက ၈ မျိုး (နာရီလက်တံအတိုင်း စတင်မည့် အစဉ်လိုက်)
@@ -423,17 +322,13 @@
     ];
 
     function generateKarakGridHTML(startNum) {
-      // startNum - စတင်မည့် ဂဏန်း (ဥပမာ - တနင်္ဂနွေဆိုရင် 1၊ တနင်္လာဆိုရင် 2၊ သောကြာဆိုရင် 6)
-      
       let cells = new Array(9);
       
-      // sequenceNumbers ထဲတွင် startNum သည် မည်သည့်နေရာ (index) တွင် ရှိသည်ကို ရှာမည်
       let startIndex = sequenceNumbers.indexOf(startNum);
       if (startIndex === -1) startIndex = 0;
 
       for(let i = 0; i < 8; i++) {
-        // နာရီလက်တံအစဉ်အတိုင်း ကာရက အမည်ကို ယူမည်
-        let karakIndex = i; // ကတ္တုမှစ၍ အစဉ်လိုက်
+        let karakIndex = i;
         let currentNum = sequenceNumbers[(startIndex + i) % 8];
         let gridIdx = numberToGridIndex[currentNum];
         
@@ -472,7 +367,10 @@
       const bDateObj = new Date(bYear, bMonth - 1, bDay);
       let bDayOfWeek = bDateObj.getDay(); // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
       
-      // နေ့အလိုက် စတင်မည့် ဂဏန်း (တနင်္ဂနွေ=1, တနင်္လာ=2, အင်္ဂါ=3, ဗုဒ္ဓဟူး=4, ကြာသပတေး=5, သောကြာ=6, စနေ=0)
+      // နေ့အလိုက် စတင်မည့် ဂဏန်း - 
+      // ဆရာပြောပြချက်အရ ကြာသပတေးဆိုရင် ၅ ကနေစရမည် (Thursday = 4 ဆိုလျှင် 5 မှစရန်)
+      // နေ့အလိုက် စတင်မည့် ဂဏန်းများ:
+      // Sun (0) = 1, Mon (1) = 2, Tue (2) = 3, Wed (3) = 4, Thu (4) = 5, Fri (5) = 6, Sat (6) = 0 (သို့မဟုတ် 9)
       let startNumForDay = bDayOfWeek === 0 ? 1 : 
                            bDayOfWeek === 1 ? 2 : 
                            bDayOfWeek === 2 ? 3 : 
@@ -483,7 +381,7 @@
       let bDayText = dayNames[bDayOfWeek];
       if (isRahu && bDayOfWeek === 3) {
         bDayText = "ရာဟု";
-        startNumForDay = 1; // ရာဟုအတွက်
+        startNumForDay = 1; // ရာဟုအတွက် စတင်မည့်ဂဏန်း
       }
 
       let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
@@ -492,7 +390,6 @@
       }
 
       let activeDayOfWeek = targetDateObj.getDay();
-      let activeDayText = dayNames[activeDayOfWeek];
 
       let inputDateObjForDay = new Date(nyYear, nyMonth - 1, nyDay);
       let originalDayText = dayNames[inputDateObjForDay.getDay()];
@@ -554,7 +451,7 @@
         document.getElementById('knr3R').innerText = knp.r3[1];
       }
 
-      // မွေးနံတိုင်
+      // မွေးနံတိုင် နှင့် ၎င်းအောက်ရှိ ကာရကဇယား တစ်ခုတည်းသာ ထားရှိခြင်း
       let bColValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let dayColumnTableHTML = "";
       bColValues.forEach((val, idx) => {
@@ -564,29 +461,6 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
       document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(startNumForDay);
-
-      // အခါတိုင်
-      let totalMinutes = hour * 60 + minute;
-      let startOfDayMinutes = 6 * 60; // 06:00 AM
-      let diff = totalMinutes - startOfDayMinutes;
-      if (diff < 0) { diff += 12 * 60; }
-      
-      let slotIdx = Math.floor(diff / 90) % 8;
-      let daySchedule = allDaysAkharData[activeDayOfWeek] || allDaysAkharData[0];
-      let currentSlotData = daySchedule[slotIdx] || daySchedule[0];
-      let akharColValues = currentSlotData.col;
-
-      let akharTableHTML = "";
-      akharColValues.forEach((val, idx) => {
-        let cellClass = "";
-        if (idx === 3) cellClass = 'class="line-top line-bottom"';
-        akharTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
-      });
-      document.getElementById('akharColumnTable').innerHTML = akharTableHTML;
-      
-      // အခါတိုင်အတွက်လည်း ထို့အတူ လက်ရှိကျရောက်သည့် အခါတိုင်အစ ဂဏန်းဖြင့် ဇယားထုတ်ပေးရန်
-      let akharStartNum = akharColValues[0]; // အခါတိုင်ထိပ်ဆုံးဂဏန်းမှ စတင်ရန်
-      document.getElementById('akharKarakGrid').innerHTML = generateKarakGridHTML(akharStartNum);
 
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b> | <b>မွေးနံ -</b> ${bDay}/${bMonth}/${bYear} (${bDayText}) | <b>ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} (${originalDayText}) ${hour < 10 ? '0' : ''}${hour}:${minute < 10 ? '0' : ''}${minute} နာရီ`;
