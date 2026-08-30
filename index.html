@@ -162,7 +162,7 @@
         <table class="column-table" id="dayColumnTable"></table>
       </div>
 
-      <!-- အခါတိုင် (မွေးနံတိုင်ပုံစံအတိုင်း နှစ်ကြောင်းမျဉ်းသားချက်ပါရှိသော ဇယား) -->
+      <!-- အခါတိုင် -->
       <div class="day-column-wrapper">
         <div class="board-label">အခါတိုင်</div>
         <table class="column-table" id="akharColumnTable"></table>
@@ -347,7 +347,7 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (မွေးနံတိုင်ကဲ့သို့ index 3 အောက်တွင် နှစ်ကြောင်းမျဉ်းသားရန် အမြဲသတ်မှတ်ခြင်း)
+      // အခါတိုင်
       let totalMinutes = hour * 60 + minute;
       let diff = totalMinutes - (6 * 60);
       if (diff < 0) diff += 24 * 60;
@@ -367,10 +367,17 @@
       });
       document.getElementById('akharColumnTable').innerHTML = akharTableHTML;
 
+      // AM / PM ပုံစံ ပြန်လည်ဖော်ပြရန်
+      let displayHour = hour;
+      let ampm = displayHour >= 12 ? 'PM' : 'AM';
+      displayHour = displayHour % 12;
+      displayHour = displayHour ? displayHour : 12; // 0 နာရီဖြစ်နေလျှင် 12 ထိုးရန်
+      let formattedTime = `${displayHour}:${minute < 10 ? '0' : ''}${minute} ${ampm}`;
+
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
         `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} (${bDayText})<br>` +
-        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} (${originalDayText}) | အချိန် - ${hour < 10 ? '0' : ''}${hour}:${minute < 10 ? '0' : ''}${minute} နာရီ` +
+        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} (${originalDayText}) | အချိန် - ${formattedTime}` +
         (hour < 6 ? `<br><span style="color:#cc0000; font-size:11px;">(မနက် ၆ နာရီမတိုင်သေးသဖြင့် မနေ့က ${activeDayText}နေ့ အခါတိုင်ကို ပြသနေပါသည်)</span>` : ``);
 
       document.getElementById('form-page').style.display = 'none';
