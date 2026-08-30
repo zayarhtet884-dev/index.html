@@ -40,26 +40,26 @@
     #result-page { display: none; }
     .report-info { font-size: 12px; line-height: 1.5; margin-bottom: 8px; color: #222; text-align: center; }
     
-    /* ၃ ခုကို ဘေးချင်းယှဉ်ပြရန် (မူလ၊ ကောဇာ၊ မွေးနံတိုင်) */
-    .boards-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 6px 0; }
+    /* ၄ ခုကို ဘေးချင်းယှဉ်ပြရန် (မူလ၊ ကောဇာ၊ မွေးနံတိုင်၊ အခါတိုင်) */
+    .boards-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 6px 0; }
     
     .board-wrapper { text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 4px 2px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; }
     
-    .board-label { font-size: 12px; font-weight: bold; color: #8b0000; margin-bottom: 4px; }
+    .board-label { font-size: 11px; font-weight: bold; color: #8b0000; margin-bottom: 4px; }
     
-    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 105px; margin: 0 auto; }
-    .m-cell { border: 1px solid #8b0000; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 9px; min-height: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .m-cell .h-name { color: #555; font-size: 8.5px; font-weight: bold; }
-    .m-cell .p-num { font-size: 11px; font-weight: bold; color: #0044aa; margin-top: 1px; }
+    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 90px; margin: 0 auto; }
+    .m-cell { border: 1px solid #8b0000; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 8px; min-height: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .m-cell .h-name { color: #555; font-size: 7.5px; font-weight: bold; }
+    .m-cell .p-num { font-size: 10px; font-weight: bold; color: #0044aa; margin-top: 1px; }
 
-    /* ကာရကဇယား (၉ ကွက်ဇယား) - မွေးနံတိုင်အောက်တွင်သာ ထားရှိသည် */
-    .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 105px; margin: 4px auto 0 auto; }
-    .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 9px; min-height: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    .k-cell .k-text { font-size: 8px; font-weight: bold; color: #8b0000; line-height: 1.1; }
+    /* ကာရကဇယား (၉ ကွက်ဇယား) - အခါတိုင်အောက်တွင်သာ ထားရှိသည် */
+    .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 90px; margin: 4px auto 0 auto; }
+    .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 8px; min-height: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .k-cell .k-text { font-size: 7px; font-weight: bold; color: #8b0000; line-height: 1.1; }
 
     .day-column-wrapper { text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 4px 2px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; }
-    .column-table { width: 100%; max-width: 50px; margin: 0 auto 4px auto; border-collapse: collapse; }
-    .column-table td { text-align: center; font-size: 12px; font-weight: bold; color: #0044aa; padding: 1px 0; }
+    .column-table { width: 100%; max-width: 45px; margin: 0 auto 4px auto; border-collapse: collapse; }
+    .column-table td { text-align: center; font-size: 11px; font-weight: bold; color: #0044aa; padding: 1px 0; }
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
@@ -71,12 +71,12 @@
     }
     
     .nama-top-val {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
       color: #0044aa;
       border-bottom: 2px solid #0044aa;
       display: inline-block;
-      width: 30px;
+      width: 26px;
       margin-bottom: 1px;
       position: relative;
       z-index: 2;
@@ -85,9 +85,9 @@
     .nama-row {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       border-bottom: 2px solid #0044aa;
-      width: 50px;
+      width: 45px;
       margin: 0 auto;
       padding: 1px 0;
       position: relative;
@@ -95,16 +95,16 @@
     }
     
     .nama-cell {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
       color: #0044aa;
-      width: 14px;
+      width: 12px;
       text-align: center;
     }
 
     .nama-center-line {
       position: absolute;
-      top: 20px;
+      top: 18px;
       bottom: 2px;
       left: 50%;
       width: 2px;
@@ -178,7 +178,7 @@
 
     <div class="report-info" id="reportDetails"></div>
 
-    <!-- ၃ ခုကို ဘေးချင်းယှဉ်တန်းထားခြင်း (မူလ၊ ကောဇာ၊ မွေးနံတိုင်+ကာရကဇယား) -->
+    <!-- ၄ ခုကို ဘေးချင်းယှဉ်တန်းထားခြင်း (မူလ၊ ကောဇာ၊ မွေးနံတိုင်၊ အခါတိုင်+ကာရကဇယား) -->
     <div class="boards-container">
       
       <!-- ၁။ မူလမဟာဘုတ် -->
@@ -231,11 +231,20 @@
         </div>
       </div>
 
-      <!-- ၃။ မွေးနံတိုင် နှင့် အောက်တွင် ကာရကဇယား (အခါတိုင်ဇယားကို ဖျက်ပြီးပါပြီ) -->
+      <!-- ၃။ မွေးနံတိုင် -->
       <div class="day-column-wrapper">
         <div>
           <div class="board-label">မွေးနံတိုင်</div>
           <table class="column-table" id="dayColumnTable"></table>
+        </div>
+        <div style="flex:1;"></div>
+      </div>
+
+      <!-- ၄။ အခါတိုင် နှင့် ၎င်းအောက်ရှိ ကာရကဇယား -->
+      <div class="day-column-wrapper">
+        <div>
+          <div class="board-label">အခါတိုင်</div>
+          <table class="column-table" id="akhatColumnTable"></table>
         </div>
         <div class="karak-grid" id="dayKarakGrid"></div>
       </div>
@@ -289,9 +298,6 @@
       0: { top: '၆', r1: ['۵', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    // ၉ ကွက်ဇယားတွင် နာရီလက်တံအစဉ်လိုက် ဂဏန်းများ နေရာချခြင်း
-    // ပုံပါလက်ရေးဇယားဂဏန်းများအတိုင်း grid index mapping:
-    // 1=0, 2=1, 3=2, 6=3, 4=5, 5=6, 9=7, 0=8
     const numberToGridIndex = {
       1: 0,
       2: 1,
@@ -303,22 +309,17 @@
       0: 8
     };
 
-    // ဆရာပြထားသည့် နာရီလက်တံအစဉ်အတိုင်း ၈ လုံးအစဉ်: 
-    // တနင်္ဂနွေ=1, တနင်္လာ=2, အင်္ဂါ=3, ဗုဒ္ဓဟူး=4, ကြာသပတေး=5, သောကြာ=6, စနေ=0 စသဖြင့်
-    // သို့သော် ဆရာပြထားသည့်အတိုင်း ကြာသပတေးဆိုရင် ၅ ကစရန် (5, 9, 0, 1, 2, 3, 4, 6 စသည် သို့မဟုတ် အစဉ်အတိုင်း)
-    // အောက်ပါ sequenceNumbers သည် ဇယားပေါ်ရှိ နာရီလက်တံအစဉ်အတိုင်း ဖြစ်သည်: [1, 2, 3, 4, 0, 9, 5, 6] (သို့မဟုတ် 5 မှစသော အစဉ်)
     const sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
 
-    // ကာရက ၈ မျိုး (နာရီလက်တံအတိုင်း စတင်မည့် အစဉ်လိုက်)
     const karakNames = [
-      "ကတ္တု",       // 0
-      "သာမိ",       // 1
-      "သမ္မဒါန",     // 2
-      "ကမ္မု",        // 3
-      "ကရဏ",       // 4
-      "အပာဒါန",    // 5
-      "သြကာသ",    // 6
-      "အာလဗ္ဓန"     // 7
+      "ကတ္တု",
+      "သာမိ",
+      "သမ္မဒါန",
+      "ကမ္မု",
+      "ကရဏ",
+      "အပာဒါန",
+      "သြကာသ",
+      "အာလဗ္ဓန"
     ];
 
     function generateKarakGridHTML(startNum) {
@@ -336,7 +337,7 @@
           cells[gridIdx] = `<div class="k-cell"><div class="k-text">${karakNames[karakIndex]}</div></div>`;
         }
       }
-      cells[4] = `<div class="k-cell" style="background:#f9f9f9; border:1px solid #dcd6c5;"></div>`; // အလယ်ကွက်လပ်
+      cells[4] = `<div class="k-cell" style="background:#f9f9f9; border:1px solid #dcd6c5;"></div>`;
 
       let html = "";
       for(let i = 0; i < 9; i++) {
@@ -365,12 +366,8 @@
       }
 
       const bDateObj = new Date(bYear, bMonth - 1, bDay);
-      let bDayOfWeek = bDateObj.getDay(); // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+      let bDayOfWeek = bDateObj.getDay();
       
-      // နေ့အလိုက် စတင်မည့် ဂဏန်း - 
-      // ဆရာပြောပြချက်အရ ကြာသပတေးဆိုရင် ၅ ကနေစရမည် (Thursday = 4 ဆိုလျှင် 5 မှစရန်)
-      // နေ့အလိုက် စတင်မည့် ဂဏန်းများ:
-      // Sun (0) = 1, Mon (1) = 2, Tue (2) = 3, Wed (3) = 4, Thu (4) = 5, Fri (5) = 6, Sat (6) = 0 (သို့မဟုတ် 9)
       let startNumForDay = bDayOfWeek === 0 ? 1 : 
                            bDayOfWeek === 1 ? 2 : 
                            bDayOfWeek === 2 ? 3 : 
@@ -381,7 +378,7 @@
       let bDayText = dayNames[bDayOfWeek];
       if (isRahu && bDayOfWeek === 3) {
         bDayText = "ရာဟု";
-        startNumForDay = 1; // ရာဟုအတွက် စတင်မည့်ဂဏန်း
+        startNumForDay = 1;
       }
 
       let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
@@ -408,7 +405,6 @@
       document.getElementById('m-banga').innerText = mulaChart.banga;
       document.getElementById('m-puti').innerText = mulaChart.puti;
 
-      // မူလ တိုင်
       let namaRem = meBirthYear % 7;
       let np = namaPatterns[namaRem];
       if (np) {
@@ -438,7 +434,6 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // ကောဇာ တိုင်
       let kozarNamaRem = meCurrentYear % 7;
       let knp = namaPatterns[kozarNamaRem];
       if (knp) {
@@ -451,7 +446,7 @@
         document.getElementById('knr3R').innerText = knp.r3[1];
       }
 
-      // မွေးနံတိုင် နှင့် ၎င်းအောက်ရှိ ကာရကဇယား တစ်ခုတည်းသာ ထားရှိခြင်း
+      // မွေးနံတိုင် ဇယား
       let bColValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let dayColumnTableHTML = "";
       bColValues.forEach((val, idx) => {
@@ -460,6 +455,16 @@
         dayColumnTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
+
+      // အခါတိုင် ဇယား (နှင့် ၎င်းအောက်တွင် ကာရကဇယား)
+      let aColValues = dayColumns[activeDayOfWeek] || dayColumns[0];
+      let akhatColumnTableHTML = "";
+      aColValues.forEach((val, idx) => {
+        let cellClass = "";
+        if (idx === 3) cellClass = 'class="line-top line-bottom"';
+        akhatColumnTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
+      });
+      document.getElementById('akhatColumnTable').innerHTML = akhatColumnTableHTML;
       document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(startNumForDay);
 
       document.getElementById('reportDetails').innerHTML = 
