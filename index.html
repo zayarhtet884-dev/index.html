@@ -57,6 +57,11 @@
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
+    /* ပုံပါအတိုင်း ကာရကဇယား (၉ ကွက်ဇယား) - မွေးနံတိုင်အောက်တွင် ထည့်သွင်းရန် */
+    .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 68px; margin: 6px auto 0 auto; }
+    .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 8px; min-height: 25px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .k-cell .k-text { font-size: 7.5px; font-weight: bold; color: #8b0000; line-height: 1.1; }
+
     .nama-pillar-box {
       margin-top: 8px;
       padding-top: 6px;
@@ -220,10 +225,11 @@
         </div>
       </div>
 
-      <!-- မွေးနံတိုင် -->
+      <!-- မွေးနံတိုင် (အောက်တွင် ဆရာပြထားသည့်ပုံစံ ကာရကဇယားပါဝင်သည်) -->
       <div class="day-column-wrapper">
         <div class="board-label">မွေးနံတိုင်</div>
         <table class="column-table" id="dayColumnTable"></table>
+        <div class="karak-grid" id="dayKarakGrid"></div>
       </div>
 
       <!-- အခါတိုင် -->
@@ -280,6 +286,33 @@
       6: { top: '၅', r1: ['၄', '၃'], r2: ['၂', '၁'], r3: ['၀', '၆'] },
       0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
+
+    // ဆရာပြထားသည့် ပုံစံအတိုင်း ကာရကဇယား (၉ ကွက်) နေရာချခြင်း
+    const numberToGridIndex = { 1: 0, 2: 1, 3: 2, 6: 3, 4: 5, 5: 6, 9: 7, 0: 8 };
+    const sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
+    const karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မု", "ကရဏ", "အပာဒါန", "သြကာသ", "အာလဗ္ဓန"];
+
+    function generateKarakGridHTML(startNum) {
+      let cells = new Array(9);
+      let startIndex = sequenceNumbers.indexOf(startNum);
+      if (startIndex === -1) startIndex = 0;
+
+      for(let i = 0; i < 8; i++) {
+        let karakIndex = i;
+        let currentNum = sequenceNumbers[(startIndex + i) % 8];
+        let gridIdx = numberToGridIndex[currentNum];
+        if (gridIdx !== undefined) {
+          cells[gridIdx] = `<div class="k-cell"><div class="k-text">${karakNames[karakIndex]}</div></div>`;
+        }
+      }
+      cells[4] = `<div class="k-cell" style="background:#f9f9f9; border:1px solid #dcd6c5;"></div>`;
+
+      let html = "";
+      for(let i = 0; i < 9; i++) {
+        html += cells[i] || `<div></div>`;
+      }
+      return html;
+    }
 
     const allDaysAkharData = {
       0: [
@@ -378,6 +411,17 @@
       let bDayText = dayNames[bDayOfWeek];
       if (isRahu && bDayOfWeek === 3) bDayText = "ရာဟု";
 
+      // မွေးနံအလိုက် စတင်မည့်ဂဏန်း (ကြာသပတေးဆိုရင် ၅ စသည်ဖြင့်)
+      let startNumForDay = bDayOfWeek === 0 ? 1 : 
+                           bDayOfWeek === 1 ? 2 : 
+                           bDayOfWeek === 2 ? 3 : 
+                           bDayOfWeek === 3 ? 4 : 
+                           bDayOfWeek === 4 ? 5 : 
+                           bDayOfWeek === 5 ? 6 : 0;
+      if (isRahu && bDayOfWeek === 3) {
+        startNumForDay = 1;
+      }
+
       let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
       if (hour < 6) {
         targetDateObj.setDate(targetDateObj.getDate() - 1);
@@ -446,7 +490,7 @@
         document.getElementById('knr3R').innerText = knp.r3[1];
       }
 
-      // မွေးနံတိုင်
+      // မွေးနံတိုင် နှင့် ကာရကဇယား
       let bColValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let dayColumnTableHTML = "";
       bColValues.forEach((val, idx) => {
@@ -455,8 +499,9 @@
         dayColumnTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
+      document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(startNumForDay);
 
-      // အခါတိုင် (မွေးနံတိုင်ကဲ့သို့ အပေါ်တား၊ အောက်တား မျဉ်းသားပါဝင်ရန် idx === 3 တွင် line-top line-bottom ထည့်သွင်းခြင်း)
+      // အခါတိုင်
       let totalMinutes = hour * 60 + minute;
       let startOfDayMinutes = 6 * 60; // 06:00 AM
       let diff = totalMinutes - startOfDayMinutes;
