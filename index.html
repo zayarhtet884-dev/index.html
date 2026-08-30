@@ -57,12 +57,15 @@
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
-    /* နာမက္ခရတိုင် (သို့) တိုင်ပုံစံများအတွက် စတိုင် */
+    /* နာမက္ခရတိုင် အလယ်ဒေါင်လိုက်မျဉ်းပါ စတိုင်များ */
     .nama-pillar-box {
       margin-top: 8px;
       padding-top: 6px;
       border-top: 1px dashed #dcd6c5;
+      position: relative;
     }
+    
+    /* ထိပ်ဆုံးဂဏန်းအောက်က ရေတိုမျဉ်း (အရင်အတိုင်း) */
     .nama-top-val {
       font-size: 14px;
       font-weight: bold;
@@ -71,25 +74,40 @@
       display: inline-block;
       width: 35px;
       margin-bottom: 2px;
+      position: relative;
+      z-index: 2;
     }
+    
     .nama-row {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      border-bottom: 1px solid #0044aa;
-      width: 50px;
+      gap: 16px;
+      border-bottom: 2px solid #0044aa;
+      width: 60px;
       margin: 0 auto;
       padding: 2px 0;
+      position: relative;
+      z-index: 2;
     }
-    .nama-row:last-child {
-      border-bottom: 2px solid #0044aa;
-    }
+    
     .nama-cell {
       font-size: 14px;
       font-weight: bold;
       color: #0044aa;
       width: 16px;
       text-align: center;
+    }
+
+    /* အလယ်ဒေါင်လိုက်မျဉ်း (Center Vertical Line) */
+    .nama-center-line {
+      position: absolute;
+      top: 12px;
+      bottom: 2px;
+      left: 50%;
+      width: 2px;
+      background-color: #0044aa;
+      transform: translateX(-50%);
+      z-index: 1;
     }
 
     .footer-credit { text-align: center; font-size: 11px; color: #666; margin-top: 15px; border-top: 1px solid #e0dcd0; padding-top: 6px; }
@@ -159,7 +177,7 @@
 
     <div class="boards-container">
       
-      <!-- မူလမဟာဘုတ် နှင့် နာမက္ခရတိုင် -->
+      <!-- မူလမဟာဘုတ် နှင့် နာမက္ခရတိုင် (စာသားဖြုတ် & ဒေါင်လိုက်မျဉ်းထည့်ထားသည်) -->
       <div class="board-wrapper">
         <div class="board-label">မူလ</div>
         <div class="mahabote-grid">
@@ -174,7 +192,7 @@
           <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="m-puti">-</div></div>
         </div>
         <div class="nama-pillar-box">
-          <div style="font-size: 10px; font-weight: bold; color: #8b0000; margin-bottom: 3px;">နာမက္ခရတိုင်</div>
+          <div class="nama-center-line"></div>
           <div class="nama-top-val" id="namaTop">-</div>
           <div class="nama-row"><span class="nama-cell" id="nr1L">-</span><span class="nama-cell" id="nr1R">-</span></div>
           <div class="nama-row"><span class="nama-cell" id="nr2L">-</span><span class="nama-cell" id="nr2R">-</span></div>
@@ -182,7 +200,7 @@
         </div>
       </div>
 
-      <!-- ကောဇာမဟာဘုတ် နှင့် ကောဇာနာမက္ခရတိုင် -->
+      <!-- ကောဇာမဟာဘုတ် နှင့် ကောဇာနာမက္ခရတိုင် (စာသားဖြုတ် & ဒေါင်လိုက်မျဉ်းထည့်ထားသည်) -->
       <div class="board-wrapper">
         <div class="board-label">ကောဇာ</div>
         <div class="mahabote-grid">
@@ -197,7 +215,7 @@
           <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="k-puti">-</div></div>
         </div>
         <div class="nama-pillar-box">
-          <div style="font-size: 10px; font-weight: bold; color: #8b0000; margin-bottom: 3px;">နာမက္ခရတိုင်</div>
+          <div class="nama-center-line"></div>
           <div class="nama-top-val" id="knamaTop">-</div>
           <div class="nama-row"><span class="nama-cell" id="knr1L">-</span><span class="nama-cell" id="knr1R">-</span></div>
           <div class="nama-row"><span class="nama-cell" id="knr2L">-</span><span class="nama-cell" id="knr2R">-</span></div>
@@ -379,7 +397,7 @@
       document.getElementById('m-banga').innerText = mulaChart.banga;
       document.getElementById('m-puti').innerText = mulaChart.puti;
 
-      // မူလ နာမက္ခရတိုင်
+      // မူလ တိုင်
       let namaRem = meBirthYear % 7;
       let np = namaPatterns[namaRem];
       if (np) {
@@ -409,7 +427,7 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // ကောဇာ နာမက္ခရတိုင် (ကောဇာခုနှစ် အကြွင်းအလိုက်)
+      // ကောဇာ တိုင်
       let kozarNamaRem = meCurrentYear % 7;
       let knp = namaPatterns[kozarNamaRem];
       if (knp) {
