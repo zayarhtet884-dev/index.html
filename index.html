@@ -57,7 +57,6 @@
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
-    /* နာမက္ခရတိုင် အပြင်အဆင် */
     .nama-pillar-box {
       margin-top: 8px;
       padding-top: 6px;
@@ -130,17 +129,17 @@
     <div class="row">
       <label>လက်ရှိရက်စွဲ :</label>
       <div class="date-inputs">
-        <input type="text" id="ny-day" value="30">
-        <input type="text" id="ny-month" value="08">
-        <input type="text" id="ny-year" value="2026">
+        <input type="text" id="ny-day">
+        <input type="text" id="ny-month">
+        <input type="text" id="ny-year">
       </div>
     </div>
 
     <div class="row">
       <label>အချိန် (နာရီ:မိနစ်):</label>
       <div class="date-inputs" style="flex:1;">
-        <input type="text" id="ny-hour" value="03" style="width: 48%;" placeholder="နာရီ">
-        <input type="text" id="ny-min" value="00" style="width: 48%;" placeholder="မိနစ်">
+        <input type="text" id="ny-hour" style="width: 48%;" placeholder="နာရီ">
+        <input type="text" id="ny-min" style="width: 48%;" placeholder="မိနစ်">
       </div>
     </div>
 
@@ -241,6 +240,16 @@
   </div>
 
   <script>
+    // ဖုန်းဖွင့်လိုက်တာနဲ့ လက်ရှိဖုန်းထဲက နေ့စွဲနဲ့အချိန်ကို အလိုအလျောက် ဖြည့်ပေးရန်
+    window.onload = function() {
+      const now = new Date();
+      document.getElementById('ny-day').value = String(now.getDate()).padStart(2, '0');
+      document.getElementById('ny-month').value = String(now.getMonth() + 1).padStart(2, '0');
+      document.getElementById('ny-year').value = now.getFullYear();
+      document.getElementById('ny-hour').value = String(now.getHours()).padStart(2, '0');
+      document.getElementById('ny-min').value = String(now.getMinutes()).padStart(2, '0');
+    };
+
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
     const chartsMap = {
@@ -448,16 +457,16 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (မနက် ၆ နာရီ မှ ညနေ ၆ နာရီ အတွက် ၉၀ မိနစ်စီ ခွဲခြားခြင်း)
+      // အခါတိုင် (မနက် ၆ နာရီ မှ ညနေ ၆ နာရီ အတွက် ၉၀ မိနစ်စီ ၈ ယာမ်ခွဲခြင်း)
       let totalMinutes = hour * 60 + minute;
       let startOfDayMinutes = 6 * 60; // 06:00 AM
       let diff = totalMinutes - startOfDayMinutes;
       
       if (diff < 0) {
-        diff += 12 * 60; // ညပိုင်း/မနက်စောစောအချိန်များအတွက် 12hr loop အလိုက် ညှိယူခြင်း
+        diff += 12 * 60; 
       }
       
-      let slotIdx = Math.floor(diff / 90) % 8; // ၁ နာရီခွဲ (၉၀ မိနစ်) အလိုက် slotIdx 0 မှ 7 ထိရယူခြင်း
+      let slotIdx = Math.floor(diff / 90) % 8;
 
       let daySchedule = allDaysAkharData[activeDayOfWeek] || allDaysAkharData[0];
       let currentSlotData = daySchedule[slotIdx] || daySchedule[0];
