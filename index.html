@@ -42,7 +42,7 @@
     .report-info { font-size: 12px; line-height: 1.6; margin-bottom: 10px; color: #222; }
     
     .boards-container { display: flex; justify-content: space-between; gap: 4px; margin: 10px 0; flex-wrap: wrap; }
-    .board-wrapper { flex: 1; min-width: 90px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
+    .board-wrapper { flex: 1; min-width: 80px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
     
     .board-label { font-size: 13px; font-weight: bold; color: #8b0000; margin-bottom: 6px; }
     
@@ -51,7 +51,7 @@
     .m-cell .h-name { color: #555; font-size: 9px; font-weight: bold; }
     .m-cell .p-num { font-size: 12px; font-weight: bold; color: #0044aa; margin-top: 2px; }
 
-    .day-column-wrapper { flex: 1; min-width: 65px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
+    .day-column-wrapper { flex: 1; min-width: 60px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
     .column-table { width: 100%; max-width: 60px; margin: 0 auto; border-collapse: collapse; }
     .column-table td { text-align: center; font-size: 14px; font-weight: bold; color: #0044aa; padding: 3px 0; }
     
@@ -145,6 +145,12 @@
         </div>
       </div>
 
+      <!-- မူလအောက်မှ နာမက္ခရတိုင် (အကြွင်းအလိုက်တိုင်) -->
+      <div class="day-column-wrapper">
+        <div class="board-label" id="namak-label">နာမက္ခရ</div>
+        <table class="column-table" id="namakColumnTable"></table>
+      </div>
+
       <!-- ကောဇာမဟာဘုတ် -->
       <div class="board-wrapper">
         <div class="board-label">ကောဇာ</div>
@@ -181,7 +187,6 @@
   </div>
 
   <script>
-    // ဖုန်းဖွင့်လိုက်တာနဲ့ လက်ရှိဖုန်းထဲက နေ့စွဲနဲ့ အချိန်ကို အလိုအလျောက် ထည့်ပေးခြင်း
     window.onload = function() {
       const now = new Date();
       document.getElementById('ny-day').value = now.getDate();
@@ -193,7 +198,7 @@
       
       let ampm = hours24 >= 12 ? 'PM' : 'AM';
       let hours12 = hours24 % 12;
-      hours12 = hours12 ? hours12 : 12; // 0 ဆိုရင် 12 ပြရန်
+      hours12 = hours12 ? hours12 : 12;
 
       document.getElementById('ny-hour').value = hours12;
       document.getElementById('ny-min').value = minutes < 10 ? '0' + minutes : minutes;
@@ -220,6 +225,17 @@
       4: [2, 6, 3, 5, 1, 4, 0],
       5: [3, 0, 4, 6, 2, 5, 1],
       6: [4, 1, 5, 0, 3, 6, 2]
+    };
+
+    // ပုံများပါ အကြွင်းအလိုက် နာမက္ခရတိုင် ဒေတာများ (အကြွင်း ၁ မှ ၀/၇ အထိ)
+    const namakColumns = {
+      1: [0, 6, 5, 4, 3, 2, 1], // ဥပမာ အကြွင်း ၁
+      2: [1, 0, 6, 5, 4, 3, 2], // ဥပမာ အကြွင်း ၂
+      3: [2, 1, 0, 6, 5, 4, 3], // ဥပမာ အကြွင်း ၃
+      4: [3, 2, 1, 0, 6, 5, 4], // ဥပမာ အကြွင်း ၄
+      5: [4, 3, 2, 1, 0, 6, 5], // ဥပမာ အကြွင်း ၅
+      6: [5, 4, 3, 2, 1, 0, 6], // ဥပမာ အကြွင်း ၆
+      7: [6, 5, 4, 3, 2, 1, 0]  // အကြွင်း 0 (၇)
     };
 
     const allDaysAkharData = {
@@ -310,7 +326,6 @@
       const ampm = document.getElementById('ny-ampm').value;
       const isRahu = document.getElementById('rahuCheck').checked;
 
-      // AM/PM ကို 24 နာရီ စနစ်သို့ ပြောင်းလဲခြင်း
       if (ampm === 'PM' && hour < 12) {
         hour += 12;
       } else if (ampm === 'AM' && hour === 12) {
@@ -329,10 +344,7 @@
 
       let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
       let activeDayOfWeek = targetDateObj.getDay();
-      let activeDayText = dayNames[activeDayOfWeek];
-
-      let inputDateObjForDay = new Date(nyYear, nyMonth - 1, nyDay);
-      let originalDayText = dayNames[inputDateObjForDay.getDay()];
+      let originalDayText = dayNames[targetDateObj.getDay()];
 
       // မူလမဟာဘုတ်
       let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
@@ -347,6 +359,17 @@
       document.getElementById('m-marana').innerText = mulaChart.marana;
       document.getElementById('m-banga').innerText = mulaChart.banga;
       document.getElementById('m-puti').innerText = mulaChart.puti;
+
+      // နာမက္ခရတိုင် (မူလအောက်မှ အကြွင်းအလိုက်တိုင်)
+      let namakValues = namakColumns[mulaRemainder] || namakColumns[1];
+      let namakTableHTML = "";
+      namakValues.forEach((val, idx) => {
+        let cellClass = "";
+        if (idx === 3) cellClass = 'class="line-top line-bottom"';
+        namakTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
+      });
+      document.getElementById('namakColumnTable').innerHTML = namakTableHTML;
+      document.getElementById('namak-label').innerText = `အကြွင်း (${mulaRemainder})`;
 
       // ကောဇာမဟာဘုတ်
       let kYearVal = targetDateObj.getFullYear();
@@ -375,19 +398,17 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (မနက် ၆ နာရီမှ ညနေ ၆ နာရီအတွင်း ၁၂ နာရီကို ၈ ပိုင်းခွဲတွက်ချက်ခြင်း)
+      // အခါတိုင်
       let totalMinutes = hour * 60 + minute;
-      let diff = totalMinutes - (6 * 60); // မနက် ၆ နာရီမှ စတင်ရန်
-      
+      let diff = totalMinutes - (6 * 60);
       if (diff < 0) diff = 0;
-      if (diff > 720) diff = 720; // ညနေ ၆ နာရီ (မိနစ် ၇၂၀) ထက်ကျော်လွန်ပါက ညနေ ၆ နာရီအဆုံးသို့ သတ်မှတ်မည်
+      if (diff > 720) diff = 720;
 
       let slotIdx = Math.floor(diff / 90); 
       if (slotIdx > 7) slotIdx = 7;
 
       let daySchedule = allDaysAkharData[activeDayOfWeek] || allDaysAkharData[0];
       let currentSlotData = daySchedule[slotIdx] || daySchedule[0];
-      
       let akharColValues = currentSlotData.col;
 
       let akharTableHTML = "";
