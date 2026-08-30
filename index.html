@@ -28,7 +28,8 @@
     label { font-size: 13px; font-weight: bold; width: 105px; color: #333; }
     .name-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 10px; font-size: 13px; font-family: inherit; color: #0044aa; font-weight: bold; }
     .date-inputs { display: flex; gap: 4px; flex: 1; }
-    .date-inputs input { width: 32%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 4px; font-size: 13px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
+    .date-inputs input, .date-inputs select { width: 32%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 4px; font-size: 13px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
+    .date-inputs select { width: 32%; }
 
     .note { font-size: 11px; color: #cc0000; text-align: center; margin: 6px 0; font-style: italic; }
     .rahubox { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 13px; }
@@ -79,17 +80,21 @@
     <div class="row">
       <label>လက်ရှိရက်စွဲ :</label>
       <div class="date-inputs">
-        <input type="text" id="ny-day" value="30">
-        <input type="text" id="ny-month" value="08">
-        <input type="text" id="ny-year" value="2026">
+        <input type="text" id="ny-day">
+        <input type="text" id="ny-month">
+        <input type="text" id="ny-year">
       </div>
     </div>
 
     <div class="row">
       <label>အချိန် (နာရီ:မိနစ်):</label>
       <div class="date-inputs" style="flex:1;">
-        <input type="text" id="ny-hour" value="13" style="width: 48%;" placeholder="နာရီ (24H)">
-        <input type="text" id="ny-min" value="20" style="width: 48%;" placeholder="မိနစ်">
+        <input type="text" id="ny-hour" style="width: 33%;" placeholder="နာရီ">
+        <input type="text" id="ny-min" style="width: 33%;" placeholder="မိနစ်">
+        <select id="ny-ampm" style="width: 32%;">
+          <option value="AM">AM (နံနက်)</option>
+          <option value="PM">PM (ညနေ)</option>
+        </select>
       </div>
     </div>
 
@@ -102,7 +107,7 @@
       </div>
     </div>
 
-    <div class="note">* ဗုဒ္ဓဟူးနေ့ နေ့လယ် ၁၂ နာရီနောက်ပိုင်း မွေးပါက Rahu ကို ခြစ်ပါရန်။</div>
+    <div class="note">* မနက် ၆ နာရီမှ ညနေ ၆ နာရီအတွင်း အခါတိုင်များကိုသာ တွက်ချက်ပြသမည် ဖြစ်ပါသည်။</div>
 
     <div class="rahubox">
       <input type="checkbox" id="rahuCheck">
@@ -176,6 +181,25 @@
   </div>
 
   <script>
+    // ဖုန်းဖွင့်လိုက်တာနဲ့ လက်ရှိဖုန်းထဲက နေ့စွဲနဲ့ အချိန်ကို အလိုအလျောက် ထည့်ပေးခြင်း
+    window.onload = function() {
+      const now = new Date();
+      document.getElementById('ny-day').value = now.getDate();
+      document.getElementById('ny-month').value = now.getMonth() + 1;
+      document.getElementById('ny-year').value = now.getFullYear();
+
+      let hours24 = now.getHours();
+      let minutes = now.getMinutes();
+      
+      let ampm = hours24 >= 12 ? 'PM' : 'AM';
+      let hours12 = hours24 % 12;
+      hours12 = hours12 ? hours12 : 12; // 0 ဆိုရင် 12 ပြရန်
+
+      document.getElementById('ny-hour').value = hours12;
+      document.getElementById('ny-min').value = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById('ny-ampm').value = ampm;
+    };
+
     const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
     
     const chartsMap = {
@@ -204,70 +228,70 @@
         { col: [3, 0, 4, 6, 2, 5, 1] },
         { col: [1, 5, 2, 4, 0, 3, 6] },
         { col: [6, 3, 0, 2, 5, 1, 4] },
-        { col: [4, 2, 5, 0, 3, 6, 1] },
-        { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 1, 6, 2, 4, 0, 3] }
-      ],
-      1: [
-        { col: [5, 2, 6, 3, 4, 0, 2] },
-        { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 3, 0, 2, 5, 1, 4] },
         { col: [4, 1, 5, 0, 3, 6, 2] },
         { col: [2, 6, 3, 5, 1, 4, 0] },
         { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 1, 6, 2, 4, 0, 3] }
+        { col: [5, 2, 6, 1, 4, 0, 3] }
+      ],
+      1: [
+        { col: [6, 3, 0, 2, 5, 1, 4] },
+        { col: [4, 1, 5, 0, 6, 3, 2] },
+        { col: [2, 6, 3, 5, 1, 4, 0] },
+        { col: [0, 4, 1, 3, 6, 2, 5] },
+        { col: [5, 2, 6, 1, 4, 0, 3] },
+        { col: [3, 0, 4, 6, 2, 5, 1] },
+        { col: [1, 5, 2, 4, 0, 3, 6] },
+        { col: [6, 3, 0, 2, 5, 1, 4] }
       ],
       2: [
         { col: [0, 4, 1, 3, 6, 2, 5] },
         { col: [5, 2, 6, 1, 4, 0, 3] },
         { col: [3, 0, 4, 6, 2, 5, 1] },
         { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 4, 0, 2, 5, 1, 3] },
-        { col: [4, 2, 5, 0, 3, 6, 1] },
-        { col: [2, 0, 3, 5, 1, 4, 6] },
-        { col: [0, 3, 1, 4, 6, 2, 5] }
+        { col: [6, 3, 0, 2, 5, 1, 4] },
+        { col: [4, 1, 5, 0, 3, 6, 2] },
+        { col: [2, 6, 3, 5, 1, 4, 0] },
+        { col: [0, 4, 1, 3, 6, 2, 5] }
       ],
       3: [
         { col: [1, 5, 2, 4, 0, 3, 6] },
         { col: [6, 3, 0, 2, 5, 1, 4] },
         { col: [4, 1, 5, 0, 3, 6, 2] },
         { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 5, 1, 3, 6, 2, 4] },
-        { col: [5, 3, 6, 1, 4, 0, 2] },
-        { col: [3, 1, 4, 6, 2, 5, 0] },
-        { col: [1, 4, 2, 0, 5, 3, 6] }
+        { col: [0, 4, 1, 3, 6, 2, 5] },
+        { col: [5, 2, 6, 1, 4, 0, 3] },
+        { col: [3, 0, 4, 6, 2, 5, 1] },
+        { col: [1, 5, 2, 4, 0, 3, 6] }
       ],
       4: [
         { col: [2, 6, 3, 5, 1, 4, 0] },
         { col: [0, 4, 1, 3, 6, 2, 5] },
         { col: [5, 2, 6, 1, 4, 0, 3] },
         { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 6, 2, 4, 0, 3, 5] },
-        { col: [6, 4, 0, 2, 5, 1, 3] },
-        { col: [4, 2, 5, 0, 3, 6, 1] },
-        { col: [2, 5, 3, 1, 6, 4, 0] }
+        { col: [1, 5, 2, 4, 0, 3, 6] },
+        { col: [6, 3, 0, 2, 5, 1, 4] },
+        { col: [4, 1, 5, 0, 3, 6, 2] },
+        { col: [2, 6, 3, 5, 1, 4, 0] }
       ],
       5: [
         { col: [3, 0, 4, 6, 2, 5, 1] },
         { col: [1, 5, 2, 4, 0, 3, 6] },
         { col: [6, 3, 0, 2, 5, 1, 4] },
         { col: [4, 1, 5, 0, 3, 6, 2] },
-        { col: [2, 0, 3, 5, 1, 4, 6] },
-        { col: [0, 5, 1, 3, 6, 2, 4] },
-        { col: [5, 3, 6, 1, 4, 0, 2] },
-        { col: [3, 6, 4, 2, 0, 5, 1] }
+        { col: [2, 6, 3, 5, 1, 4, 0] },
+        { col: [0, 4, 1, 3, 6, 2, 5] },
+        { col: [5, 2, 6, 1, 4, 0, 3] },
+        { col: [3, 0, 4, 6, 2, 5, 1] }
       ],
       6: [
         { col: [4, 1, 5, 0, 3, 6, 2] },
         { col: [2, 6, 3, 5, 1, 4, 0] },
         { col: [0, 4, 1, 3, 6, 2, 5] },
         { col: [5, 2, 6, 1, 4, 0, 3] },
-        { col: [3, 1, 4, 6, 2, 5, 0] },
-        { col: [1, 6, 2, 4, 0, 3, 5] },
-        { col: [6, 4, 0, 2, 5, 1, 3] },
-        { col: [4, 0, 5, 3, 1, 6, 2] }
+        { col: [3, 0, 4, 6, 2, 5, 1] },
+        { col: [1, 5, 2, 4, 0, 3, 6] },
+        { col: [6, 3, 0, 2, 5, 1, 4] },
+        { col: [4, 1, 5, 0, 3, 6, 2] }
       ]
     };
 
@@ -281,9 +305,17 @@
       const nyMonth = parseInt(document.getElementById('ny-month').value);
       const nyYear = parseInt(document.getElementById('ny-year').value);
 
-      const hour = parseInt(document.getElementById('ny-hour').value) || 0;
+      let hour = parseInt(document.getElementById('ny-hour').value) || 0;
       const minute = parseInt(document.getElementById('ny-min').value) || 0;
+      const ampm = document.getElementById('ny-ampm').value;
       const isRahu = document.getElementById('rahuCheck').checked;
+
+      // AM/PM ကို 24 နာရီ စနစ်သို့ ပြောင်းလဲခြင်း
+      if (ampm === 'PM' && hour < 12) {
+        hour += 12;
+      } else if (ampm === 'AM' && hour === 12) {
+        hour = 0;
+      }
 
       if (!bDay || !bMonth || !bYear || !nyDay || !nyMonth || !nyYear) {
         alert("အချက်အလက်များ အပြည့်အစုံ ဖြည့်ပါ!");
@@ -296,10 +328,6 @@
       if (isRahu && bDayOfWeek === 3) bDayText = "ရာဟု";
 
       let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
-      if (hour < 6) {
-        targetDateObj.setDate(targetDateObj.getDate() - 1);
-      }
-
       let activeDayOfWeek = targetDateObj.getDay();
       let activeDayText = dayNames[activeDayOfWeek];
 
@@ -347,11 +375,14 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင်
+      // အခါတိုင် (မနက် ၆ နာရီမှ ညနေ ၆ နာရီအတွင်း ၁၂ နာရီကို ၈ ပိုင်းခွဲတွက်ချက်ခြင်း)
       let totalMinutes = hour * 60 + minute;
-      let diff = totalMinutes - (6 * 60);
-      if (diff < 0) diff += 24 * 60;
-      let slotIdx = Math.floor(diff / 90);
+      let diff = totalMinutes - (6 * 60); // မနက် ၆ နာရီမှ စတင်ရန်
+      
+      if (diff < 0) diff = 0;
+      if (diff > 720) diff = 720; // ညနေ ၆ နာရီ (မိနစ် ၇၂၀) ထက်ကျော်လွန်ပါက ညနေ ၆ နာရီအဆုံးသို့ သတ်မှတ်မည်
+
+      let slotIdx = Math.floor(diff / 90); 
       if (slotIdx > 7) slotIdx = 7;
 
       let daySchedule = allDaysAkharData[activeDayOfWeek] || allDaysAkharData[0];
@@ -367,18 +398,14 @@
       });
       document.getElementById('akharColumnTable').innerHTML = akharTableHTML;
 
-      // AM / PM ပုံစံ ပြန်လည်ဖော်ပြရန်
-      let displayHour = hour;
-      let ampm = displayHour >= 12 ? 'PM' : 'AM';
-      displayHour = displayHour % 12;
-      displayHour = displayHour ? displayHour : 12; // 0 နာရီဖြစ်နေလျှင် 12 ထိုးရန်
-      let formattedTime = `${displayHour}:${minute < 10 ? '0' : ''}${minute} ${ampm}`;
+      let displayHour12 = hour % 12;
+      displayHour12 = displayHour12 ? displayHour12 : 12;
 
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
         `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} (${bDayText})<br>` +
-        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} (${originalDayText}) | အချိန် - ${formattedTime}` +
-        (hour < 6 ? `<br><span style="color:#cc0000; font-size:11px;">(မနက် ၆ နာရီမတိုင်သေးသဖြင့် မနေ့က ${activeDayText}နေ့ အခါတိုင်ကို ပြသနေပါသည်)</span>` : ``);
+        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} (${originalDayText}) | အချိန် - ${displayHour12}:${minute < 10 ? '0' : ''}${minute} ${ampm}` +
+        `<br><span style="color:#cc0000; font-size:11px;">(မနက် ၆ နာရီမှ ညနေ ၆ နာရီအတွင်း အခါတိုင် တွက်ချက်မှု)</span>`;
 
       document.getElementById('form-page').style.display = 'none';
       document.getElementById('result-page').style.display = 'block';
