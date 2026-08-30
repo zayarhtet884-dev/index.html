@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ဆန်းကျမ်း - မဟာဘုတ်ဗေဒင် နှင့် အခါတိုင်</title>
+  <title>ဆန်းကျမ်း - မဟာဘုတ်ဗေဒင် နှင့် ကာရကဇယားများ</title>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -17,7 +17,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Padauk', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; min-height: 100vh; }
     
-    .container { width: 100%; max-width: 620px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .container { width: 100%; max-width: 650px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
     
     .app-header { text-align: center; border-bottom: 1px solid #e0dcd0; padding-bottom: 8px; margin-bottom: 10px; }
     .app-title { font-size: 16px; font-weight: bold; color: #444; }
@@ -41,19 +41,23 @@
     .report-info { font-size: 12px; line-height: 1.6; margin-bottom: 10px; color: #222; }
     
     .boards-container { display: flex; justify-content: space-between; gap: 4px; margin: 10px 0; flex-wrap: wrap; }
-    .board-wrapper { flex: 1; min-width: 90px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
+    .board-wrapper { flex: 1; min-width: 110px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
     
     .board-label { font-size: 13px; font-weight: bold; color: #8b0000; margin-bottom: 6px; }
     
-    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 110px; margin: 0 auto; }
-    .m-cell { border: 1px solid #8b0000; border-radius: 2px; padding: 4px 1px; background: #fff; font-size: 10px; }
+    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 115px; margin: 0 auto; }
+    .m-cell { border: 1px solid #8b0000; border-radius: 2px; padding: 4px 1px; background: #fff; font-size: 10px; min-height: 38px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     .m-cell .h-name { color: #555; font-size: 9px; font-weight: bold; }
     .m-cell .p-num { font-size: 12px; font-weight: bold; color: #0044aa; margin-top: 2px; }
 
-    .day-column-wrapper { flex: 1; min-width: 65px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
-    .column-table { width: 100%; max-width: 60px; margin: 0 auto; border-collapse: collapse; }
-    .column-table td { text-align: center; font-size: 14px; font-weight: bold; color: #0044aa; padding: 3px 0; }
-    
+    /* ကာရကဇယား (မွေးနံတိုင်/အခါတိုင် အောက်တွင်ပြရန်) */
+    .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 115px; margin: 0 auto; }
+    .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 3px 1px; background: #fff; font-size: 10px; min-height: 38px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .k-cell .k-text { font-size: 9.5px; font-weight: bold; color: #8b0000; line-height: 1.1; }
+
+    .day-column-wrapper { flex: 1; min-width: 110px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
+    .column-table { width: 100%; max-width: 60px; margin: 0 auto 6px auto; border-collapse: collapse; }
+    .column-table td { text-align: center; font-size: 13px; font-weight: bold; color: #0044aa; padding: 2px 0; }
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
@@ -174,7 +178,7 @@
 
     <div class="boards-container">
       
-      <!-- မူလမဟာဘုတ် နှင့် တိုင် -->
+      <!-- မူလမဟာဘုတ် -->
       <div class="board-wrapper">
         <div class="board-label">မူလ</div>
         <div class="mahabote-grid">
@@ -197,7 +201,7 @@
         </div>
       </div>
 
-      <!-- ကောဇာမဟာဘုတ် နှင့် တိုင် -->
+      <!-- ကောဇာမဟာဘုတ် -->
       <div class="board-wrapper">
         <div class="board-label">ကောဇာ</div>
         <div class="mahabote-grid">
@@ -220,16 +224,18 @@
         </div>
       </div>
 
-      <!-- မွေးနံတိုင် -->
+      <!-- မွေးနံတိုင် နှင့် အောက်တွင် ကာရကဇယား -->
       <div class="day-column-wrapper">
         <div class="board-label">မွေးနံတိုင်</div>
         <table class="column-table" id="dayColumnTable"></table>
+        <div class="karak-grid" id="dayKarakGrid"></div>
       </div>
 
-      <!-- အခါတိုင် -->
+      <!-- အခါတိုင် နှင့် အောက်တွင် ကာရကဇယား -->
       <div class="day-column-wrapper">
         <div class="board-label">အခါတိုင်</div>
         <table class="column-table" id="akharColumnTable"></table>
+        <div class="karak-grid" id="akharKarakGrid"></div>
       </div>
 
     </div>
@@ -354,6 +360,58 @@
       ]
     };
 
+    // ကာရက ၈ မျိုး အမည်များ (နာရီလက်တံအတိုင်း စတင်ထည့်သွင်းရန် အစဉ်)
+    // စံပုံစံ မဟာဘုတ် ၉ ကွက်ဇယားတွင် အလယ်ကွက်လပ်မှလွဲ၍ ကျန် ၈ ကွက်အတွက် အစဉ်လိုက် သတ်မှတ်ခြင်း
+    const karakNames = [
+      "ကတ္တု",       // ၁ (အပေါ်ဘယ်)
+      "သာမိ",       // ၂ (အပေါ်အလယ်)
+      "သမ္မဒါန",     // ၃ (အပေါ်ညာ)
+      "ကမ္မု",        // ၄ (အလယ်ညာ)
+      "အာလဗ္ဓန",    // ၅ (အောက်ညာ) - (စနစ်အရ ၈ ခုမြောက် သို့မဟုတ် အစဉ်အတိုင်း)
+      "သြကာသ",    // ၆ (အောက်အလယ်)
+      "အပာဒါန",    // ၇ (အောက်ဘယ်)
+      "ကရဏ"        // ၈ (အလယ်ဘယ်)
+    ];
+
+    // မဟာဘုတ် ၉ ကွက် ဇယားဂရစ်တွင် နာရီလက်တံအစဉ်လိုက် (Clockwise order):
+    // 0: top-left (1), 1: top-middle (2), 2: top-right (3)
+    // 3: middle-right (4), 4: bottom-right (5), 5: bottom-middle (6), 6: bottom-left (7), 7: middle-left (8)
+    const gridPositions = [0, 1, 2, 5, 8, 7, 6, 3];
+
+    function generateKarakGridHTML(startIndex) {
+      // startIndex သည် မွေးနံအလိုက် သတ်မှတ်သော ဂဏန်း (တနင်္ဂနွေ=1, တနင်္လာ=2, ..., စနေ=0, ရာဟု=8)
+      // နမူနာ - တနင်္ဂနွေဆိုလျှင် 1 မှစမည် (ဇယားကွက်၏ ပထမနေရာ)
+      // မြန်မာ့ရိုးရာ မဟာဘုတ် ဂဏန်းစနစ်အရ အစပြုဂဏန်းကို mapping လုပ်ခြင်း
+      // တနင်္ဂနွေ=1, တနင်္လာ=2, အင်္ဂါ=3, ဗုဒ္ဓဟူး=4, ကြာသပတေး=5, သောကြာ=6, စနေ=0(သို့ 7), ရာဟု=8
+      let posMap = {};
+      let mappingIndices;
+      
+      if (startIndex === 1) mappingIndices = [1, 2, 3, 4, 5, 6, 0, 7]; // 1 စ
+      else if (startIndex === 2) mappingIndices = [2, 3, 4, 5, 6, 0, 7, 1]; // 2 စ
+      else if (startIndex === 3) mappingIndices = [3, 4, 5, 6, 0, 7, 1, 2]; // 3 စ
+      else if (startIndex === 4) mappingIndices = [4, 5, 6, 0, 7, 1, 2, 3]; // 4 စ
+      else if (startIndex === 5) mappingIndices = [5, 6, 0, 7, 1, 2, 3, 4]; // 5 စ
+      else if (startIndex === 6) mappingIndices = [6, 0, 7, 1, 2, 3, 4, 5]; // 6 စ
+      else if (startIndex === 0 || startIndex === 7) mappingIndices = [0, 7, 1, 2, 3, 4, 5, 6]; // 0 စ
+      else if (startIndex === 8) mappingIndices = [1, 2, 3, 4, 5, 6, 0, 7]; // ရာဟုအတွက် (၁ ကဲ့သို့ သို့မဟုတ် သင့်လျော်ရာ)
+      else mappingIndices = [1, 2, 3, 4, 5, 6, 0, 7];
+
+      // ၉ ကွက်ဇယားအတွက် HTML တည်ဆောက်ခြင်း (အလယ်ကွက်သည် ၄ သို့မဟုတ် လပ်နေမည့်နေရာ index 4)
+      let cells = new Array(9);
+      for(let i=0; i<8; i++) {
+        let karakIdx = mappingIndices[i];
+        let gridIdx = gridPositions[i];
+        cells[gridIdx] = `<div class="k-cell"><div class="k-text">${karakNames[karakIdx]}</div></div>`;
+      }
+      cells[4] = `<div class="k-cell" style="background:#f9f9f9; border:1px solid #dcd6c5;"></div>`; // အလယ်ကွက်လပ်
+
+      let html = "";
+      for(let i=0; i<9; i++) {
+        html += cells[i] || `<div></div>`;
+      }
+      return html;
+    }
+
     function calculateMahabote() {
       const name = document.getElementById('username').value || "မောင်မောင်";
       const bDay = parseInt(document.getElementById('b-day').value);
@@ -374,9 +432,21 @@
       }
 
       const bDateObj = new Date(bYear, bMonth - 1, bDay);
-      let bDayOfWeek = bDateObj.getDay(); 
+      let bDayOfWeek = bDateObj.getDay(); // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+      
+      // မွေးနံ အညွှန်းပြောင်းလဲမှု (တနင်္ဂနွေ=1, တနင်္လာ=2, အင်္ဂါ=3, ဗုဒ္ဓဟူး=4, ကြာသပတေး=5, သောကြာ=6, စနေ=0)
+      let customDayNum = bDayOfWeek === 0 ? 1 : 
+                         bDayOfWeek === 1 ? 2 : 
+                         bDayOfWeek === 2 ? 3 : 
+                         bDayOfWeek === 3 ? 4 : 
+                         bDayOfWeek === 4 ? 5 : 
+                         bDayOfWeek === 5 ? 6 : 0;
+
       let bDayText = dayNames[bDayOfWeek];
-      if (isRahu && bDayOfWeek === 3) bDayText = "ရာဟု";
+      if (isRahu && bDayOfWeek === 3) {
+        bDayText = "ရာဟု";
+        customDayNum = 8; // ရာဟုအတွက်
+      }
 
       let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
       if (hour < 6) {
@@ -456,20 +526,18 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (မွေးနံတိုင်ကဲ့သို့ အပေါ်တား၊ အောက်တား မျဉ်းသားပါဝင်ရန် idx === 3 တွင် line-top line-bottom ထည့်သွင်းခြင်း)
+      // မွေးနံတိုင်အောက်တွင် မွေးခုနှစ်အလိုက် ကာရကဇယားထည့်သွင်းခြင်း
+      document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(customDayNum);
+
+      // အခါတိုင်
       let totalMinutes = hour * 60 + minute;
       let startOfDayMinutes = 6 * 60; // 06:00 AM
       let diff = totalMinutes - startOfDayMinutes;
-      
-      if (diff < 0) {
-        diff += 12 * 60; 
-      }
+      if (diff < 0) { diff += 12 * 60; }
       
       let slotIdx = Math.floor(diff / 90) % 8;
-
       let daySchedule = allDaysAkharData[activeDayOfWeek] || allDaysAkharData[0];
       let currentSlotData = daySchedule[slotIdx] || daySchedule[0];
-      
       let akharColValues = currentSlotData.col;
 
       let akharTableHTML = "";
@@ -479,6 +547,9 @@
         akharTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('akharColumnTable').innerHTML = akharTableHTML;
+
+      // အခါတိုင်အောက်တွင်လည်း ထပ်တူ ကာရကဇယားထည့်သွင်းခြင်း (သို့မဟုတ် မွေးနံအလိုက်)
+      document.getElementById('akharKarakGrid').innerHTML = generateKarakGridHTML(customDayNum);
 
       document.getElementById('reportDetails').innerHTML = 
         `<b>${name}</b><br>` +
