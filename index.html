@@ -65,7 +65,6 @@
       position: relative;
     }
     
-    /* ထိပ်ဆုံးဂဏန်း အောက်ခြေ အလျားမျဉ်းထိပဲ ဒေါင်လိုက်မျဉ်း ဆံ့စေရန် */
     .nama-top-val {
       font-size: 14px;
       font-weight: bold;
@@ -98,10 +97,9 @@
       text-align: center;
     }
 
-    /* အလယ်ဒေါင်လိုက်မျဉ်း (အပေါ်ဆုံးအလျားမျဉ်းမှ အောက်ဆုံးအလျားမျဉ်းအထိ) */
     .nama-center-line {
       position: absolute;
-      top: 25px; /* အပေါ်ဆုံး အလျားမျဉ်းနေရာမှ စတင်ရန် */
+      top: 25px;
       bottom: 2px;
       left: 50%;
       width: 2px;
@@ -141,7 +139,7 @@
     <div class="row">
       <label>အချိန် (နာရီ:မိနစ်):</label>
       <div class="date-inputs" style="flex:1;">
-        <input type="text" id="ny-hour" value="03" style="width: 48%;" placeholder="နာရီ (24H)">
+        <input type="text" id="ny-hour" value="03" style="width: 48%;" placeholder="နာရီ">
         <input type="text" id="ny-min" value="00" style="width: 48%;" placeholder="မိနစ်">
       </div>
     </div>
@@ -239,7 +237,7 @@
 
     <div class="footer-credit">Developed By ဆရာ ဇေယျာထက်</div>
 
-    <button class="back-btn" onclick="goBackToForm()">နောက်ို့ (Back)</button>
+    <button class="back-btn" onclick="goBackToForm()">နောက်သို့ (Back)</button>
   </div>
 
   <script>
@@ -450,12 +448,16 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင်
+      // အခါတိုင် (မနက် ၆ နာရီ မှ ညနေ ၆ နာရီ အတွက် ၉၀ မိနစ်စီ ခွဲခြားခြင်း)
       let totalMinutes = hour * 60 + minute;
-      let diff = totalMinutes - (6 * 60);
-      if (diff < 0) diff += 24 * 60;
-      let slotIdx = Math.floor(diff / 90);
-      if (slotIdx > 7) slotIdx = 7;
+      let startOfDayMinutes = 6 * 60; // 06:00 AM
+      let diff = totalMinutes - startOfDayMinutes;
+      
+      if (diff < 0) {
+        diff += 12 * 60; // ညပိုင်း/မနက်စောစောအချိန်များအတွက် 12hr loop အလိုက် ညှိယူခြင်း
+      }
+      
+      let slotIdx = Math.floor(diff / 90) % 8; // ၁ နာရီခွဲ (၉၀ မိနစ်) အလိုက် slotIdx 0 မှ 7 ထိရယူခြင်း
 
       let daySchedule = allDaysAkharData[activeDayOfWeek] || allDaysAkharData[0];
       let currentSlotData = daySchedule[slotIdx] || daySchedule[0];
