@@ -1,442 +1,124 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ဆန်းကျမ်း - မဟာဘုတ်ဗေဒင် နှင့် အခါတိုင်</title>
-  <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #fcf6e8;
-      --card-bg: #ffffff;
-      --border-color: #dcd6c5;
-      --input-bg: #fdfbf7;
-      --btn-color: #8b0000;
-      --text-main: #333333;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Padauk', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; min-height: 100vh; }
-    
-    .container { width: 100%; max-width: 620px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-    
-    .app-header { text-align: center; border-bottom: 1px solid #e0dcd0; padding-bottom: 8px; margin-bottom: 10px; }
-    .app-title { font-size: 16px; font-weight: bold; color: #444; }
-    .teacher-title { font-size: 15px; font-weight: bold; color: #8b0000; margin-top: 4px; }
-    .teacher-sub { font-size: 13px; color: #555; }
-
-    .row { display: flex; align-items: center; margin-bottom: 8px; gap: 8px; }
-    label { font-size: 13px; font-weight: bold; width: 105px; color: #333; }
-    .name-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 10px; font-size: 13px; font-family: inherit; color: #0044aa; font-weight: bold; }
-    .date-inputs { display: flex; gap: 4px; flex: 1; }
-    .date-inputs input, .date-inputs select { width: 32%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 4px; font-size: 13px; font-family: inherit; color: #0044aa; text-align: center; font-weight: bold; }
-    .date-inputs select { width: 32%; }
-
-    .note { font-size: 11px; color: #cc0000; text-align: center; margin: 6px 0; font-style: italic; }
-    .rahubox { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0; font-size: 13px; }
-    .rahubox input { width: 15px; height: 15px; }
-    .rahubox span { color: #cc0000; font-weight: bold; }
-
-    .btn-calc { width: 100%; background-color: var(--btn-color); color: white; border: none; padding: 9px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; font-family: inherit; margin-top: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
-
-    #result-page { display: none; }
-    .report-info { font-size: 12px; line-height: 1.6; margin-bottom: 10px; color: #222; }
-    
-    .boards-container { display: flex; justify-content: space-between; gap: 4px; margin: 10px 0; flex-wrap: wrap; }
-    .board-wrapper { flex: 1; min-width: 80px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
-    
-    .board-label { font-size: 13px; font-weight: bold; color: #8b0000; margin-bottom: 6px; }
-    
-    .mahabote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 110px; margin: 0 auto; }
-    .m-cell { border: 1px solid #8b0000; border-radius: 2px; padding: 4px 1px; background: #fff; font-size: 10px; }
-    .m-cell .h-name { color: #555; font-size: 9px; font-weight: bold; }
-    .m-cell .p-num { font-size: 12px; font-weight: bold; color: #0044aa; margin-top: 2px; }
-
-    .day-column-wrapper { flex: 1; min-width: 60px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
-    .column-table { width: 100%; max-width: 60px; margin: 0 auto; border-collapse: collapse; }
-    .column-table td { text-align: center; font-size: 14px; font-weight: bold; color: #0044aa; padding: 3px 0; }
-    
-    .column-table td.line-top { border-top: 2px solid #0044aa; }
-    .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
-
-    .footer-credit { text-align: center; font-size: 11px; color: #666; margin-top: 15px; border-top: 1px solid #e0dcd0; padding-top: 6px; }
-    .back-btn { width: 100%; background-color: #444; color: white; border: none; padding: 7px; font-size: 13px; border-radius: 4px; cursor: pointer; margin-top: 10px; font-family: inherit; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>နာမက္ခရတိုင် တွက်ချက်မှု</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #fdfbf7;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .title {
+            color: #a00;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        /* တိုင်ပုံစံ (Pyramid / Pillar Box) */
+        .pillar-box {
+            border: 1px solid #d4af37;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px auto;
+            width: 220px;
+            background: #fff;
+        }
+        .pillar-title {
+            color: #d81b60;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .pillar-top {
+            font-size: 18px;
+            color: #d81b60;
+            font-weight: bold;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #000;
+            width: 50px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .pillar-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 5px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #000;
+            width: 140px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .pillar-row:last-of-type {
+            border-bottom: 2px solid #000;
+        }
+        .pillar-cell {
+            font-size: 18px;
+            color: #d81b60;
+            font-weight: bold;
+            width: 30px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- PAGE 1: Input Form -->
-  <div class="container" id="form-page">
-    <div class="app-header">
-      <div class="app-title">ဆန်းကျမ်း</div>
-      <div class="teacher-title">ဆရာ ဇေယျာထက်</div>
-      <div class="teacher-sub">တဲရော့ - ဗေဒင် - လက္ခဏာ</div>
-    </div>
-
-    <div class="row" style="margin-top: 10px;">
-      <label>အမည် (Name):</label>
-      <input type="text" id="username" class="name-input" value="မောင်မောင်">
-    </div>
-
-    <div class="row">
-      <label>လက်ရှိရက်စွဲ :</label>
-      <div class="date-inputs">
-        <input type="text" id="ny-day">
-        <input type="text" id="ny-month">
-        <input type="text" id="ny-year">
-      </div>
-    </div>
-
-    <div class="row">
-      <label>အချိန် (နာရီ:မိနစ်):</label>
-      <div class="date-inputs" style="flex:1;">
-        <input type="text" id="ny-hour" style="width: 33%;" placeholder="နာရီ">
-        <input type="text" id="ny-min" style="width: 33%;" placeholder="မိနစ်">
-        <select id="ny-ampm" style="width: 32%;">
-          <option value="AM">AM (နံနက်)</option>
-          <option value="PM">PM (ညနေ)</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row">
-      <label>မွေးသက္ကရာဇ် :</label>
-      <div class="date-inputs">
-        <input type="text" id="b-day" placeholder="ရက်" value="12">
-        <input type="text" id="b-month" placeholder="လ" value="8">
-        <input type="text" id="b-year" placeholder="ခုနှစ်" value="2005">
-      </div>
-    </div>
-
-    <div class="note">* မနက် ၆ နာရီမှ ညနေ ၆ နာရီအတွင်း အခါတိုင်များကိုသာ တွက်ချက်ပြသမည် ဖြစ်ပါသည်။</div>
-
-    <div class="rahubox">
-      <input type="checkbox" id="rahuCheck">
-      <span>Rahu (ရာဟု)</span>
-    </div>
-
-    <button class="btn-calc" onclick="calculateMahabote()">မဟာဘုတ် ဇယားများ ထုတ်မည်</button>
-  </div>
-
-  <!-- PAGE 2: Result Page -->
-  <div class="container" id="result-page">
-    <div class="app-header">
-      <div class="app-title">ဆန်းကျမ်း</div>
-      <div class="teacher-title">ဆရာ ဇေယျာထက်</div>
-      <div class="teacher-sub">တဲရော့ - ဗေဒင် - လက္ခဏာ</div>
-    </div>
-
-    <div class="report-info" id="reportDetails"></div>
-
-    <div class="boards-container">
-      
-      <!-- မူလမဟာဘုတ် -->
-      <div class="board-wrapper">
-        <div class="board-label">မူလ</div>
-        <div class="mahabote-grid">
-          <div></div>
-          <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="m-adhipati">-</div></div>
-          <div></div>
-          <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="m-thun">-</div></div>
-          <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="m-thaik">-</div></div>
-          <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="m-raja">-</div></div>
-          <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="m-marana">-</div></div>
-          <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="m-banga">-</div></div>
-          <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="m-puti">-</div></div>
+    <div class="container">
+        <div class="title">နာမက္ခရတိုင် တွက်ချက်ခြင်း</div>
+        
+        <!-- မူလဇယား (သို့မဟုတ် အချက်အလက်ပြရန်) -->
+        <div id="mula-section">
+            <!-- ဤနေရာတွင် မူလဇယားရှိမည် -->
         </div>
-      </div>
 
-      <!-- မူလအောက်မှ နာမက္ခရတိုင် (အကြွင်းအလိုက်တိုင်) -->
-      <div class="day-column-wrapper">
-        <div class="board-label" id="namak-label">နာမက္ခရ</div>
-        <table class="column-table" id="namakColumnTable"></table>
-      </div>
-
-      <!-- ကောဇာမဟာဘုတ် -->
-      <div class="board-wrapper">
-        <div class="board-label">ကောဇာ</div>
-        <div class="mahabote-grid">
-          <div></div>
-          <div class="m-cell"><div class="h-name">အဓိပတိ</div><div class="p-num" id="k-adhipati">-</div></div>
-          <div></div>
-          <div class="m-cell"><div class="h-name">အထွန်း</div><div class="p-num" id="k-thun">-</div></div>
-          <div class="m-cell"><div class="h-name">သိုက်</div><div class="p-num" id="k-thaik">-</div></div>
-          <div class="m-cell"><div class="h-name">ရာဇ</div><div class="p-num" id="k-raja">-</div></div>
-          <div class="m-cell"><div class="h-name">မရဏ</div><div class="p-num" id="k-marana">-</div></div>
-          <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="k-banga">-</div></div>
-          <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="k-puti">-</div></div>
+        <!-- မူလအောက်တွင် ထည့်ရမည့် တိုင်ပုံစံ -->
+        <div class="pillar-box">
+            <div class="pillar-title" id="remainder-title">အကြွင်း (၁) တိုင်</div>
+            <div class="pillar-top" id="p-top">၀</div>
+            <div class="pillar-row">
+                <span class="pillar-cell" id="p1-left">၆</span>
+                <span class="pillar-cell" id="p1-right">၅</span>
+            </div>
+            <div class="pillar-row">
+                <span class="pillar-cell" id="p2-left">၄</span>
+                <span class="pillar-cell" id="p2-right">၃</span>
+            </div>
+            <div class="pillar-row">
+                <span class="pillar-cell" id="p3-left">၂</span>
+                <span class="pillar-cell" id="p3-right">၁</span>
+            </div>
         </div>
-      </div>
-
-      <!-- မွေးနံတိုင် -->
-      <div class="day-column-wrapper">
-        <div class="board-label">မွေးနံတိုင်</div>
-        <table class="column-table" id="dayColumnTable"></table>
-      </div>
-
-      <!-- အခါတိုင် -->
-      <div class="day-column-wrapper">
-        <div class="board-label">အခါတိုင်</div>
-        <table class="column-table" id="akharColumnTable"></table>
-      </div>
-
     </div>
 
-    <div class="footer-credit">Developed By ဆရာ ဇေယျာထက်</div>
+    <script>
+        // ဥပမာ - မွေးခုနှစ်ကို ၇ ဖြင့်စား၍ အကြွင်းရှာပုံ (သို့မဟုတ် လိုအပ်သလို ချိတ်ဆက်ရန်)
+        function updatePillar(remainder) {
+            // အကြွင်းအလိုက် ဂဏန်းပုံစံများ (ဆရာပြထားသော ပုံများအတိုင်း)
+            const patterns = {
+                1: { top: '၀', r1: ['၆', '၅'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
+                2: { top: '၁', r2_l: '၀', r2_r: '၆', r3_l: '၅', r3_r: '၄', r4_l: '၃', r4_r: '၂' }, // လိုအပ်သလို ပုံစံအတိုင်း အစားထိုးနိုင်ပါသည်
+                // ကျန်အကြွင်းများကို ဆရာပြထားသည့်အတိုင်း ထည့်သွင်းနိုင်သည်
+            };
 
-    <button class="back-btn" onclick="goBackToForm()">နောက်ို့ (Back)</button>
-  </div>
+            // DOM Elements များကို ချိတ်ဆက်ရန်
+            document.getElementById('remainder-title').innerText = `အကြွင်း (${remainder}) တိုင်`;
+        }
 
-  <script>
-    window.onload = function() {
-      const now = new Date();
-      document.getElementById('ny-day').value = now.getDate();
-      document.getElementById('ny-month').value = now.getMonth() + 1;
-      document.getElementById('ny-year').value = now.getFullYear();
-
-      let hours24 = now.getHours();
-      let minutes = now.getMinutes();
-      
-      let ampm = hours24 >= 12 ? 'PM' : 'AM';
-      let hours12 = hours24 % 12;
-      hours12 = hours12 ? hours12 : 12;
-
-      document.getElementById('ny-hour').value = hours12;
-      document.getElementById('ny-min').value = minutes < 10 ? '0' + minutes : minutes;
-      document.getElementById('ny-ampm').value = ampm;
-    };
-
-    const dayNames = ["တနင်္ဂနွေ", "တနင်္လာ", "အင်္ဂါ", "ဗုဒ္ဓဟူး", "ကြာသပတေး", "သောကြာ", "စနေ"];
-    
-    const chartsMap = {
-      1: { adhipati: 5, thun: 0, thaik: 3, raja: 6, marana: 4, banga: 1, puti: 2 },
-      2: { adhipati: 6, thun: 1, thaik: 4, raja: 0, marana: 5, banga: 2, puti: 3 },
-      3: { adhipati: 0, thun: 2, thaik: 5, raja: 1, marana: 6, banga: 3, puti: 4 },
-      4: { adhipati: 1, thun: 3, thaik: 6, raja: 2, marana: 0, banga: 4, puti: 5 },
-      5: { adhipati: 2, thun: 4, thaik: 0, raja: 3, marana: 1, banga: 5, puti: 6 },
-      6: { adhipati: 3, thun: 5, thaik: 1, raja: 4, marana: 2, banga: 6, puti: 0 },
-      7: { adhipati: 4, thun: 6, thaik: 2, raja: 5, marana: 3, banga: 0, puti: 1 }
-    };
-
-    const dayColumns = {
-      0: [5, 2, 6, 1, 4, 0, 3],
-      1: [6, 3, 0, 2, 5, 1, 4],
-      2: [0, 4, 1, 3, 6, 2, 5],
-      3: [1, 5, 2, 4, 0, 3, 6],
-      4: [2, 6, 3, 5, 1, 4, 0],
-      5: [3, 0, 4, 6, 2, 5, 1],
-      6: [4, 1, 5, 0, 3, 6, 2]
-    };
-
-    // ပုံများပါ အကြွင်းအလိုက် နာမက္ခရတိုင် ဒေတာများ (အကြွင်း ၁ မှ ၀/၇ အထိ)
-    const namakColumns = {
-      1: [0, 6, 5, 4, 3, 2, 1], // ဥပမာ အကြွင်း ၁
-      2: [1, 0, 6, 5, 4, 3, 2], // ဥပမာ အကြွင်း ၂
-      3: [2, 1, 0, 6, 5, 4, 3], // ဥပမာ အကြွင်း ၃
-      4: [3, 2, 1, 0, 6, 5, 4], // ဥပမာ အကြွင်း ၄
-      5: [4, 3, 2, 1, 0, 6, 5], // ဥပမာ အကြွင်း ၅
-      6: [5, 4, 3, 2, 1, 0, 6], // ဥပမာ အကြွင်း ၆
-      7: [6, 5, 4, 3, 2, 1, 0]  // အကြွင်း 0 (၇)
-    };
-
-    const allDaysAkharData = {
-      0: [
-        { col: [5, 2, 6, 1, 4, 0, 3] },
-        { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 3, 0, 2, 5, 1, 4] },
-        { col: [4, 1, 5, 0, 3, 6, 2] },
-        { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 2, 6, 1, 4, 0, 3] }
-      ],
-      1: [
-        { col: [6, 3, 0, 2, 5, 1, 4] },
-        { col: [4, 1, 5, 0, 6, 3, 2] },
-        { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 2, 6, 1, 4, 0, 3] },
-        { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 3, 0, 2, 5, 1, 4] }
-      ],
-      2: [
-        { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 2, 6, 1, 4, 0, 3] },
-        { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 3, 0, 2, 5, 1, 4] },
-        { col: [4, 1, 5, 0, 3, 6, 2] },
-        { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 4, 1, 3, 6, 2, 5] }
-      ],
-      3: [
-        { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 3, 0, 2, 5, 1, 4] },
-        { col: [4, 1, 5, 0, 3, 6, 2] },
-        { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 2, 6, 1, 4, 0, 3] },
-        { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 5, 2, 4, 0, 3, 6] }
-      ],
-      4: [
-        { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 2, 6, 1, 4, 0, 3] },
-        { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 3, 0, 2, 5, 1, 4] },
-        { col: [4, 1, 5, 0, 3, 6, 2] },
-        { col: [2, 6, 3, 5, 1, 4, 0] }
-      ],
-      5: [
-        { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 3, 0, 2, 5, 1, 4] },
-        { col: [4, 1, 5, 0, 3, 6, 2] },
-        { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 2, 6, 1, 4, 0, 3] },
-        { col: [3, 0, 4, 6, 2, 5, 1] }
-      ],
-      6: [
-        { col: [4, 1, 5, 0, 3, 6, 2] },
-        { col: [2, 6, 3, 5, 1, 4, 0] },
-        { col: [0, 4, 1, 3, 6, 2, 5] },
-        { col: [5, 2, 6, 1, 4, 0, 3] },
-        { col: [3, 0, 4, 6, 2, 5, 1] },
-        { col: [1, 5, 2, 4, 0, 3, 6] },
-        { col: [6, 3, 0, 2, 5, 1, 4] },
-        { col: [4, 1, 5, 0, 3, 6, 2] }
-      ]
-    };
-
-    function calculateMahabote() {
-      const name = document.getElementById('username').value || "မောင်မောင်";
-      const bDay = parseInt(document.getElementById('b-day').value);
-      const bMonth = parseInt(document.getElementById('b-month').value);
-      const bYear = parseInt(document.getElementById('b-year').value);
-      
-      const nyDay = parseInt(document.getElementById('ny-day').value);
-      const nyMonth = parseInt(document.getElementById('ny-month').value);
-      const nyYear = parseInt(document.getElementById('ny-year').value);
-
-      let hour = parseInt(document.getElementById('ny-hour').value) || 0;
-      const minute = parseInt(document.getElementById('ny-min').value) || 0;
-      const ampm = document.getElementById('ny-ampm').value;
-      const isRahu = document.getElementById('rahuCheck').checked;
-
-      if (ampm === 'PM' && hour < 12) {
-        hour += 12;
-      } else if (ampm === 'AM' && hour === 12) {
-        hour = 0;
-      }
-
-      if (!bDay || !bMonth || !bYear || !nyDay || !nyMonth || !nyYear) {
-        alert("အချက်အလက်များ အပြည့်အစုံ ဖြည့်ပါ!");
-        return;
-      }
-
-      const bDateObj = new Date(bYear, bMonth - 1, bDay);
-      let bDayOfWeek = bDateObj.getDay(); 
-      let bDayText = dayNames[bDayOfWeek];
-      if (isRahu && bDayOfWeek === 3) bDayText = "ရာဟု";
-
-      let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
-      let activeDayOfWeek = targetDateObj.getDay();
-      let originalDayText = dayNames[targetDateObj.getDay()];
-
-      // မူလမဟာဘုတ်
-      let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
-      let mulaRemainder = meBirthYear % 7;
-      if (mulaRemainder === 0) mulaRemainder = 7;
-      let mulaChart = chartsMap[mulaRemainder] || chartsMap[1];
-
-      document.getElementById('m-adhipati').innerText = mulaChart.adhipati;
-      document.getElementById('m-thun').innerText = mulaChart.thun;
-      document.getElementById('m-thaik').innerText = mulaChart.thaik;
-      document.getElementById('m-raja').innerText = mulaChart.raja;
-      document.getElementById('m-marana').innerText = mulaChart.marana;
-      document.getElementById('m-banga').innerText = mulaChart.banga;
-      document.getElementById('m-puti').innerText = mulaChart.puti;
-
-      // နာမက္ခရတိုင် (မူလအောက်မှ အကြွင်းအလိုက်တိုင်)
-      let namakValues = namakColumns[mulaRemainder] || namakColumns[1];
-      let namakTableHTML = "";
-      namakValues.forEach((val, idx) => {
-        let cellClass = "";
-        if (idx === 3) cellClass = 'class="line-top line-bottom"';
-        namakTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
-      });
-      document.getElementById('namakColumnTable').innerHTML = namakTableHTML;
-      document.getElementById('namak-label').innerText = `အကြွင်း (${mulaRemainder})`;
-
-      // ကောဇာမဟာဘုတ်
-      let kYearVal = targetDateObj.getFullYear();
-      let kMonthVal = targetDateObj.getMonth() + 1;
-      let kDayVal = targetDateObj.getDate();
-      let meCurrentYear = kMonthVal < 4 || (kMonthVal === 4 && kDayVal < 17) ? kYearVal - 639 : kYearVal - 638;
-      let kozarRemainder = meCurrentYear % 7;
-      if (kozarRemainder === 0) kozarRemainder = 7;
-      let kozarChart = chartsMap[kozarRemainder] || chartsMap[1];
-
-      document.getElementById('k-adhipati').innerText = kozarChart.adhipati;
-      document.getElementById('k-thun').innerText = kozarChart.thun;
-      document.getElementById('k-thaik').innerText = kozarChart.thaik;
-      document.getElementById('k-raja').innerText = kozarChart.raja;
-      document.getElementById('k-marana').innerText = kozarChart.marana;
-      document.getElementById('k-banga').innerText = kozarChart.banga;
-      document.getElementById('k-puti').innerText = kozarChart.puti;
-
-      // မွေးနံတိုင်
-      let bColValues = dayColumns[bDayOfWeek] || dayColumns[0];
-      let dayColumnTableHTML = "";
-      bColValues.forEach((val, idx) => {
-        let cellClass = "";
-        if (idx === 3) cellClass = 'class="line-top line-bottom"';
-        dayColumnTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
-      });
-      document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
-
-      // အခါတိုင်
-      let totalMinutes = hour * 60 + minute;
-      let diff = totalMinutes - (6 * 60);
-      if (diff < 0) diff = 0;
-      if (diff > 720) diff = 720;
-
-      let slotIdx = Math.floor(diff / 90); 
-      if (slotIdx > 7) slotIdx = 7;
-
-      let daySchedule = allDaysAkharData[activeDayOfWeek] || allDaysAkharData[0];
-      let currentSlotData = daySchedule[slotIdx] || daySchedule[0];
-      let akharColValues = currentSlotData.col;
-
-      let akharTableHTML = "";
-      akharColValues.forEach((val, idx) => {
-        let cellClass = "";
-        if (idx === 3) cellClass = 'class="line-top line-bottom"';
-        akharTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
-      });
-      document.getElementById('akharColumnTable').innerHTML = akharTableHTML;
-
-      let displayHour12 = hour % 12;
-      displayHour12 = displayHour12 ? displayHour12 : 12;
-
-      document.getElementById('reportDetails').innerHTML = 
-        `<b>${name}</b><br>` +
-        `<b>မွေးသက္ကရာဇ် -</b> ${bDay}/${bMonth}/${bYear} (${bDayText})<br>` +
-        `<b>တွက်ချက်ရက်စွဲ -</b> ${nyDay}/${nyMonth}/${nyYear} (${originalDayText}) | အချိန် - ${displayHour12}:${minute < 10 ? '0' : ''}${minute} ${ampm}` +
-        `<br><span style="color:#cc0000; font-size:11px;">(မနက် ၆ နာရီမှ ညနေ ၆ နာရီအတွင်း အခါတိုင် တွက်ချက်မှု)</span>`;
-
-      document.getElementById('form-page').style.display = 'none';
-      document.getElementById('result-page').style.display = 'block';
-    }
-
-    function goBackToForm() {
-      document.getElementById('result-page').style.display = 'none';
-      document.getElementById('form-page').style.display = 'block';
-    }
-  </script>
+        // စမ်းသပ်ရန် အကြွင်း ၁ ထည့်ထားခြင်း
+        updatePillar(1);
+    </script>
 
 </body>
 </html>
