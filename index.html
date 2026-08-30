@@ -240,7 +240,6 @@
   </div>
 
   <script>
-    // ဖုန်းဖွင့်လိုက်တာနဲ့ လက်ရှိဖုန်းထဲက နေ့စွဲနဲ့အချိန်ကို အလိုအလျောက် ဖြည့်ပေးရန်
     window.onload = function() {
       const now = new Date();
       document.getElementById('ny-day').value = String(now.getDate()).padStart(2, '0');
@@ -287,14 +286,14 @@
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 2 },
+        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 }
       ],
       1: [
-        { col: [6, 3, 0, 2, 5, 1, 4], line: 2 },
+        { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
         { col: [4, 1, 5, 0, 6, 3, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
@@ -307,7 +306,7 @@
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
-        { col: [1, 5, 2, 4, 0, 3, 6], line: 2 },
+        { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
@@ -317,7 +316,7 @@
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
-        { col: [2, 6, 3, 5, 1, 4, 0], line: 2 },
+        { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
@@ -327,7 +326,7 @@
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
-        { col: [3, 0, 4, 6, 2, 5, 1], line: 2 },
+        { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
@@ -337,7 +336,7 @@
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
-        { col: [4, 1, 5, 0, 3, 6, 2], line: 2 },
+        { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
@@ -347,7 +346,7 @@
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
-        { col: [5, 2, 6, 1, 4, 0, 3], line: 2 },
+        { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
@@ -457,7 +456,7 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (မနက် ၆ နာရီ မှ ညနေ ၆ နာရီ အတွက် ၉၀ မိနစ်စီ ၈ ယာမ်ခွဲခြင်း)
+      // အခါတိုင် (မွေးနံတိုင်ကဲ့သို့ အပေါ်တား၊ အောက်တား မျဉ်းသားပါဝင်ရန် idx === 3 တွင် line-top line-bottom ထည့်သွင်းခြင်း)
       let totalMinutes = hour * 60 + minute;
       let startOfDayMinutes = 6 * 60; // 06:00 AM
       let diff = totalMinutes - startOfDayMinutes;
@@ -472,16 +471,12 @@
       let currentSlotData = daySchedule[slotIdx] || daySchedule[0];
       
       let akharColValues = currentSlotData.col;
-      let lineIdx = currentSlotData.line;
 
       let akharTableHTML = "";
       akharColValues.forEach((val, idx) => {
         let cellClass = "";
-        if (idx === lineIdx) cellClass += " line-bottom";
-        if (idx === lineIdx + 1) cellClass += " line-top";
-        
-        let attr = cellClass ? `class="${cellClass.trim()}"` : "";
-        akharTableHTML += `<tr><td ${attr}>${val}</td></tr>`;
+        if (idx === 3) cellClass = 'class="line-top line-bottom"';
+        akharTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('akharColumnTable').innerHTML = akharTableHTML;
 
