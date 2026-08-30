@@ -57,7 +57,7 @@
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
-    /* နာမက္ခရတိုင်အတွက် အထူး စတိုင်များ */
+    /* နာမက္ခရတိုင် (သို့) တိုင်ပုံစံများအတွက် စတိုင် */
     .nama-pillar-box {
       margin-top: 8px;
       padding-top: 6px;
@@ -159,7 +159,7 @@
 
     <div class="boards-container">
       
-      <!-- မူလမဟာဘုတ် (အောက်တွင် နာမက္ခရတိုင် ပါဝင်သည်) -->
+      <!-- မူလမဟာဘုတ် နှင့် နာမက္ခရတိုင် -->
       <div class="board-wrapper">
         <div class="board-label">မူလ</div>
         <div class="mahabote-grid">
@@ -173,7 +173,6 @@
           <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="m-banga">-</div></div>
           <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="m-puti">-</div></div>
         </div>
-        <!-- နာမက္ခရတိုင် (မူလအောက်တည့်တည့်) -->
         <div class="nama-pillar-box">
           <div style="font-size: 10px; font-weight: bold; color: #8b0000; margin-bottom: 3px;">နာမက္ခရတိုင်</div>
           <div class="nama-top-val" id="namaTop">-</div>
@@ -183,7 +182,7 @@
         </div>
       </div>
 
-      <!-- ကောဇာမဟာဘုတ် -->
+      <!-- ကောဇာမဟာဘုတ် နှင့် ကောဇာနာမက္ခရတိုင် -->
       <div class="board-wrapper">
         <div class="board-label">ကောဇာ</div>
         <div class="mahabote-grid">
@@ -197,6 +196,13 @@
           <div class="m-cell"><div class="h-name">ဘင်္ဂ</div><div class="p-num" id="k-banga">-</div></div>
           <div class="m-cell"><div class="h-name">ပုတိ</div><div class="p-num" id="k-puti">-</div></div>
         </div>
+        <div class="nama-pillar-box">
+          <div style="font-size: 10px; font-weight: bold; color: #8b0000; margin-bottom: 3px;">နာမက္ခရတိုင်</div>
+          <div class="nama-top-val" id="knamaTop">-</div>
+          <div class="nama-row"><span class="nama-cell" id="knr1L">-</span><span class="nama-cell" id="knr1R">-</span></div>
+          <div class="nama-row"><span class="nama-cell" id="knr2L">-</span><span class="nama-cell" id="knr2R">-</span></div>
+          <div class="nama-row"><span class="nama-cell" id="knr3L">-</span><span class="nama-cell" id="knr3R">-</span></div>
+        </div>
       </div>
 
       <!-- မွေးနံတိုင် -->
@@ -205,7 +211,7 @@
         <table class="column-table" id="dayColumnTable"></table>
       </div>
 
-      <!-- အခါတိုင် (၇ ရက်သားသမီး အားလုံးအတွက် အချိန် ၈ ပိုင်းတိတိ အလိုက်သင့်ပြောင်းလဲမည့် ဇယား) -->
+      <!-- အခါတိုင် -->
       <div class="day-column-wrapper">
         <div class="board-label">အခါတိုင်</div>
         <table class="column-table" id="akharColumnTable"></table>
@@ -241,7 +247,6 @@
       6: [4, 1, 5, 0, 3, 6, 2]
     };
 
-    // နာမက္ခရတိုင် အကြွင်းအလိုက် ဂဏန်းပုံစံများ (ဆရာပြထားသော ပုံများအတိုင်း အတိအကျ)
     const namaPatterns = {
       1: { top: '၀', r1: ['၆', '၅'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
       2: { top: '၁', r1: ['၀', '၆'], r2: ['၅', '၄'], r3: ['၃', '၂'] },
@@ -252,9 +257,8 @@
       0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    // ၇ ရက်သားသမီး အားလုံးအတွက် အခါ (၈) ပိုင်း ဇယားများနှင့် မျဉ်းသားမည့်နေရာများ (line index)
     const allDaysAkharData = {
-      0: [ // တနင်္ဂနွေ
+      0: [
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
@@ -264,7 +268,7 @@
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 }
       ],
-      1: [ // တနင်္လာ
+      1: [
         { col: [6, 3, 0, 2, 5, 1, 4], line: 2 },
         { col: [4, 1, 5, 0, 6, 3, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
@@ -274,7 +278,7 @@
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 }
       ],
-      2: [ // အင်္ဂါ
+      2: [
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
@@ -284,7 +288,7 @@
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 }
       ],
-      3: [ // ဗုဒ္ဓဟူး
+      3: [
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
@@ -294,7 +298,7 @@
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 }
       ],
-      4: [ // ကြာသပတေး
+      4: [
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
@@ -304,7 +308,7 @@
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 }
       ],
-      5: [ // သောကြာ
+      5: [
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 },
         { col: [1, 5, 2, 4, 0, 3, 6], line: 3 },
         { col: [6, 3, 0, 2, 5, 1, 4], line: 3 },
@@ -314,7 +318,7 @@
         { col: [5, 2, 6, 1, 4, 0, 3], line: 3 },
         { col: [3, 0, 4, 6, 2, 5, 1], line: 3 }
       ],
-      6: [ // စနေ
+      6: [
         { col: [4, 1, 5, 0, 3, 6, 2], line: 3 },
         { col: [2, 6, 3, 5, 1, 4, 0], line: 3 },
         { col: [0, 4, 1, 3, 6, 2, 5], line: 3 },
@@ -350,7 +354,6 @@
       let bDayText = dayNames[bDayOfWeek];
       if (isRahu && bDayOfWeek === 3) bDayText = "ရာဟု";
 
-      // မနက် ၆ နာရီ မတိုင်မီဆိုလျှင် ရက်စွဲကို မနေ့ကနေ့သို့ ပြန်ဆုတ်ပေးခြင်း
       let targetDateObj = new Date(nyYear, nyMonth - 1, nyDay);
       if (hour < 6) {
         targetDateObj.setDate(targetDateObj.getDate() - 1);
@@ -376,8 +379,8 @@
       document.getElementById('m-banga').innerText = mulaChart.banga;
       document.getElementById('m-puti').innerText = mulaChart.puti;
 
-      // မွေးခုနှစ်အပေါ်မူတည်၍ နာမက္ခရတိုင် တွက်ချက်ခြင်း
-      let namaRem = meBirthYear % 7; // အကြွင်း 0 မှ 6 ထိ
+      // မူလ နာမက္ခရတိုင်
+      let namaRem = meBirthYear % 7;
       let np = namaPatterns[namaRem];
       if (np) {
         document.getElementById('namaTop').innerText = np.top;
@@ -406,6 +409,19 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
+      // ကောဇာ နာမက္ခရတိုင် (ကောဇာခုနှစ် အကြွင်းအလိုက်)
+      let kozarNamaRem = meCurrentYear % 7;
+      let knp = namaPatterns[kozarNamaRem];
+      if (knp) {
+        document.getElementById('knamaTop').innerText = knp.top;
+        document.getElementById('knr1L').innerText = knp.r1[0];
+        document.getElementById('knr1R').innerText = knp.r1[1];
+        document.getElementById('knr2L').innerText = knp.r2[0];
+        document.getElementById('knr2R').innerText = knp.r2[1];
+        document.getElementById('knr3L').innerText = knp.r3[0];
+        document.getElementById('knr3R').innerText = knp.r3[1];
+      }
+
       // မွေးနံတိုင်
       let bColValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let dayColumnTableHTML = "";
@@ -416,7 +432,7 @@
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
 
-      // အခါတိုင် (မနက် ၆ နာရီမှစတင်သော ၂၄ နာရီပတ်လုံး ၈ ပိုင်းခွဲကာ သက်ဆိုင်ရာနေ့အလိုက် ဇယားထုတ်ပေးခြင်း)
+      // အခါတိုင်
       let totalMinutes = hour * 60 + minute;
       let diff = totalMinutes - (6 * 60);
       if (diff < 0) diff += 24 * 60;
