@@ -150,7 +150,7 @@
     <div class="row">
       <label>မွေးသက္ကရာဇ် :</label>
       <div class="date-inputs">
-        <input type="text" id="b-day" placeholder="ရက်" value="12">
+        <input type="text" id="b-day" placeholder="ရက်" value="16">
         <input type="text" id="b-month" placeholder="လ" value="8">
         <input type="text" id="b-year" placeholder="ခုနှစ်" value="2005">
       </div>
@@ -277,7 +277,7 @@
     };
 
     const namaPatterns = {
-      1: { top: '၀', r1: ['၆', '۵'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
+      1: { top: '၀', r1: ['၆', '၅'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
       2: { top: '၁', r1: ['၀', '၆'], r2: ['၅', '၄'], r3: ['၃', '၂'] },
       3: { top: '၂', r1: ['၁', '၀'], r2: ['၆', '၅'], r3: ['၄', '၃'] },
       4: { top: '၃', r1: ['၂', '၁'], r2: ['၀', '၆'], r3: ['၅', '၄'] },
@@ -286,21 +286,21 @@
       0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    // ကြာသပတေးနှင့် ရာဟုအတွက် ပုံပါအတိုင်း ကာရကဇယား နေရာချခြင်း
+    // ကာရကဇယား နေရာချခြင်း (ရာဟုအတွက်သာ ပုံစံပြောင်းပြီး၊ ကျန်ရက်များအတွက် မူလပုံစံအတိုင်းထားရှိသည်)
     function generateKarakGridHTML(startNum, isRahuActive) {
       let cells = new Array(9);
       let karakNames, sequenceNumbers, numberToGridIndex;
 
       if (isRahuActive) {
-        // ပထမပုံ (ရာဟုအတွက်)
+        // ရာဟုအတွက် ပထမပုံစံ
         karakNames = ["ကတ္ထု", "သာမိ", "ကမ္မု", "အာလဗ္ဓန", "သြကာသ", "အပာဒါန", "ကရဏ", "သမ္မဒါန"];
         sequenceNumbers = [1, 2, 3, 6, 0, 9, 4, 5];
         numberToGridIndex = { 1: 0, 2: 3, 3: 6, 6: 7, 0: 8, 9: 5, 4: 2, 5: 1 };
       } else {
-        // ဒုတိယပုံ (ကြာသပတေးအတွက်)
+        // ကျန်ရက်များ (ကြာသပတေးအပါအဝင်) အတွက် မူလ ပုံစံမှန်
         karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မု", "ကရဏ", "အပာဒါန", "သြကာသ", "အာလဗ္ဓန"];
         sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
-        numberToGridIndex = { 1: 0, 2: 1, 3: 2, 4: 3, 0: 6, 9: 7, 5: 8, 6: 5 };
+        numberToGridIndex = { 1: 0, 2: 3, 3: 6, 4: 7, 0: 8, 9: 5, 5: 2, 6: 1 };
       }
 
       let startIndex = sequenceNumbers.indexOf(startNum);
