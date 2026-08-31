@@ -283,21 +283,24 @@
       4: { top: '၃', r1: ['၂', '၁'], r2: ['၀', '၆'], r3: ['၅', '၄'] },
       5: { top: '၄', r1: ['၃', '၂'], r2: ['၁', '၀'], r3: ['၆', '၅'] },
       6: { top: '၅', r1: ['၄', '၃'], r2: ['၂', '၁'], r3: ['၀', '၆'] },
-      0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
+      0: { top: '၆', r1: ['۵', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    // ကာရကဇယား နေရာချခြင်း (ရာဟုအတွက်သာ ပုံစံပြောင်းပြီး၊ ကျန်ရက်များအတွက် မူလပုံစံအတိုင်းထားရှိသည်)
-    function generateKarakGridHTML(startNum, isRahuActive) {
+    // တနင်္ဂနွေနေ့အတွက် ပုံမှာပြထားသည့်အတိုင်း တိကျသော ကာရကဇယား နေရာချခြင်း
+    function generateKarakGridHTML(startNum, isRahuActive, dayOfWeek) {
       let cells = new Array(9);
       let karakNames, sequenceNumbers, numberToGridIndex;
 
-      if (isRahuActive) {
-        // ရာဟုအတွက် ပထမပုံစံ
+      if (dayOfWeek === 0) {
+        // တနင်္ဂနွေနေ့အတွက် သီးသန့်ပုံစံ (ပုံပါအတိုင်း အမြဲမှန်ကန်စေရန်)
+        karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "အာလဗ္ဓန", "ကမ္မု", "အပာဒါန", "သြကာသ", "ကရဏ"];
+        sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
+        numberToGridIndex = { 1: 0, 2: 1, 3: 2, 4: 5, 0: 8, 9: 6, 5: 3, 6: 4 };
+      } else if (isRahuActive) {
         karakNames = ["ကတ္ထု", "သာမိ", "ကမ္မု", "အာလဗ္ဓန", "သြကာသ", "အပာဒါန", "ကရဏ", "သမ္မဒါန"];
         sequenceNumbers = [1, 2, 3, 6, 0, 9, 4, 5];
         numberToGridIndex = { 1: 0, 2: 3, 3: 6, 6: 7, 0: 8, 9: 5, 4: 2, 5: 1 };
       } else {
-        // ကျန်ရက်များ (ကြာသပတေးအပါအဝင်) အတွက် မူလ ပုံစံမှန်
         karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မု", "ကရဏ", "အပာဒါန", "သြကာသ", "အာလဗ္ဓန"];
         sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
         numberToGridIndex = { 1: 0, 2: 3, 3: 6, 4: 7, 0: 8, 9: 5, 5: 2, 6: 1 };
@@ -507,7 +510,7 @@
         dayColumnTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
-      document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(startNumForDay, isRahu && bDayOfWeek === 3);
+      document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(startNumForDay, isRahu && bDayOfWeek === 3, bDayOfWeek);
 
       // အခါတိုင်
       let totalMinutes = hour * 60 + minute;
