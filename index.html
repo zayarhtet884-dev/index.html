@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ဆန်းကျမ်း - မဟာဘုတ်ဗေဒင် နှင့် အခါတိုင်</title>
+  <title>ဆန်းကျမ်း - မဟာဘုတ်ဗေဒင် နှင့် ကာရကဇယား</title>
   <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -50,16 +50,17 @@
     .m-cell .h-name { color: #555; font-size: 9px; font-weight: bold; }
     .m-cell .p-num { font-size: 12px; font-weight: bold; color: #0044aa; margin-top: 2px; }
 
-    .day-column-wrapper { flex: 1; min-width: 65px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
+    .day-column-wrapper { flex: 1; min-width: 75px; text-align: center; background: #fffdf9; border: 1px solid #eae2cb; padding: 6px 2px; border-radius: 4px; }
     .column-table { width: 100%; max-width: 60px; margin: 0 auto; border-collapse: collapse; }
     .column-table td { text-align: center; font-size: 14px; font-weight: bold; color: #0044aa; padding: 3px 0; }
     
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
-    .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 68px; margin: 6px auto 0 auto; }
-    .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 8px; min-height: 25px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    .k-cell .k-text { font-size: 7.5px; font-weight: bold; color: #8b0000; line-height: 1.1; }
+    /* ကာရကဇယား ၃x၃ ကွက်တိအတွက် */
+    .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 72px; margin: 6px auto 0 auto; }
+    .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 8px; min-height: 26px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .k-cell .k-text { font-size: 7px; font-weight: bold; color: #8b0000; line-height: 1.1; }
 
     .nama-pillar-box {
       margin-top: 8px;
@@ -278,45 +279,66 @@
 
     const namaPatterns = {
       1: { top: '၀', r1: ['၆', '၅'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
-      2: { top: '၁', r1: ['၀', '၆'], r2: ['၅', '၄'], r3: ['၃', '၂'] },
+      2: { top: '၁', r1: ['၀', '۶'], r2: ['၅', '၄'], r3: ['၃', '၂'] },
       3: { top: '၂', r1: ['၁', '၀'], r2: ['၆', '၅'], r3: ['၄', '၃'] },
-      4: { top: '၃', r1: ['၂', '၁'], r2: ['၀', '၆'], r3: ['၅', '၄'] },
-      5: { top: '၄', r1: ['၃', '၂'], r2: ['၁', '၀'], r3: ['၆', '၅'] },
-      6: { top: '၅', r1: ['၄', '၃'], r2: ['၂', '၁'], r3: ['၀', '၆'] },
-      0: { top: '၆', r1: ['۵', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
+      4: { top: '၃', r1: ['၂', '၁'], r2: ['၀', '၆'], r3: ['۵', '၄'] },
+      5: { top: '۴', r1: ['၃', '၂'], r2: ['၁', '၀'], r3: ['၆', '၅'] },
+      6: { top: '၅', r1: ['၄', '၃'], r2: ['၂', '၁'], r3: ['၀', '۶'] },
+      0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    // တနင်္ဂနွေနေ့အတွက် ပုံမှာပြထားသည့်အတိုင်း တိကျသော ကာရကဇယား နေရာချခြင်း
+    // ဆရာပြထားသည့်အတိုင်း နေ့နံအလိုက် နာရီလက်တံလည်သလို (Clockwise) စတင်ကာ ဇယားကွက် ၈ ကွက်တွင် နေရာချခြင်း
     function generateKarakGridHTML(startNum, isRahuActive, dayOfWeek) {
       let cells = new Array(9);
-      let karakNames, sequenceNumbers, numberToGridIndex;
+      
+      // ဆရာပေးထားသော မှန်ကန်သည့် အစဉ်အတိုင်း
+      let karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မ", "ကရဏ", "အပါဒါန", "သြကာသ", "အလပ္ပန"];
+      
+      // ဆရာပြထားသော ပုံများအတိုင်း နေ့နံအလိုက် စတင်သည့် ဂဏန်းနေရာများမှ နာရီလက်တံလည်သလို (Clockwise Grid Index) သို့ ဖြန့်ခင်းရန်
+      // ဇယားကွက်အညွှန်း (Grid Index): 0(ထိပ်ဘယ်), 1(ထိပ်လယ်), 2(ထိပ်ညာ), 3(အလယ်ဘယ်), 4(အလယ်ဗဟို-လွတ်သည်), 5(အလယ်ညာ), 6(အောက်ဘယ်), 7(အောက်လယ်), 8(အောက်ညာ)
+      let sequenceNumbers, numberToGridIndex;
 
-      if (dayOfWeek === 0) {
-        // တနင်္ဂနွေနေ့အတွက် သီးသန့်ပုံစံ (ပုံပါအတိုင်း အမြဲမှန်ကန်စေရန်)
-        karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "အာလဗ္ဓန", "ကမ္မု", "အပာဒါန", "သြကာသ", "ကရဏ"];
+      if (dayOfWeek === 0) { // တနင်္ဂနွေ (ပုံ ၁ အရ တနင်္ဂနွေမွေးနံနေရာမှာ စသည်)
+        sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6]; 
+        // ဇယားပေါ်ရှိ သက်ဆိုင်ရာနေရာများသို့ နာရီလက်တံလည်သလို ချိတ်ဆက်ခြင်း
+        numberToGridIndex = { 1: 0, 2: 1, 3: 2, 4: 5, 0: 8, 9: 6, 5: 3, 6: 4 };
+      } else if (isRahuActive) { // ရာဟု
+        sequenceNumbers = [1, 2, 3, 6, 0, 9, 4, 5];
+        numberToGridIndex = { 1: 6, 2: 3, 3: 0, 6: 1, 0: 2, 9: 5, 4: 8, 5: 7 };
+      } else if (dayOfWeek === 1) { // တနင်္လာ (ပုံ ၂ အရ)
+        sequenceNumbers = [6, 3, 0, 2, 5, 1, 4];
+        numberToGridIndex = { 6: 1, 3: 0, 0: 3, 2: 6, 5: 7, 1: 8, 4: 5 };
+      } else if (dayOfWeek === 2) { // အင်္ဂါ
+        sequenceNumbers = [0, 4, 1, 3, 6, 2, 5];
+        numberToGridIndex = { 0: 6, 4: 3, 1: 0, 3: 1, 6: 2, 2: 5, 5: 8 };
+      } else if (dayOfWeek === 3) { // ဗုဒ္ဓဟူး
+        sequenceNumbers = [1, 5, 2, 4, 0, 3, 6];
+        numberToGridIndex = { 1: 6, 5: 3, 2: 0, 4: 1, 0: 2, 3: 5, 6: 8 };
+      } else if (dayOfWeek === 4) { // ကြာသပတေး (ပုံအရ ညာဘက်အောက်ထောင့်နားစသည်)
+        sequenceNumbers = [2, 6, 3, 5, 1, 4, 0];
+        numberToGridIndex = { 2: 2, 6: 5, 3: 8, 5: 7, 1: 6, 4: 3, 0: 0 };
+      } else if (dayOfWeek === 5) { // သောကြာ
+        sequenceNumbers = [3, 0, 4, 6, 2, 5, 1];
+        numberToGridIndex = { 3: 6, 0: 3, 4: 0, 6: 1, 2: 2, 5: 5, 1: 8 };
+      } else if (dayOfWeek === 6) { // စနေ
+        sequenceNumbers = [4, 1, 5, 0, 3, 6, 2];
+        numberToGridIndex = { 4: 6, 1: 3, 5: 0, 0: 1, 3: 2, 6: 5, 2: 8 };
+      } else {
         sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
         numberToGridIndex = { 1: 0, 2: 1, 3: 2, 4: 5, 0: 8, 9: 6, 5: 3, 6: 4 };
-      } else if (isRahuActive) {
-        karakNames = ["ကတ္ထု", "သာမိ", "ကမ္မု", "အာလဗ္ဓန", "သြကာသ", "အပာဒါန", "ကရဏ", "သမ္မဒါန"];
-        sequenceNumbers = [1, 2, 3, 6, 0, 9, 4, 5];
-        numberToGridIndex = { 1: 0, 2: 3, 3: 6, 6: 7, 0: 8, 9: 5, 4: 2, 5: 1 };
-      } else {
-        karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မု", "ကရဏ", "အပာဒါန", "သြကာသ", "အာလဗ္ဓန"];
-        sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
-        numberToGridIndex = { 1: 0, 2: 3, 3: 6, 4: 7, 0: 8, 9: 5, 5: 2, 6: 1 };
       }
 
       let startIndex = sequenceNumbers.indexOf(startNum);
       if (startIndex === -1) startIndex = 0;
 
-      for(let i = 0; i < 8; i++) {
-        let karakIndex = i;
-        let currentNum = sequenceNumbers[(startIndex + i) % 8];
+      for(let i = 0; i < karakNames.length; i++) {
+        let currentNum = sequenceNumbers[(startIndex + i) % sequenceNumbers.length];
         let gridIdx = numberToGridIndex[currentNum];
         if (gridIdx !== undefined) {
-          cells[gridIdx] = `<div class="k-cell"><div class="k-text">${karakNames[karakIndex]}</div></div>`;
+          cells[gridIdx] = `<div class="k-cell"><div class="k-text">${karakNames[i]}</div></div>`;
         }
       }
+      // ဗဟိုကွက်လပ်
       cells[4] = `<div class="k-cell" style="background:#f9f9f9; border:1px solid #dcd6c5;"></div>`;
 
       let html = "";
