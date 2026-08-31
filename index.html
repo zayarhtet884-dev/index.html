@@ -57,7 +57,6 @@
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
-    /* ပုံပါအတိုင်း ကာရကဇယား (၉ ကွက်ဇယား) - မွေးနံတိုင်အောက်တွင် ထည့်သွင်းရန် */
     .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 68px; margin: 6px auto 0 auto; }
     .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 8px; min-height: 25px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
     .k-cell .k-text { font-size: 7.5px; font-weight: bold; color: #8b0000; line-height: 1.1; }
@@ -225,7 +224,7 @@
         </div>
       </div>
 
-      <!-- မွေးနံတိုင် (အောက်တွင် ဆရာပြထားသည့်ပုံစံ ကာရကဇယားပါဝင်သည်) -->
+      <!-- မွေးနံတိုင် -->
       <div class="day-column-wrapper">
         <div class="board-label">မွေးနံတိုင်</div>
         <table class="column-table" id="dayColumnTable"></table>
@@ -278,7 +277,7 @@
     };
 
     const namaPatterns = {
-      1: { top: '၀', r1: ['၆', '၅'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
+      1: { top: '၀', r1: ['၆', '۵'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
       2: { top: '၁', r1: ['၀', '၆'], r2: ['၅', '၄'], r3: ['၃', '၂'] },
       3: { top: '၂', r1: ['၁', '၀'], r2: ['၆', '၅'], r3: ['၄', '၃'] },
       4: { top: '၃', r1: ['၂', '၁'], r2: ['၀', '၆'], r3: ['၅', '၄'] },
@@ -287,13 +286,23 @@
       0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    // ဆရာပြထားသည့် ပုံစံအတိုင်း ကာရကဇယား (၉ ကွက်) နေရာချခြင်း
-    const numberToGridIndex = { 1: 0, 2: 1, 3: 2, 6: 3, 4: 5, 5: 6, 9: 7, 0: 8 };
-    const sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
-    const karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မု", "ကရဏ", "အပာဒါန", "သြကာသ", "အာလဗ္ဓန"];
-
-    function generateKarakGridHTML(startNum) {
+    // ကြာသပတေးနှင့် ရာဟုအတွက် ပုံပါအတိုင်း ကာရကဇယား နေရာချခြင်း
+    function generateKarakGridHTML(startNum, isRahuActive) {
       let cells = new Array(9);
+      let karakNames, sequenceNumbers, numberToGridIndex;
+
+      if (isRahuActive) {
+        // ပထမပုံ (ရာဟုအတွက်)
+        karakNames = ["ကတ္ထု", "သာမိ", "ကမ္မု", "အာလဗ္ဓန", "သြကာသ", "အပာဒါန", "ကရဏ", "သမ္မဒါန"];
+        sequenceNumbers = [1, 2, 3, 6, 0, 9, 4, 5];
+        numberToGridIndex = { 1: 0, 2: 3, 3: 6, 6: 7, 0: 8, 9: 5, 4: 2, 5: 1 };
+      } else {
+        // ဒုတိယပုံ (ကြာသပတေးအတွက်)
+        karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မု", "ကရဏ", "အပာဒါန", "သြကာသ", "အာလဗ္ဓန"];
+        sequenceNumbers = [1, 2, 3, 4, 0, 9, 5, 6];
+        numberToGridIndex = { 1: 0, 2: 1, 3: 2, 4: 3, 0: 6, 9: 7, 5: 8, 6: 5 };
+      }
+
       let startIndex = sequenceNumbers.indexOf(startNum);
       if (startIndex === -1) startIndex = 0;
 
@@ -411,7 +420,6 @@
       let bDayText = dayNames[bDayOfWeek];
       if (isRahu && bDayOfWeek === 3) bDayText = "ရာဟု";
 
-      // မွေးနံအလိုက် စတင်မည့်ဂဏန်း (ကြာသပတေးဆိုရင် ၅ စသည်ဖြင့်)
       let startNumForDay = bDayOfWeek === 0 ? 1 : 
                            bDayOfWeek === 1 ? 2 : 
                            bDayOfWeek === 2 ? 3 : 
@@ -499,11 +507,11 @@
         dayColumnTableHTML += `<tr><td ${cellClass}>${val}</td></tr>`;
       });
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
-      document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(startNumForDay);
+      document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(startNumForDay, isRahu && bDayOfWeek === 3);
 
       // အခါတိုင်
       let totalMinutes = hour * 60 + minute;
-      let startOfDayMinutes = 6 * 60; // 06:00 AM
+      let startOfDayMinutes = 6 * 60; 
       let diff = totalMinutes - startOfDayMinutes;
       
       if (diff < 0) {
