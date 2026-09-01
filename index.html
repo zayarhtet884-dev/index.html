@@ -57,10 +57,11 @@
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
-    /* ဇယားကွက် (၉ကွက်ဇယား) - စာသားများ အလွန်ကြီးမသွားဘဲ သပ်ရပ်စွာပေါ်စေရန် */
-    .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 85px; margin: 6px auto 0 auto; }
-    .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 8px; min-height: 28px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    .k-cell .k-text { font-size: 7.5px; font-weight: bold; color: #8b0000; line-height: 1.1; }
+    /* ကာရက နှင့် ဝဂ် နှစ်မျိုးစလုံး ဇယားကွက်တစ်ခုတည်းတွင် အပေါ်/အောက် ပြသရန် */
+    .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 88px; margin: 6px auto 0 auto; }
+    .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 7.5px; min-height: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .k-cell .k-top { font-size: 7px; font-weight: bold; color: #8b0000; line-height: 1; }
+    .k-cell .k-bottom { font-size: 7px; font-weight: bold; color: #0044aa; line-height: 1; margin-top: 1px; border-top: 1px solid #eee; width: 100%; padding-top: 1px; }
 
     .nama-pillar-box {
       margin-top: 8px;
@@ -225,7 +226,7 @@
         </div>
       </div>
 
-      <!-- မွေးနံတိုင် (ဝဂ် ၈ ပါး ဇယားပါဝင်သည်) -->
+      <!-- မွေးနံတိုင် (ကာရက နှင့် ဝဂ် နှစ်မျိုးပေါင်းစပ်ထားသော ဇယား) -->
       <div class="day-column-wrapper">
         <div class="board-label">မွေးနံတိုင်</div>
         <table class="column-table" id="dayColumnTable"></table>
@@ -278,7 +279,7 @@
     };
 
     const namaPatterns = {
-      1: { top: '၀', r1: ['၆', '۵'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
+      1: { top: '၀', r1: ['၆', '၅'], r2: ['၄', '၃'], r3: ['၂', '၁'] },
       2: { top: '၁', r1: ['၀', '၆'], r2: ['၅', '၄'], r3: ['၃', '၂'] },
       3: { top: '၂', r1: ['၁', '၀'], r2: ['၆', '၅'], r3: ['၄', '၃'] },
       4: { top: '၃', r1: ['၂', '၁'], r2: ['၀', '၆'], r3: ['၅', '၄'] },
@@ -287,12 +288,15 @@
       0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    // ဝဂ် (၈) ပါး အစဉ်လိုက်
-    const karakNames = ["ပရိဝါယ", "အာယု", "နာဂရ", "ဘုမ္မိ", "ဂဟပတိ", "တေဇ", "ဌာန", "သီရိ"];
+    // ကာရက (၈) ပါး (အပေါ်တန်း)
+    const karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မု", "ကရဏ", "အပာဒါန", "သြကာသ", "အာလဗ္ဓန"];
     
-    // နာရီလက်တံလည်ပုံစံ (Clockwise) ဖြင့် ဇယားကွက်အလိုက် နေရာချရန် အညွှန်းများ
+    // ဝဂ် (၈) ပါး (အောက်တန်း - ကတ္ထုနေရာမှ စတင်၍ လက်ယာရစ်)
+    const vagNames = ["ပရိဝါယ", "အာယု", "နာဂရ", "ဘုမ္မိ", "ဂဟပတိ", "တေဇ", "ဌာန", "သီရိ"];
+    
+    // နာရီလက်တံလည်ပုံစံ (Clockwise) နေရာချရန် အညွှန်းများ
     const karakGridIndicesMap = {
-      0: [0, 1, 2, 5, 8, 7, 6, 3], // တနင်္ဂနွေ (Top-Left) က စတင်ရန်
+      0: [0, 1, 2, 5, 8, 7, 6, 3], // တနင်္ဂနွေ (Top-Left)
       1: [1, 2, 5, 8, 7, 6, 3, 0], // တနင်္လာ (Top-Center)
       2: [2, 5, 8, 7, 6, 3, 0, 1], // အင်္ဂါ (Top-Right)
       5: [3, 0, 1, 2, 5, 8, 7, 6], // သောကြာ (Middle-Left)
@@ -313,7 +317,11 @@
 
       for(let i = 0; i < 8; i++) {
         let gridIdx = indices[i];
-        cells[gridIdx] = `<div class="k-cell"><div class="k-text">${karakNames[i]}</div></div>`;
+        cells[gridIdx] = `
+          <div class="k-cell">
+            <div class="k-top">${karakNames[i]}</div>
+            <div class="k-bottom">${vagNames[i]}</div>
+          </div>`;
       }
       // အလယ်ကွက် လပ်
       cells[4] = `<div class="k-cell" style="background:#f9f9f9; border:1px solid #dcd6c5;"></div>`;
@@ -490,7 +498,7 @@
         document.getElementById('knr3R').innerText = knp.r3[1];
       }
 
-      // မွေးနံတိုင် နှင့် ဝဂ်ဇယား
+      // မွေးနံတိုင် နှင့် ကာရက/ဝဂ် နှစ်မျိုးပေါင်းစပ်ဇယား
       let bColValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let dayColumnTableHTML = "";
       bColValues.forEach((val, idx) => {
