@@ -57,7 +57,6 @@
     .column-table td.line-top { border-top: 2px solid #0044aa; }
     .column-table td.line-bottom { border-bottom: 2px solid #0044aa; }
 
-    /* ကာရက နှင့် ဝဂ် နှစ်မျိုးစလုံး ဇယားကွက်တစ်ခုတည်းတွင် အပေါ်/အောက် ပြသရန် */
     .karak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 88px; margin: 6px auto 0 auto; }
     .k-cell { border: 1px solid #0044aa; border-radius: 2px; padding: 2px 1px; background: #fff; font-size: 7.5px; min-height: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
     .k-cell .k-top { font-size: 7px; font-weight: bold; color: #8b0000; line-height: 1; }
@@ -165,7 +164,7 @@
       <span>Rahu (ရာဟု)</span>
     </div>
 
-    <button class="btn-calc" onclick="calculateMahabote()">မဟာဘုတ် ဇယားများ ထုတ်မည်</button>
+    <button class="btn-calc" onclick="calculateMahabote()">တွက်ရန်</button>
   </div>
 
   <!-- PAGE 2: Result Page -->
@@ -226,7 +225,7 @@
         </div>
       </div>
 
-      <!-- မွေးနံတိုင် (ကာရက နှင့် ဝဂ် နှစ်မျိုးပေါင်းစပ်ထားသော ဇယား) -->
+      <!-- မွေးနံတိုင် -->
       <div class="day-column-wrapper">
         <div class="board-label">မွေးနံတိုင်</div>
         <table class="column-table" id="dayColumnTable"></table>
@@ -288,28 +287,24 @@
       0: { top: '၆', r1: ['၅', '၄'], r2: ['၃', '၂'], r3: ['၁', '၀'] }
     };
 
-    // ကာရက (၈) ပါး (အပေါ်တန်း)
     const karakNames = ["ကတ္ထု", "သာမိ", "သမ္မဒါန", "ကမ္မု", "ကရဏ", "အပာဒါန", "သြကာသ", "အာလဗ္ဓန"];
-    
-    // ဝဂ် (၈) ပါး (အောက်တန်း - ကတ္ထုနေရာမှ စတင်၍ လက်ယာရစ်)
     const vagNames = ["ပရိဝါယ", "အာယု", "နာဂရ", "ဘုမ္မိ", "ဂဟပတိ", "တေဇ", "ဌာန", "သီရိ"];
     
-    // နာရီလက်တံလည်ပုံစံ (Clockwise) နေရာချရန် အညွှန်းများ
     const karakGridIndicesMap = {
-      0: [0, 1, 2, 5, 8, 7, 6, 3], // တနင်္ဂနွေ (Top-Left)
-      1: [1, 2, 5, 8, 7, 6, 3, 0], // တနင်္လာ (Top-Center)
-      2: [2, 5, 8, 7, 6, 3, 0, 1], // အင်္ဂါ (Top-Right)
-      5: [3, 0, 1, 2, 5, 8, 7, 6], // သောကြာ (Middle-Left)
-      7: [6, 3, 0, 1, 2, 5, 8, 7], // ရာဟု (Bottom-Left)
-      4: [7, 6, 3, 0, 1, 2, 5, 8], // ကြာသပတေး (Bottom-Center)
-      6: [8, 7, 6, 3, 0, 1, 2, 5], // စနေ (Bottom-Right)
-      3: [5, 8, 7, 6, 3, 0, 1, 2]  // ဗုဒ္ဓဟူး (Middle-Right)
+      0: [0, 1, 2, 5, 8, 7, 6, 3],
+      1: [1, 2, 5, 8, 7, 6, 3, 0],
+      2: [2, 5, 8, 7, 6, 3, 0, 1],
+      5: [3, 0, 1, 2, 5, 8, 7, 6],
+      7: [6, 3, 0, 1, 2, 5, 8, 7],
+      4: [7, 6, 3, 0, 1, 2, 5, 8],
+      6: [8, 7, 6, 3, 0, 1, 2, 5],
+      3: [5, 8, 7, 6, 3, 0, 1, 2]
     };
 
     function generateKarakGridHTML(bDayOfWeek, isRahu) {
       let activeIndex = bDayOfWeek;
       if (isRahu && bDayOfWeek === 3) {
-        activeIndex = 7; // ရာဟုအတွက်
+        activeIndex = 7;
       }
 
       let cells = new Array(9);
@@ -323,7 +318,6 @@
             <div class="k-bottom">${vagNames[i]}</div>
           </div>`;
       }
-      // အလယ်ကွက် လပ်
       cells[4] = `<div class="k-cell" style="background:#f9f9f9; border:1px solid #dcd6c5;"></div>`;
 
       let html = "";
@@ -441,7 +435,6 @@
       let inputDateObjForDay = new Date(nyYear, nyMonth - 1, nyDay);
       let originalDayText = dayNames[inputDateObjForDay.getDay()];
 
-      // မူလမဟာဘုတ်
       let meBirthYear = bMonth < 4 || (bMonth === 4 && bDay < 17) ? bYear - 639 : bYear - 638;
       let mulaRemainder = meBirthYear % 7;
       if (mulaRemainder === 0) mulaRemainder = 7;
@@ -455,7 +448,6 @@
       document.getElementById('m-banga').innerText = mulaChart.banga;
       document.getElementById('m-puti').innerText = mulaChart.puti;
 
-      // မူလ တိုင်
       let namaRem = meBirthYear % 7;
       let np = namaPatterns[namaRem];
       if (np) {
@@ -468,7 +460,6 @@
         document.getElementById('nr3R').innerText = np.r3[1];
       }
 
-      // ကောဇာမဟာဘုတ်
       let kYearVal = targetDateObj.getFullYear();
       let kMonthVal = targetDateObj.getMonth() + 1;
       let kDayVal = targetDateObj.getDate();
@@ -485,7 +476,6 @@
       document.getElementById('k-banga').innerText = kozarChart.banga;
       document.getElementById('k-puti').innerText = kozarChart.puti;
 
-      // ကောဇာ တိုင်
       let kozarNamaRem = meCurrentYear % 7;
       let knp = namaPatterns[kozarNamaRem];
       if (knp) {
@@ -498,7 +488,6 @@
         document.getElementById('knr3R').innerText = knp.r3[1];
       }
 
-      // မွေးနံတိုင် နှင့် ကာရက/ဝဂ် နှစ်မျိုးပေါင်းစပ်ဇယား
       let bColValues = dayColumns[bDayOfWeek] || dayColumns[0];
       let dayColumnTableHTML = "";
       bColValues.forEach((val, idx) => {
@@ -509,9 +498,8 @@
       document.getElementById('dayColumnTable').innerHTML = dayColumnTableHTML;
       document.getElementById('dayKarakGrid').innerHTML = generateKarakGridHTML(bDayOfWeek, isRahu);
 
-      // အခါတိုင်
       let totalMinutes = hour * 60 + minute;
-      let startOfDayMinutes = 6 * 60; // 06:00 AM
+      let startOfDayMinutes = 6 * 60;
       let diff = totalMinutes - startOfDayMinutes;
       
       if (diff < 0) {
